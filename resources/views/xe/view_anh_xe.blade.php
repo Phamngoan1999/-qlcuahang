@@ -1,0 +1,27 @@
+<style>
+    .themanh{
+        width: 150px;
+        height: 150px;
+        border: 1px solid #f1f1f1;
+        margin: 5px;
+        display: inline-block;
+        position: relative;
+    }
+    .anh{
+        padding: 5px;
+    }
+    .xoa-anh{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+</style>
+@foreach($thongAnh as $anh)
+    <div class="themanh">
+        <image src="{{ asset('uploads/images/'.$anh['duong_dan']) }}" class="anh"  width="150px" height="150px"/>
+        <button type="button" class="btn btn-danger xoa-anh" title = "Xóa ảnh"
+                data-url = "{{route('quanlyxe.xoaanh',$anh['id'])}}">
+            <i class="fas fa-trash-alt" aria-hidden="true"></i>
+        </button>
+    </div>
+@endforeach
