@@ -11,4 +11,9 @@ class KhachHangRepository extends BaseRepository
     {
         return KhachHang::class;
     }
+
+    public function getAllKhachHang()
+    {
+        return $this->model->paginate(10);
+    }
 }

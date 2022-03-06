@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateTaikhoan;
 use App\Services\CuaHangService;
 use App\Services\UserService;
-use Illuminate\Support\Carbon;
+use Illuminate\Http\Request;
 
 class QuanlyTaiKhoan extends Controller
 {
@@ -24,5 +25,15 @@ class QuanlyTaiKhoan extends Controller
         $listCuaHang = $this->cuaHangService->getAllCuaHang();
         $listUser = $this->userService->getUserRoleCustomer();
         return view('admin.quanlytaikhoan', compact('listUser','listCuaHang'));
+    }
+
+    public function show()
+    {
+        return view("user.thongtintaikhoan");
+    }
+
+    public function update(UpdateTaikhoan $request)
+    {
+        return $this->userService->update($request);
     }
 }

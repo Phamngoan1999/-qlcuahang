@@ -45,7 +45,7 @@
                                 <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Cửa hàng</th>
+                                    <th>Dòng xe</th>
                                     <th>Biển số</th>
                                     <th>Tác vụ</th>
                                 </tr>
@@ -54,7 +54,6 @@
                                 @foreach($danhsach as $key => $iterm)
                                     <tr>
                                         <td>{{$key+1}}</td>
-                                        <td>{{$iterm->cuahang->ten_cua_hang}}</td>
                                         <td>{{$iterm->xe->bien_so}}</td>
                                         <td>
                                             @if($iterm->trang_thai== 'chonhan')
@@ -66,7 +65,7 @@
                                             @elseif($iterm->trang_thai== 'dahoanthanh')
                                                 <a href="{{route("quanlysuachua.showhoadon",$iterm->id)}}" class="btn btn-success" >Đơn đã hoàn thành</a>
                                             @endif
-                                            <button type="button" class="btn btn-danger xoa-loai-xe" >
+                                                <button type="button" class="btn btn-danger xoa-loai-xe" >
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </td>

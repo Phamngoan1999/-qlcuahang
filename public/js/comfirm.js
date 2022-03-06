@@ -9,6 +9,15 @@ const comfirmAlert = {
             dangerMode: true
         });
     },
+    confirmnhandon: function (){
+        return swal({
+            title: "Bạn chắc chắn nhận đơn sửa chữa?",
+            text: "Hãy lưu thông tin hóa đơn",
+            icon: "success",
+            buttons: true,
+            dangerMode: true
+        });
+    },
     showSuccessMessageAlert: function showSuccessMessageAlert(title)
     {
         toastr.success(title);

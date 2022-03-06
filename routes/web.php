@@ -158,6 +158,21 @@ Route::middleware(['auth'])->group(function() {
 
         Route::post('/luuhoadon', [HoaDonController::class, 'store'])
             ->name('luuhoadon');
+
+        Route::get('/showhoadon/{id}', [HoaDonController::class, 'show'])
+            ->name('showhoadon');
+
+        Route::get('/quanlycuahang', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'index'])
+            ->name('quanlycuahang');
+
+        Route::post('/updatenhandon/{id}', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'nhandon'])
+            ->name('updatenhandon');
+
+        Route::post('/huyhoadon/{id}', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'huyhoadon'])
+            ->name('huyhoadon');
+
+        Route::post('/lenhoadon/{id}', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'lenhoadon'])
+            ->name('lenhoadon');
     });
 
     Route::name('quanlytaikhoan.')->prefix('quanlytaikhoan')->group(function () {
@@ -176,6 +191,12 @@ Route::middleware(['auth'])->group(function() {
 
         Route::delete('/delete/{id}', [CuaHangController::class, 'delete'])
             ->name('delete');
+
+        Route::get('/thongtintaikhoan', [QuanlyTaiKhoan::class, 'show'])
+            ->name('thongtintaikhoan');
+
+        Route::patch('/thongtintaikhoan', [QuanlyTaiKhoan::class, 'update'])
+            ->name('update-thong-tin');
     });
 
     Route::name('quanlybinhluan.')->prefix('quanlybinhluan')->group(function () {

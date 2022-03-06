@@ -16,4 +16,8 @@ class PhuTung extends Model
         'don_gia',
         'iMa_hoa_don'
     ];
+
+    public function hoadon(){
+        return $this->belongsTo(HoaDon::class,'iMa_hoa_don');
+    }
 }

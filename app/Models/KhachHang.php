@@ -26,7 +26,6 @@ class KhachHang extends Model
         return $this->hasMany(Xe::class, 'iMa_khach_hang_ban_xe','id');
     }
 
-
     public function attachXe(array $xe)
     {
         return $this->xe()->attach($xe);

@@ -26,6 +26,11 @@ class KhachHangService{
         return $this->khachHangRepository->all();
     }
 
+    public function getAllKhachHang()
+    {
+        return $this->khachHangRepository->getAllKhachHang();
+    }
+
     public function find($id)
     {
         return $this->khachHangRepository->find($id);

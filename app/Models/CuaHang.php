@@ -16,4 +16,9 @@ class CuaHang extends Model
         'so_dien_thoai',
         'dia_chi_cua_hang'
     ];
+
+    public function hoadon()
+    {
+        return $this->hasMany(HoaDon::class, 'iMa_cua_hang','id');
+    }
 }

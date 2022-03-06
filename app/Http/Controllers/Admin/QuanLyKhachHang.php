@@ -20,7 +20,7 @@ class QuanLyKhachHang extends Controller
 
     public function index()
     {
-        $listKhachHang = $this->khachHangService->all();
+        $listKhachHang = $this->khachHangService->getAllKhachHang();
         return view("admin.quanlykhachhang",compact('listKhachHang'));
     }
 

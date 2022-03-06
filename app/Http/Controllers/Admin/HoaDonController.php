@@ -31,6 +31,14 @@ class HoaDonController extends Controller
         return view('hoadon.create',compact('danhsachCuaHang','danhsachXe'));
     }
 
+    public function show($id)
+    {
+        $danhsachCuaHang = $this->cuaHangServive->all();
+        $danhsachXe = $this->xeService->allXeChuaBan();
+        $thongtinXe = $this->hoaDonService->find($id);
+        return view('hoadon.show',compact('danhsachCuaHang','danhsachXe','thongtinXe','id'));
+    }
+
     public function store(Request $request)
     {
         return $this->hoaDonService->create($request);

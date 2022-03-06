@@ -19,8 +19,9 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="{{asset('template/vendors/mdi/css/materialdesignicons.min.css')}}">
 </head>
-<body>
+<body>s
 @if(\Session::has('message'))
     <script>
         $(document).ready(function (){
@@ -28,11 +29,76 @@
         });
     </script>
 @endif
+<style>
+    .sidebar .nav .nav-item.active > .nav-link i:hover, .sidebar .nav .nav-item.active > .nav-link .menu-title:hover, .sidebar .nav .nav-item.active > .nav-link .menu-arrow:hover {
+        color: #FFF!important;
+    }
+    .sidebar .nav .nav-item.active:hover > .nav-link i,
+    .sidebar .nav .nav-item.active:hover > .nav-link .menu-title,
+    .sidebar .nav .nav-item.active:hover > .nav-link .menu-arrow {
+        color: #FFF!important;
+        font-weight: bold;
+    }
+    .sidebar .nav .nav-item > .nav-link i, .sidebar .nav .nav-item > .nav-link .menu-title, .sidebar .nav .nav-item > .nav-link .menu-arrow {
+        color: #6C7383;!important;
+        font-weight: bold;
+    }
+    .sidebar .nav .nav-item:hover > .nav-link i,
+    .sidebar .nav .nav-item:hover > .nav-link .menu-title,
+    .sidebar .nav .nav-item:hover > .nav-link .menu-arrow {
+        color: #FFF!important;
+        font-weight: bold;
+    }
+    .sidebar .nav .nav-item > .nav-link i, .sidebar .nav .nav-item > .nav-link .menu-title, .sidebar .nav .nav-item > .nav-link .menu-arrow {
+        color: #6C7383!important;
+        font-weight: bold;
+    }
+    .nav-item{
+        border-radius: 2px!important;
+    }
+    .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"] {
+        background: #4B49AC;
+        color: #fff!important;
+        border-radius: 2px;
+        border-color: #FFF;
+        color: #fff;
+    }
+    .sidebar .nav .nav-item.active > .nav-link {
+         background: #fff;
+         position: relative;
+    }
+    .sidebar .nav .nav-item .nav-link {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        white-space: nowrap;
+        padding: 0.8125rem 1.937rem 0.8125rem 1rem;
+        color: #6C7383;
+        border-radius: 0px;
+        -webkit-transition-duration: 0.45s;
+        -moz-transition-duration: 0.45s;
+        -o-transition-duration: 0.45s;
+        transition-duration: 0.45s;
+        transition-property: color;
+        -webkit-transition-property: color;
+    }
+    .page-body-wrapper {
+        min-height: calc(100vh - 60px);
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 20px;
+    }
+</style>
 <div class="container-scroller">
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo mr-5"><img src="../../images/logo.svg" class="mr-2" alt="logo"/></a>
-            <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../images/logo-mini.svg" alt="logo"/></a>
+            <a class="navbar-brand brand-logo mr-5"><img src="{{asset('Logo/logoanh.png')}}" class="mr-2" alt="logo" with="200px"/></a>
+            <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="{{asset('Logo/logoanh.png')}}" alt="logo"/></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -42,82 +108,29 @@
                 <li class="nav-item nav-search d-none d-lg-block">
                     <div class="input-group">
                         <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                <span class="input-group-text" id="search">
-                  <i class="icon-search"></i>
-                </span>
+
                         </div>
-                        <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
                     </div>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right">
-                <li class="nav-item dropdown">
-                    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-                        <i class="icon-bell mx-0"></i>
-                        <span class="count"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                        <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-success">
-                                    <i class="ti-info-alt mx-0"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                                <p class="font-weight-light small-text mb-0 text-muted">
-                                    Just now
-                                </p>
-                            </div>
-                        </a>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-warning">
-                                    <i class="ti-settings mx-0"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-normal">Settings</h6>
-                                <p class="font-weight-light small-text mb-0 text-muted">
-                                    Private message
-                                </p>
-                            </div>
-                        </a>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-info">
-                                    <i class="ti-user mx-0"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                                <p class="font-weight-light small-text mb-0 text-muted">
-                                    2 days ago
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                </li>
                 <li class="nav-item nav-profile dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                        <img src="../../images/faces/face28.jpg" alt="profile"/>
+                        <i class="mdi mdi-account"></i>{{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item">
+                        <a class="dropdown-item"  href="{{ route('quanlytaikhoan.thongtintaikhoan') }}">
                             <i class="ti-settings text-primary"></i>
-                            Settings
+                            Thông tin tài khoản
                         </a>
-                        <a class="dropdown-item">
+                        <a class="dropdown-item"  href="{{ route('logout') }}"   onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
                             <i class="ti-power-off text-primary"></i>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                             Logout
                         </a>
                     </div>
-                </li>
-                <li class="nav-item nav-settings d-none d-lg-flex">
-                    <a class="nav-link" href="#">
-                        <i class="icon-ellipsis"></i>
-                    </a>
                 </li>
             </ul>
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
@@ -298,37 +311,37 @@
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link"  href="{{route("danhmuc.quanly")}}">
-                        <i class="icon-grid menu-icon"></i>
+                        <i class="mdi mdi-file-multiple menu-icon"></i>
                         <span class="menu-title">Quản lý danh mục</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"  href="{{route("quanlytaikhoan.quanly")}}">
-                        <i class="icon-grid menu-icon"></i>
+                        <i class="mdi mdi-account-plus menu-icon"></i>
                         <span class="menu-title">Quản lý tài khoản</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"  href="{{route("quanlykhachhang.khachang")}}">
-                        <i class="icon-grid menu-icon"></i>
+                        <i class="mdi mdi-format-align-justify menu-icon"></i>
                         <span class="menu-title">Quản lý khách hàng</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route("quanlyxe.quanly")}}">
-                        <i class="icon-grid menu-icon"></i>
+                        <i class="mdi mdi-format-align-justify menu-icon"></i>
                         <span class="menu-title">Quản lý thông tin xe</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route("quanlybinhluan.quanly")}}">
-                        <i class="icon-grid menu-icon"></i>
+                        <i class="mdi mdi-message-text menu-icon"></i>
                         <span class="menu-title">Quản lý bình luận</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route("quanlysuachua.quanly")}}">
-                        <i class="icon-grid menu-icon"></i>
+                    <a class="nav-link" href="{{route("quanlysuachua.quanly")}}" aria-expanded="false"  aria-controls="ui-basic">
+                        <i class="icon-grid menu-icon" ></i>
                         <span class="menu-title">Quản lý sửa chữa</span>
                     </a>
                 </li>
@@ -347,25 +360,10 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link"  href="{{ route('logout') }}"   onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
-                        <i class="icon-grid menu-icon"></i>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                        <span class="menu-title">Đăng xuất</span>
-                    </a>
-                </li>
             </ul>
         </nav>
         <div class="main-panel">
         @yield('content')
-        <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-            </div>
-        </footer>
             <!-- partial -->
         </div>
     </div>
