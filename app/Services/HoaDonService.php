@@ -23,6 +23,11 @@ class HoaDonService
         return $this->hoaDonRepository->getAllHoaDon();
     }
 
+    public function search()
+    {
+        return $this->hoaDonRepository->search();
+    }
+
     public function getHoaDonToCuaHang()
     {
         return $this->hoaDonRepository->getHoaDonToCuaHang();
@@ -31,6 +36,36 @@ class HoaDonService
     public function find($id)
     {
         return $this->hoaDonRepository->findToHoaDon($id);
+    }
+
+    public function selectXeTheoCuahang()
+    {
+        return $this->hoaDonRepository->selectXeTheoCuahang();
+    }
+
+    public function update($request,$id)
+    {
+        $dataUpdate = array(
+            'iMa_cua_hang' => $request->iMa_cua_hang,
+            'trang_thai' => 'chonhan'
+        );
+        $this->hoaDonRepository->update($dataUpdate,$id);
+        if(isset($request->phutung))
+        {
+            foreach ($request->phutung as $iterm)
+            {
+                if(!empty($iterm))
+                {
+                    $dataPhuTung = array(
+                        'ten_phu_tung' => $iterm,
+                        'iMa_hoa_don' => $id
+                    );
+                    $this->phuTungRepository->create($dataPhuTung);
+                }
+            }
+        }
+        $hoadon = $this->hoaDonRepository->find($id);
+        return $hoadon;
     }
 
     public function create($request)
@@ -82,5 +117,10 @@ class HoaDonService
             'trang_thai' => 'dahoanthanh'
         );
         return $this->hoaDonRepository->update($dataUpdateHoaDon,$id);
+    }
+
+    public function delete($id)
+    {
+        return $this->hoaDonRepository->delete($id);
     }
 }

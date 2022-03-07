@@ -20,4 +20,9 @@ class PhuTung extends Model
     public function hoadon(){
         return $this->belongsTo(HoaDon::class,'iMa_hoa_don');
     }
+
+    public function findTheoHoaDon($id)
+    {
+        return $this->where('iMa_hoa_don',$id)->get();
+    }
 }

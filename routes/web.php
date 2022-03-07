@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\HangXeController;
 use App\Http\Controllers\Admin\HoaDonController;
 use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\Admin\LoaiXeController;
+use App\Http\Controllers\Admin\PhuTungController;
 use App\Http\Controllers\Admin\QuanlyBinhLuan;
 use App\Http\Controllers\Admin\QuanLyKhachHang;
 use App\Http\Controllers\Admin\QuanLySuaChua;
@@ -151,19 +152,32 @@ Route::middleware(['auth'])->group(function() {
     Route::name('quanlysuachua.')->prefix('quanlysuachua')->group(function () {
 
         Route::get('/', [QuanLySuaChua::class, 'index'])
-            ->name('quanly');
+            ->name('quanly')
+            ->middleware('role:admin');
 
         Route::get('/themhoadon', [HoaDonController::class, 'create'])
-            ->name('themhoadon');
+            ->name('themhoadon')
+            ->middleware('role:admin');
+
+        Route::delete('/xoahoadon/{id}', [QuanLySuaChua::class, 'xoahoadon'])
+            ->name('xoahoadon')
+            ->middleware('role:admin');
+
+        Route::delete('/deletephutung/{id}', [PhuTungController::class, 'delete'])
+            ->name('delete-phu-tung');
 
         Route::post('/luuhoadon', [HoaDonController::class, 'store'])
-            ->name('luuhoadon');
+            ->name('luuhoadon')->middleware('role:admin');
+
+        Route::patch('/updatehoadon/{id}', [HoaDonController::class, 'update'])
+            ->name('updatehoadon');
 
         Route::get('/showhoadon/{id}', [HoaDonController::class, 'show'])
             ->name('showhoadon');
 
         Route::get('/quanlycuahang', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'index'])
-            ->name('quanlycuahang');
+            ->name('quanlycuahang')
+            ->middleware('role:cuahanglienket');
 
         Route::post('/updatenhandon/{id}', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'nhandon'])
             ->name('updatenhandon');

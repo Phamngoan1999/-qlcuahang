@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Xe extends Model
 {
@@ -86,4 +87,5 @@ class Xe extends Model
         return $this->whereHas('dongxe')->with(['dongxe'])
                     ->where('iMa_khach_hang_mua_xe',null)->get();
     }
+
 }

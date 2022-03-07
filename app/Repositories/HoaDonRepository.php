@@ -18,6 +18,11 @@ class HoaDonRepository extends BaseRepository
         return $this->model->getAllHoaDon();
     }
 
+    public function search()
+    {
+        return $this->model->paginate(10);
+    }
+
     public function findToHoaDon($id)
     {
         return $this->model->findToHoaDon($id);
@@ -44,4 +49,8 @@ class HoaDonRepository extends BaseRepository
         return $this->update($dataUpdate,$id);
     }
 
+    public function selectXeTheoCuahang()
+    {
+        return $this->model->selectXeTheoCuahang();
+    }
 }

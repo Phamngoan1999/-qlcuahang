@@ -20,4 +20,9 @@ class XeRepository extends BaseRepository
     {
         return $this->model->allXeChuaBan();
     }
+
+    public function selectXeTheoCuahang()
+    {
+        return $this->model->selectXeTheoCuahang();
+    }
 }

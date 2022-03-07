@@ -339,12 +339,22 @@
                         <span class="menu-title">Quản lý bình luận</span>
                     </a>
                 </li>
+                @hasRole('admin')
                 <li class="nav-item">
                     <a class="nav-link" href="{{route("quanlysuachua.quanly")}}" aria-expanded="false"  aria-controls="ui-basic">
                         <i class="icon-grid menu-icon" ></i>
                         <span class="menu-title">Quản lý sửa chữa</span>
                     </a>
                 </li>
+                @endhasRole
+                @hasRole('cuahanglienket')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route("quanlysuachua.quanlycuahang")}}" aria-expanded="false"  aria-controls="ui-basic">
+                        <i class="icon-grid menu-icon" ></i>
+                        <span class="menu-title">Quản lý sửa chữa</span>
+                    </a>
+                </li>
+                @endhasRole
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                         <i class="icon-layout menu-icon"></i>

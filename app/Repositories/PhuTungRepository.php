@@ -11,4 +11,8 @@ class PhuTungRepository extends BaseRepository
         return PhuTung::class;
     }
 
+    public function findTheoHoaDon($idHoaDon)
+    {
+        return $this->model->findTheoHoaDon($idHoaDon);
+    }
 }

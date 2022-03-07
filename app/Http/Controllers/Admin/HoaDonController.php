@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateHoaDon;
+use App\Http\Requests\UpdateHoaDon;
 use App\Services\CuaHangService;
 use App\Services\HoaDonService;
 use App\Services\XeService;
@@ -24,6 +26,14 @@ class HoaDonController extends Controller
         $this->hoaDonService = $hoaDonService;
     }
 
+    public function index($id)
+    {
+        $danhsachCuaHang = $this->cuaHangServive->all();
+        $danhsachXe = $this->xeService->allXeChuaBan();
+        $thongtinHoadon = $this->hoaDonService->find($id);
+        return view('hoadon.index',compact('danhsachCuaHang','danhsachXe','thongtinHoadon','id'));
+    }
+
     public function create()
     {
         $danhsachCuaHang = $this->cuaHangServive->all();
@@ -35,13 +45,48 @@ class HoaDonController extends Controller
     {
         $danhsachCuaHang = $this->cuaHangServive->all();
         $danhsachXe = $this->xeService->allXeChuaBan();
-        $thongtinXe = $this->hoaDonService->find($id);
-        return view('hoadon.show',compact('danhsachCuaHang','danhsachXe','thongtinXe','id'));
+        $thongtinHoadon = $this->hoaDonService->find($id);
+        return view('hoadon.show',compact('danhsachCuaHang','danhsachXe','thongtinHoadon','id'));
     }
 
-    public function store(Request $request)
+    public function update(UpdateHoaDon $request,$id)
     {
-        return $this->hoaDonService->create($request);
-        return view('hoadon.create',compact('danhsachCuaHang','danhsachXe'));
+        if(isset($request->phutung))
+        {
+            if($this->checkPhutung($request->phutung))
+            {
+                $hoadon = $this->hoaDonService->update($request,$id);
+                return $this->index($hoadon->id);
+            }else{
+                return "nhap-thieu";
+            }
+        }else{
+            $this->hoaDonService->update($request,$id);
+            return $this->index($id);
+        }
+    }
+
+
+    public function checkPhutung($phutung)
+    {
+        foreach ($phutung as $key => $text)
+        {
+            if($text === null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function store(CreateHoaDon $request)
+    {
+        if($this->checkPhutung($request->phutung))
+        {
+            $hoadon = $this->hoaDonService->create($request);
+            return $this->index($hoadon->id);
+        }else{
+            return "nhap-thieu";
+        }
     }
 }

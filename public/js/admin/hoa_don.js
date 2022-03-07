@@ -2,25 +2,85 @@ import base, {METHOD_GET, METHOD_POST, METHOD_PATCH, METHOD_DELETE} from "../bas
 import comfirmAlert from "../comfirm.js";
 
 
+function validateData()
+{
+    jQuery("input[name='phutung[]']").each(function() {
+        if(this.value == '')
+        {
+            $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
+            return false;
+        }
+    });
+}
+
+function htmlThemPhuTung()
+{
+    let html = '<div class="phu-tung">\n' +
+'                                <div class="row them-phu-tung" >\n' +
+'                                    <div class="col-md-4">\n' +
+'                                        <div class="form-group">\n' +
+'                                            <label for="">Phụ tùng</label>\n' +
+'                                            <input type="text" class="form-control phu-tung-check" name="phutung[]"  placeholder="Phụ tùng">\n' +
+'                                        </div>\n' +
+'                                    </div>\n' +
+'                                    <div class="col-md-2">\n' +
+'                                        <div class="form-group">\n' +
+'                                            <label for="" style="visibility: hidden;">Phụ tùng</label>\n' +
+'                                            <button type="button" class="btn btn-danger xoa-phu-tung"><i class="fas fa-trash-alt"></i></button>\n' +
+'                                        </div>\n' +
+'                                    </div>\n' +
+'                                </div>\n' +
+'                            </div>'  ;
+    return html;
+}
 (function ($, window, document){
     $(function () {
 
-        $(document).on('click','#add-phu-tung',function(event) {
-            let them = $('.phu-tung').html();
+        $(document).on('click','#add-phu-tung',function() {
+            $('.error').html("");
+            let them = htmlThemPhuTung();
             $('#list-phu-tung').append(them);
         });
 
-        $(document).on('click','.xoa-phu-tung',function(event) {
+        $(document).on('click','.xoa-phu-tung',function() {
             $(this).parents( ".them-phu-tung" ).remove();
         });
 
-        $(document).on('click','#add-luu-thong-tin',function(event) {
+        $(document).on('click','.xoa-phu-tung-confirm',function() {
+            let deleteUrl = $(this).attr('data-url');
+            comfirmAlert.confirm()
+                .then(result => {
+                    if (result) {
+                        base.callApi(deleteUrl, METHOD_DELETE)
+                            .done(function (response){
+                                if(response === "Hay-xoa-hoa-don")
+                                {
+                                    comfirmAlert.showErrorMessageAlert("Không thể xóa phụ tùng này");
+                                    return false;
+                                }
+                                comfirmAlert.showSuccessMessageAlert("Xóa phụ tùng thành công");
+                                $('.chi-tiet-hoa-don').html(response)
+                                $('.js-example-basic-single').select2();
+                            });
+                    }
+                });
+        });
+
+        $(document).on('click','.update-luu-thong-tin',function() {
+            $('.error').html("");
             let dataForm = new FormData($('#form-hoa-don')[0]);
+            dataForm.append('_method', METHOD_PATCH);
             let url = $(this).attr('data-url');
             base.callApiWithFormData( url, METHOD_POST, dataForm)
                 .done(function (response) {
+                    if(response === "nhap-thieu")
+                    {
+                        $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
+                        return false;
+                    }
                     comfirmAlert.showSuccessMessageAlert('Lưu thông tin thành công');
-                    window.location.href = window.location.origin+'/quanlysuachua/themhoadon';
+                    $('.chi-tiet-hoa-don').html(response)
+                    $('.js-example-basic-single').select2();
                 })
                 .fail(function (response){
                     let errors = response.responseJSON.errors;
@@ -31,7 +91,31 @@ import comfirmAlert from "../comfirm.js";
                 })
         });
 
-        $(document).on('click','#nhan-don-sua-chua',function(event) {
+        $(document).on('click','#add-luu-thong-tin',function() {
+            $('.error').html("");
+            let dataForm = new FormData($('#form-hoa-don')[0]);
+            let url = $(this).attr('data-url');
+            base.callApiWithFormData( url, METHOD_POST, dataForm)
+                .done(function (response) {
+                    if(response === "nhap-thieu")
+                    {
+                        $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
+                        return false;
+                    }
+                    comfirmAlert.showSuccessMessageAlert('Lưu thông tin thành công');
+                    $('.chi-tiet-hoa-don').html(response)
+                    $('.js-example-basic-single').select2();
+                })
+                .fail(function (response){
+                    let errors = response.responseJSON.errors;
+                    for(let key in errors)
+                    {
+                        $(".error-"+key).html(errors[key]);
+                    }
+                })
+        });
+
+        $(document).on('click','#nhan-don-sua-chua',function() {
             let dataForm = new FormData($('#form-hoa-don')[0]);
             let updateUrl = $(this).attr('data-url');
             comfirmAlert.confirmnhandon()
@@ -40,13 +124,15 @@ import comfirmAlert from "../comfirm.js";
                         base.callApiWithFormData( updateUrl, METHOD_POST, dataForm)
                             .done(function (response){
                                 comfirmAlert.showSuccessMessageAlert("Nhận đơn thành công");
+                                $('.chi-tiet-hoa-don').html(response)
+                                $('.js-example-basic-single').select2();
                             });
                     }
                 });
         });
 
 
-        $(document).on('click','#huy-don-sua-chua',function(event) {
+        $(document).on('click','#huy-don-sua-chua',function() {
             let dataForm = new FormData($('#form-hoa-don')[0]);
             let updateUrl = $(this).attr('data-url');
             comfirmAlert.confirmnhandon()
@@ -55,12 +141,14 @@ import comfirmAlert from "../comfirm.js";
                         base.callApiWithFormData( updateUrl, METHOD_POST, dataForm)
                             .done(function (response){
                                 comfirmAlert.showSuccessMessageAlert("Hủy thành công");
+                                $('.chi-tiet-hoa-don').html(response)
+                                $('.js-example-basic-single').select2();
                             });
                     }
                 });
         });
 
-        $(document).on('click','#len-hoa-don-sua-chua',function(event) {
+        $(document).on('click','#len-hoa-don-sua-chua',function() {
             let dataForm = new FormData($('#form-hoa-don')[0]);
             let updateUrl = $(this).attr('data-url');
             comfirmAlert.confirmnhandon()
@@ -68,8 +156,23 @@ import comfirmAlert from "../comfirm.js";
                     if (result) {
                         base.callApiWithFormData( updateUrl, METHOD_POST, dataForm)
                             .done(function (response){
-                                console.log(response);
-                                // comfirmAlert.showSuccessMessageAlert("Hủy thành công");
+                                comfirmAlert.showSuccessMessageAlert("Đã hoàn hóa đơn này");
+                                $('.chi-tiet-hoa-don').html(response)
+                                $('.js-example-basic-single').select2();
+                            });
+                    }
+                });
+        });
+
+        $(document).on('click','.xoa-hoa-don',function() {
+            let deleteUrl = $(this).attr('data-url');
+            comfirmAlert.confirm()
+                .then(result => {
+                    if (result) {
+                        base.callApi(deleteUrl, METHOD_DELETE)
+                            .done(function (response){
+                                comfirmAlert.showSuccessMessageAlert("Xóa hóa đơn thành công");
+                                $('.table-div').html(response);
                             });
                     }
                 });
