@@ -1,0 +1,71 @@
+.themanh{
+    width: 150px;
+    height: 150px;
+    border: 1px solid #f1f1f1;
+    margin: 5px;
+    display: inline-block;
+    position: relative;
+}
+.anh{
+    padding: 5px;
+}
+.xoa-anh{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.xoa-anh-web{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.error{
+    padding: 5px 4px 5px 0px!important;
+}
+.ikon_xoa{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+label{
+    font-weight: bold;
+    font-size: 13px;
+    font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.image_avatar
+{
+    padding: 70px;
+    border: 1px solid #0a58ca;
+    position: relative;
+    margin-left: 15px;
+    width: 200px;height: 230px;
+}
+#thumbnail{
+    position: absolute;
+    left:0px;
+    top: 0px;
+}
+#gallery-photo-avata-web
+{
+    background: none;
+    position: absolute;
+    left: 80px;
+    top: 90px;
+    opacity: 0;
+}
+.ikon-upload
+{
+    color: #0a58ca;
+    font-size: 50px;
+    font-weight: bold;
+    position: absolute;
+    left:80px;
+    top: 50px;
+}
+.tai-anh{
+    position: absolute;
+    left:60px;
+    top: 100px;
+    color: #0a58ca;
+    font-weight: bold;
+}

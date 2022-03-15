@@ -22,9 +22,27 @@ class XeService
         $this->khachHangRepository = $khachHangRepository;
     }
 
+    public function searchForDateXeMua($request)
+    {
+        $dataSearch = array(
+            'fromDate' => $request->from_date,
+            'toDate'    => $request->to_date
+        );
+        return $this->xeRepository->searchTongTienXeMua($dataSearch);
+    }
+
+    public function searchForDateXeBan($request)
+    {
+        $dataSearch = array(
+            'fromDate' => $request->from_date,
+            'toDate'    => $request->to_date
+        );
+        return $this->xeRepository->searchTongTienXeBan($dataSearch);
+    }
+
     public function all()
     {
-        return $this->xeRepository->all();
+        return $this->xeRepository->getAll();
     }
 
     public function allXeChuaBan()
@@ -40,6 +58,16 @@ class XeService
     public function delete($id)
     {
         return $this->xeRepository->delete($id);
+    }
+
+    public function search($request)
+    {
+        $dataSearch = array(
+            'iMa_hang_xe' => $request->hang_xe,
+            'iMa_loai_xe' => $request->loai_xe,
+            'khoang_gia' => $request->khoang_gia
+        );
+        return $this->xeRepository->search($request);
     }
 
     public function store($request,$id)
@@ -63,7 +91,7 @@ class XeService
             'so_khung' => $request->so_khung,
             'bao_hiem_xe' => !empty($request->bao_hiem_xe)?"checked":null,
             'ngay_mua' => now(),
-            'gia_mua' => $request->gia_mua,
+            'gia_mua' => format_money_insert_db($request->gia_mua),
             'iMa_trang_thai' => 1,
             'iMa_dong_xe' => $request->iMa_dong_xe
         ]);
@@ -96,7 +124,6 @@ class XeService
         return $xe;
     }
 
-
     public function update($request,$id)
     {
         $dataKhachHang = array(
@@ -118,12 +145,13 @@ class XeService
             'so_khung' => $request->so_khung,
             'bao_hiem_xe' => !empty($request->bao_hiem_xe)?"checked":null,
             'ngay_mua' => now(),
-            'gia_mua' => $request->gia_mua,
+            'gia_mua' => format_money_insert_db($request->gia_mua),
             'iMa_trang_thai' => 1,
             'iMa_dong_xe' => $request->iMa_dong_xe
         );
         $this->xeRepository->update($dataXe,$id);
         $xe = $this->xeRepository->find($id);
+
         //update thông tin khách hàng
         $this->khachHangRepository->update($dataKhachHang,$xe->iMa_khach_hang_ban_xe);
         $files = $request->file('files_anh_giay_to');
@@ -136,6 +164,41 @@ class XeService
                 ]);
                 $xe->anh()->save($dataAnh);
             }
+        }
+        return $xe;
+    }
+
+    public function dangthongtinxeweb($request,$id)
+    {
+        $dataXe = array(
+            'so_loai' => $request->so_loai,
+            'mau_son' => $request->mau_son,
+            'dung_tich' => $request->dung_tich,
+            'bien_so' => $request->bien_so,
+            'dang_ky_tai' => $request->dang_ky_tai,
+            'so_may' => $request->so_may,
+            'so_khung' => $request->so_khung,
+            'bao_hiem_xe' => !empty($request->bao_hiem_xe)?"checked":null,
+            'iMa_trang_thai' => 2,
+            'iMa_dong_xe' => $request->iMa_dong_xe,
+            'gia_dang_web' => $request->gia_dang_web,
+            'so_km_da_di' => $request->so_km_di,
+            'nam_dang_ky' => $request->nam_dang_ky,
+            'khoang_gia' => $request->khoang_gia,
+            'ghi_chu' => $request->ghi_chu
+        );
+        $this->xeRepository->update($dataXe,$id);
+        $xe = $this->xeRepository->find($id);
+        //ảnh avata
+        $files_avata = $request->file('files_avata_xe');
+        if(!empty($files_avata))
+        {
+            $duongdan = $this->storeImage($files_avata);
+            $dataAnh_avata = new Anh([
+                'duong_dan' => $duongdan,
+                'iMa_loai_anh' => 4
+            ]);
+            $xe->anh()->save($dataAnh_avata);
         }
         $files_wed = $request->file('files_anh_dang_web');
         if(!empty($files_wed))
@@ -170,10 +233,27 @@ class XeService
             'iMa_dong_xe' => $request->iMa_dong_xe,
             'gia_dang_web' => $request->gia_dang_web,
             'so_km_da_di' => $request->so_km_di,
-            'nam_dang_ky' => $request->nam_dang_ky
+            'nam_dang_ky' => $request->nam_dang_ky,
+            'khoang_gia' => $request->khoang_gia,
+            'ghi_chu' => $request->ghi_chu
         );
         $this->xeRepository->update($dataXe,$id);
         $xe = $this->xeRepository->find($id);
+        //ảnh avata
+        $files_avata = $request->file('files_avata_xe');
+        if(!empty($files_avata))
+        {
+            $anhXoa = Anh::where('iMa_xe',$xe->id)->where('iMa_loai_anh',4)->first();
+            $this->deleteImage($anhXoa->duong_dan);
+            $anhXoa->delete();
+
+            $duongdan = $this->storeImage($files_avata);
+            $dataAnh_avata = new Anh([
+                'duong_dan' => $duongdan,
+                'iMa_loai_anh' => 4
+            ]);
+            $xe->anh()->save($dataAnh_avata);
+        }
         $files_wed = $request->file('files_anh_dang_web');
         if(!empty($files_wed))
         {
@@ -189,4 +269,61 @@ class XeService
         }
         return $xe;
     }
+
+    public function selectXeTheoCuahang($request)
+    {
+        return $this->xeRepository->selectXeTheoCuahang($request);
+    }
+
+    public function getXeNew()
+    {
+        return $this->xeRepository->getXeNew();
+    }
+
+    public function getXeLienQuanKhachHang($id)
+    {
+        return $this->xeRepository->getXeLienQuanKhachHang($id);
+    }
+
+    public function deletethongtin($id)
+    {
+        $dataXe = array(
+            'iMa_trang_thai' => 4,
+        );
+        return $this->xeRepository->update($dataXe,$id);
+    }
+
+    public function searchQuanLyXe($request)
+    {
+        $dataSearch = array(
+            'bien_so_search' => $request->bien_so_search,
+            'khach_hang_search' => $request->khach_hang_search,
+            'trang_thai_search' => $request->trang_thai_search
+        );
+        return $this->xeRepository->searchQuanLyXe($dataSearch);
+    }
+
+    public function searchHangXe($id)
+    {
+        return $this->xeRepository->searchHangXe($id);
+    }
+
+    public function baocaoxeban($request)
+    {
+        $dataSearch = array(
+            'fromDate' => $request->from_date,
+            'toDate'    => $request->to_date
+        );
+        return $this->xeRepository->searchTongTienXeBan($dataSearch);
+    }
+
+    public function tinhtongtiensuachua($request)
+    {
+        $dataSearch = array(
+            'fromDate' => $request->from_date,
+            'toDate'    => $request->to_date
+        );
+        return $this->xeRepository->tinhtongtiensuachua($dataSearch);
+    }
+
 }

@@ -1,0 +1,35 @@
+
+.received_withd_msg{
+    margin: 0px!important;
+    width: 100%;
+}
+.received_msg {
+    display: inline-block;
+    /* padding: 0 0 0 10px; */
+    vertical-align: top;
+    width: 93%;
+}
+.outgoing_msg{
+    padding-right: 15px;
+}
+.page-link
+{
+    color: #000;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.khongmau{
+    border: 0px solid #000;
+    background: #fff;
+}
+.border-toprs{
+    border-radius: 5px 5px 0px 0px!important;
+}
+.border-buttomrs{
+    border-radius: 0px 0px 5px 5px!important;
+}
+.stylebinhluan{
+    color: #065fd4;
+    font-weight: bold!important;
+    font-size: 14px;
+}

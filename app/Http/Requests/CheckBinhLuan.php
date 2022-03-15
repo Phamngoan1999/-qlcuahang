@@ -27,6 +27,7 @@ class CheckBinhLuan extends FormRequest
             'comment' => 'required'
         ];
     }
+
     public function messages()
     {
         return [

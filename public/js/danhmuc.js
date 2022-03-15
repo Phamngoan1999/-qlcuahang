@@ -26,6 +26,11 @@ import comfirmAlert from "./comfirm.js";
                     if (result) {
                         base.callApi(deleteUrl, METHOD_DELETE)
                             .done(function (response){
+                                if(response == "khong-the-xoa")
+                                {
+                                    comfirmAlert.showErrorMessageAlert("Không thể xóa hãng xe");
+                                    return false;
+                                }
                                 comfirmAlert.showSuccessMessageAlert("Xóa Hãng xe thành công");
                                 $('#danh-sach-hang-xe').html(response);
                             });
@@ -78,6 +83,11 @@ import comfirmAlert from "./comfirm.js";
                     if (result) {
                         base.callApi(deleteUrl, METHOD_DELETE)
                             .done(function (response){
+                                if(response == "khong-the-xoa")
+                                {
+                                    comfirmAlert.showErrorMessageAlert("Không thể xóa loại xe");
+                                    return false;
+                                }
                                 comfirmAlert.showSuccessMessageAlert("Xóa Loại xe thành công");
                                 $('#danh-sach-loai-xe').html(response);
                             });
@@ -133,6 +143,11 @@ import comfirmAlert from "./comfirm.js";
                     if (result) {
                         base.callApi(deleteUrl, METHOD_DELETE)
                             .done(function (response){
+                                if(response == "khong-the-xoa")
+                                {
+                                    comfirmAlert.showErrorMessageAlert("Không thể xóa dòng xe");
+                                    return false;
+                                }
                                 comfirmAlert.showSuccessMessageAlert("Xóa Dòng xe thành công");
                                 $('#danh-sach-dong-xe').html(response);
                             });

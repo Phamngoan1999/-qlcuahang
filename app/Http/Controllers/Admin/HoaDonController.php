@@ -55,8 +55,7 @@ class HoaDonController extends Controller
         {
             if($this->checkPhutung($request->phutung))
             {
-                $hoadon = $this->hoaDonService->update($request,$id);
-                return $this->index($hoadon->id);
+                return $this->hoaDonService->update($request,$id);
             }else{
                 return "nhap-thieu";
             }
@@ -65,7 +64,6 @@ class HoaDonController extends Controller
             return $this->index($id);
         }
     }
-
 
     public function checkPhutung($phutung)
     {
@@ -83,8 +81,7 @@ class HoaDonController extends Controller
     {
         if($this->checkPhutung($request->phutung))
         {
-            $hoadon = $this->hoaDonService->create($request);
-            return $this->index($hoadon->id);
+            return $this->hoaDonService->create($request);
         }else{
             return "nhap-thieu";
         }

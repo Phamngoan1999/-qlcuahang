@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\Xe;
 use App\Repositories\HoaDonRepository;
 use App\Repositories\PhuTungRepository;
+use App\Repositories\XeRepository;
 
 class HoaDonService
 {
@@ -12,10 +14,13 @@ class HoaDonService
 
     protected $phuTungRepository;
 
-    public function __construct(HoaDonRepository $hoaDonRepository,PhuTungRepository $phuTungRepository)
+    protected $xeRepository;
+
+    public function __construct(HoaDonRepository $hoaDonRepository,PhuTungRepository $phuTungRepository,XeRepository $xeRepository)
     {
         $this->hoaDonRepository = $hoaDonRepository;
         $this->phuTungRepository = $phuTungRepository;
+        $this->xeRepository = $xeRepository;
     }
 
     public function all()
@@ -23,14 +28,18 @@ class HoaDonService
         return $this->hoaDonRepository->getAllHoaDon();
     }
 
-    public function search()
+    public function search($request)
     {
-        return $this->hoaDonRepository->search();
+        $dataSearch['cuahang'] = $request->cuahang;
+        $dataSearch['xe'] = $request->xe;
+        return $this->hoaDonRepository->search($dataSearch);
     }
 
-    public function getHoaDonToCuaHang()
+    public function getHoaDonToCuaHang($request)
     {
-        return $this->hoaDonRepository->getHoaDonToCuaHang();
+        $dataSearch['idTrangThai'] = $request->trangthai;
+        $dataSearch['idXe'] = $request->xe;
+        return $this->hoaDonRepository->getHoaDonToCuaHang($dataSearch);
     }
 
     public function find($id)
@@ -76,6 +85,7 @@ class HoaDonService
             'trang_thai' => 'chonhan'
         );
         $hoadon = $this->hoaDonRepository->create($dataCreate);
+        Xe::find($request->iMa_xe)->update(['iMa_trang_thai'=>6]);
         foreach ($request->phutung as $iterm)
         {
             if(!empty($iterm))
@@ -97,7 +107,13 @@ class HoaDonService
 
     public function huyhoadon($request,$id)
     {
-        return $this->hoaDonRepository->huyhoadon($id);
+        $dataUpdate = array(
+            'trang_thai' => 'huyhoadon'
+        );
+        $this->hoaDonRepository->update($dataUpdate,$id);
+        $hoadon = $this->hoaDonRepository->find($id);
+        // update trạng thái xe
+        return $this->xeRepository->update(['iMa_trang_thai' => 5],$hoadon->iMa_xe);
     }
 
     public function lenhoadon($request,$id)
@@ -105,10 +121,11 @@ class HoaDonService
         $tongtien = 0;
         foreach($request->dongia as $key => $iterm)
         {
+            $gia = format_money_insert_db($iterm);
             $dataDongiaPhuTung = array(
                 'don_gia' => $iterm
             );
-            $tongtien = (double)$tongtien + (double)$iterm;
+            $tongtien = (double)$tongtien + (double)$gia;
             $this->phuTungRepository->update($dataDongiaPhuTung,$key);
         }
         $dataUpdateHoaDon = array(
@@ -116,11 +133,24 @@ class HoaDonService
             'ngay_lap' => now(),
             'trang_thai' => 'dahoanthanh'
         );
-        return $this->hoaDonRepository->update($dataUpdateHoaDon,$id);
+        $this->hoaDonRepository->update($dataUpdateHoaDon,$id);
+        $hoadon = $this->hoaDonRepository->find($id);
+        // update trạng thái xe
+        return $this->xeRepository->update(['iMa_trang_thai' => 7],$hoadon->iMa_xe);
     }
+
 
     public function delete($id)
     {
         return $this->hoaDonRepository->delete($id);
+    }
+
+    public function tongtiensuachua($request)
+    {
+        $dataSearch = array(
+            'fromDate' => $request->from_date,
+            'toDate'    => $request->to_date
+        );
+        return $this->hoaDonRepository->tinhtongtiensuachua($dataSearch);
     }
 }

@@ -31,7 +31,7 @@ class Anh extends Model
     public function getAnhWedXe($id)
     {
         return Anh::where('iMa_xe', $id)
-            ->where('iMa_loai_anh', 2)
+            ->whereIn('iMa_loai_anh', array(1,4))
             ->get()->toArray();
     }
 

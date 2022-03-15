@@ -42,12 +42,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">Chọn xe sửa chữa</label>
-                                                <select class="js-example-basic-single w-100"  name="iMa_xe" disabled>
-                                                    <option value="">Chọn xe sửa chữa</option>
-                                                    @foreach($danhsachXe as$xe)
-                                                        <option value="{{$xe->id}}" @if($xe->id==$thongtinHoadon[0]->iMa_xe) selected @endif>{{$xe->dongxe->ten_dong_xe}}-{{$xe->bien_so}}</option>
-                                                    @endforeach
-                                                </select>
+                                                <input class="form-control" type="text" value="{{$thongtinHoadon[0]->xe->dongxe->ten_dong_xe}} - {{$thongtinHoadon[0]->xe->bien_so}}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -96,15 +91,22 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="">Đơn giá</label>
-                                                            <input type="text" class="form-control" name="dongia[{{$iterm->id}}]"  placeholder="đơn giá" value="{{$iterm->don_gia}}">
+                                                            <input type="text" class="form-control don-gia-validate" name="dongia[{{$iterm->id}}]"  placeholder="đơn giá" value="{{$iterm->don_gia}}">
                                                         </div>
                                                     </div>
                                                 @endif
                                                 @endhasRole
                                             </div>
                                         @endforeach
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="error error-phutung"></div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="error error-don-gia"></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="error error-phutung"></div>
                                 </div>
                             </div>
                             <div class="row" style="padding-top: 10px;">
@@ -136,4 +138,20 @@
         </div>
     </div>
     <script type="module" src="{{asset('js/admin/hoa_don.js')}}"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.8.3.js"></script>
+    <script>
+        function formatCurrency(number){
+            var n = number.split('').reverse().join("");
+            var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");
+            return  n2.split('').reverse().join('') + 'VNĐ';
+        }
+        $(".don-gia-validate").on('input', function(e){
+            $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g,'')));
+        }).on('keypress',function(e){
+            if(!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+        }).on('paste', function(e){
+            var cb = e.originalEvent.clipboardData || window.clipboardData;
+            if(!$.isNumeric(cb.getData('text'))) e.preventDefault();
+        });
+    </script>
 @endsection

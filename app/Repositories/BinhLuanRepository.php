@@ -14,11 +14,18 @@ class BinhLuanRepository extends BaseRepository
 
     public function getAll()
     {
-        return $this->model->getAll();
+        return $this->model->paginate(10);
     }
 
     public function binhLuanTheoXe($idXe)
     {
         return $this->model->binhLuanTheoXe($idXe);
+    }
+
+    public function search($dataSearch)
+    {
+        return $this->model->withTrangThai($dataSearch['trang_thai_search'])
+            ->withXe($dataSearch['ma_xe'])
+            ->paginate(10);
     }
 }

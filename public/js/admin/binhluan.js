@@ -12,8 +12,14 @@ import comfirmAlert from "../comfirm.js";
                     if (result) {
                         base.callApi(deleteUrl, METHOD_DELETE)
                             .done(function (response){
+                                console.log(response);
                                 comfirmAlert.showSuccessMessageAlert("Xóa bình luận thành công");
-                                // $('#danh-sach-cua-hang').html(response);
+                                $('.table').html(response);
+                                $('.paginate-page a').unbind('click').on('click', function(e) {
+                                    e.preventDefault();
+                                    let url_search  = $(this).attr('href');
+                                    getPosts(url_search);
+                                });
                             });
                     }
                 });
@@ -37,7 +43,6 @@ import comfirmAlert from "../comfirm.js";
                 .done(function (response) {
                     $("#modal-show-binh-luan").modal("hide");
                     comfirmAlert.showSuccessMessageAlert("Update Dòng xe thành công!");
-                    // $("#danh-sach-dong-xe").html(response);
                 })
                 .fail(function (response){
                     let errors = response.responseJSON.errors;
@@ -47,5 +52,47 @@ import comfirmAlert from "../comfirm.js";
                     }
                 })
         });
+
+        $(document).on('click', '#tim-kiem', function(){
+            let dataSearch = $('#form-search').serialize();
+            let url = $(this).attr('data-url');
+            loading();
+            base.callApi( url, METHOD_GET, dataSearch)
+                .done(function (response) {
+                    $('.table').html(response);
+                    $('.paginate-page a').unbind('click').on('click', function(e) {
+                        e.preventDefault();
+                        let url_search  = $(this).attr('href');
+                        getPosts(url_search);
+                    });
+                })
+        });
+
+        $(document).on('click', '.paginate-page a', function(e) {
+            e.preventDefault();
+            let url_search = $(this).attr('href');
+            getPosts(url_search);
+        });
+
+        function loading()
+        {
+            let url_load = window.location.origin+'/Logo/loading.gif';
+            let html = "<tr>\
+                            <td colspan='6' class='text-center'>\
+                                <img src='"+url_load+"' >\
+                            </td>\
+                        </tr>";
+            $('#danh-sach-binh-luan').html(html);
+        }
+
+        function getPosts(url_search)
+        {
+            loading();
+            base.callApi( url_search, METHOD_GET)
+                .done(function (response) {
+                    $('.table').html(response);
+                })
+        }
+
     })
 }(window.jQuery, window, document))

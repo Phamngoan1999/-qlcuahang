@@ -1,43 +1,5 @@
 @extends('header.quanly')
 @section('content')
-    <link rel="stylesheet" href="{{asset('css/checkbox.css')}}">
-    <style>
-            .themanh{
-                width: 150px;
-                height: 150px;
-                border: 1px solid #f1f1f1;
-                margin: 5px;
-                display: inline-block;
-                position: relative;
-            }
-            .anh{
-                padding: 5px;
-            }
-            .xoa-anh{
-                position: absolute;
-                top: 5px;
-                right: 5px;
-            }
-            .xoa-anh-web{
-                position: absolute;
-                top: 5px;
-                right: 5px;
-            }
-            .error{
-                padding: 5px 4px 5px 0px!important;
-            }
-            .ikon_xoa{
-                position: absolute;
-                top: 5px;
-                right: 5px;
-            }
-             label{
-                 font-weight: bold;
-                 font-size: 13px;
-                 font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-             }
-
-    </style>
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
@@ -183,16 +145,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Giá mua <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="gia_mua" id="gia_mua" placeholder="Giá mua"  value="{{$thongTinXe[0]['gia_mua']}}">
+                                        <input type="text" class="form-control" name="gia_mua" id="gia_mua" placeholder="Giá mua"  value="{{ currency_format($thongTinXe[0]['gia_mua'])}}">
                                         <div class="error error-gia_mua"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Giá đăng lên trang web</label>
-                                        <input type="text" class="form-control" name="gia_dang_web"  placeholder="Giá đăng trên web"  value="{{$thongTinXe[0]['gia_dang_web']}}">
                                     </div>
                                 </div>
                             </div>
@@ -206,16 +160,18 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="gallery" width="100%" style="margin-top: 5px;border: 1px solid #f1f1f1;height: 200px;">
+                                    <div class="gallery" width="100%">
                                         @if(isset($thongtinAnh))
                                             @foreach($thongtinAnh as $anh)
-                                                @if($anh['iMa_loai_anh'] == 2)
+                                                @if($anh['iMa_loai_anh'] == 2||$anh['iMa_loai_anh'] == 3)
                                                     <div class="themanh">
                                                         <image src="{{ asset('uploads/images/'.$anh['duong_dan']) }}" class="anh"  width="150px" height="150px"/>
+                                                        @if($thongTinXe[0]['iMa_trang_thai'] != 3)
                                                         <button type="button" class="btn btn-danger xoa-anh" title = "Xóa ảnh"
                                                                 data-url = "{{route('quanlyxe.xoaanh',$anh['id'])}}">
                                                                 <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                                         </button>
+                                                        @endif
                                                     </div>
                                                 @endif
                                             @endforeach
@@ -227,35 +183,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Ảnh đăng trên web</label>
-                                        <input type="file"  id="gallery-photo-add-web" class="form-control" name="files_anh_dang_web[]" multiple>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="image_preview" width="100%" style="margin-top: 5px;border: 1px solid #f1f1f1;height: 200px;">
-                                        @if(isset($thongtinAnh))
-                                            @foreach($thongtinAnh as $anh)
-                                                @if($anh['iMa_loai_anh'] == 1)
-                                                    <div class="themanh">
-                                                        <image src="{{ asset('uploads/images/'.$anh['duong_dan']) }}" class="anh"  width="150px" height="150px"/>
-                                                        <button type="button" class="btn btn-danger xoa-anh-web" title = "Xóa ảnh"
-                                                                data-url = "{{route('quanlyxe.xoaanh',$anh['id'])}}">
-                                                            <i class="fas fa-trash-alt" aria-hidden="true"></i>
-                                                        </button>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
                                     <div class="form-group" style="padding-top: 10px;">
+                                        @if($thongTinXe[0]['iMa_trang_thai'] != 3)
                                         <button type="button" id="update-thong-tin" data-url="{{route('quanlyxe.updatethongtinxe',$thongTinXe[0]['id'])}}" class="btn btn-primary" >Update thông tin</button>
+                                        @endif
+                                        <a href="{{route('quanlyxe.inthongtin',$thongTinXe[0]['id'])}}" class="btn btn-primary">In thông tin</a>
                                     </div>
                                 </div>
                             </div>
@@ -270,13 +202,23 @@
             $('#so_CMND').keyup(function () {
                 this.value = this.value.replace(/[^0-9\.]/g,'');
             });
-            $('#gia_mua').keyup(function () {
-                this.value = this.value.replace(/[^0-9\.]/g,'');
-            });
             $('#so_dien_thoai').keyup(function () {
                 this.value = this.value.replace(/[^0-9\.]/g,'');
             });
         })
+        function formatCurrency(number){
+            var n = number.split('').reverse().join("");
+            var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");
+            return  n2.split('').reverse().join('') + 'VNĐ';
+        }
+        $("#gia_mua").on('input', function(e){
+            $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g,'')));
+        }).on('keypress',function(e){
+            if(!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+        }).on('paste', function(e){
+            var cb = e.originalEvent.clipboardData || window.clipboardData;
+            if(!$.isNumeric(cb.getData('text'))) e.preventDefault();
+        });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="module" src="{{asset('js/admin/create_xe_mua.js')}}"></script>

@@ -1,5 +1,13 @@
 @extends('header.quanly')
 @section('content')
+    <style>
+        .modal .modal-dialog .modal-content .modal-body {
+            padding: 10px 26px!important;
+        }
+        .modal .modal-dialog {
+            margin-top: 10px!important;
+        }
+    </style>
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
@@ -123,7 +131,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>STT</th>
+                                    <th  class="text-center">STT</th>
                                     <th>Tên cửa hàng </th>
                                     <th>Số điện thoại</th>
                                     <th>Thời gian đăng ký tài khoản</th>
@@ -132,28 +140,26 @@
                                 <tbody>
                                 @foreach($listUser as $key => $user)
                                     <tr>
-                                        <td>{{$key + 1}}</td>
+                                        <td class="text-center">{{$key + 1}}</td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
-                                        <td>{{$user->created_at}}</td>
+                                        <td>{{ format_thoi_gian($user->created_at) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="paginate float-right text-right" style="padding: 10px 0px;">
+                                    {{$listUser->appends(request()->all())->links()}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <style>
-        .obligatory
-        {
-            color: red;
-        }
-        .error{
-            padding-top: 5px;
-        }
-    </style>
     <script type="module" src="{{asset('js/admin/taikhoan.js')}}"></script>
 @endsection

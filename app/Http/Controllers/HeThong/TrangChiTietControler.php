@@ -10,10 +10,12 @@ use App\Models\LoaiXe;
 use App\Models\Xe;
 use App\Services\BinhLuanService;
 use App\Services\XeService;
+use App\Traits\HandleImage;
 use Illuminate\Http\Request;
 
 class TrangChiTietControler extends Controller
 {
+    use HandleImage;
     protected $xeService;
 
     protected $binhLuanService;
@@ -27,6 +29,10 @@ class TrangChiTietControler extends Controller
     public function index($id)
     {
         $thongTinXe = Xe::getThongTinToTalXe($id);
+        if($thongTinXe[0]['iMa_trang_thai'] != 2)
+        {
+            return redirect('404');
+        }
         $thongtinAnh = Anh::getAnhWedXe($id);
         $hangXe = HangXe::all();
         $loaiXe = LoaiXe::all();

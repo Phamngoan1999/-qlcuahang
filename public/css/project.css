@@ -69,3 +69,9 @@
 .obligatory{
     color: red;
 }
+.btn-width{
+    width: 200px!important;
+}
+.label{
+    font-weight: bold;
+}

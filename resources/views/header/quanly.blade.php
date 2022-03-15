@@ -20,8 +20,12 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="{{asset('template/vendors/mdi/css/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/checkbox.css')}}">
+    <link rel="stylesheet" href="{{asset('css/box_image.css')}}">
+    <link rel="stylesheet" href="{{asset('css/label.css')}}">
+    <link rel="stylesheet" href="{{asset('css/slide.css')}}">
 </head>
-<body>s
+<body>
 @if(\Session::has('message'))
     <script>
         $(document).ready(function (){
@@ -29,76 +33,16 @@
         });
     </script>
 @endif
-<style>
-    .sidebar .nav .nav-item.active > .nav-link i:hover, .sidebar .nav .nav-item.active > .nav-link .menu-title:hover, .sidebar .nav .nav-item.active > .nav-link .menu-arrow:hover {
-        color: #FFF!important;
-    }
-    .sidebar .nav .nav-item.active:hover > .nav-link i,
-    .sidebar .nav .nav-item.active:hover > .nav-link .menu-title,
-    .sidebar .nav .nav-item.active:hover > .nav-link .menu-arrow {
-        color: #FFF!important;
-        font-weight: bold;
-    }
-    .sidebar .nav .nav-item > .nav-link i, .sidebar .nav .nav-item > .nav-link .menu-title, .sidebar .nav .nav-item > .nav-link .menu-arrow {
-        color: #6C7383;!important;
-        font-weight: bold;
-    }
-    .sidebar .nav .nav-item:hover > .nav-link i,
-    .sidebar .nav .nav-item:hover > .nav-link .menu-title,
-    .sidebar .nav .nav-item:hover > .nav-link .menu-arrow {
-        color: #FFF!important;
-        font-weight: bold;
-    }
-    .sidebar .nav .nav-item > .nav-link i, .sidebar .nav .nav-item > .nav-link .menu-title, .sidebar .nav .nav-item > .nav-link .menu-arrow {
-        color: #6C7383!important;
-        font-weight: bold;
-    }
-    .nav-item{
-        border-radius: 2px!important;
-    }
-    .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"] {
-        background: #4B49AC;
-        color: #fff!important;
-        border-radius: 2px;
-        border-color: #FFF;
-        color: #fff;
-    }
-    .sidebar .nav .nav-item.active > .nav-link {
-         background: #fff;
-         position: relative;
-    }
-    .sidebar .nav .nav-item .nav-link {
-        display: -webkit-flex;
-        display: flex;
-        -webkit-align-items: center;
-        align-items: center;
-        white-space: nowrap;
-        padding: 0.8125rem 1.937rem 0.8125rem 1rem;
-        color: #6C7383;
-        border-radius: 0px;
-        -webkit-transition-duration: 0.45s;
-        -moz-transition-duration: 0.45s;
-        -o-transition-duration: 0.45s;
-        transition-duration: 0.45s;
-        transition-property: color;
-        -webkit-transition-property: color;
-    }
-    .page-body-wrapper {
-        min-height: calc(100vh - 60px);
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-direction: row;
-        flex-direction: row;
-        padding-left: 0;
-        padding-right: 0;
-        padding-top: 20px;
-    }
-</style>
+<div class="modal fade" id="show-modal"tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div style="text-align: center;margin: 100px;"><img src="{{asset('Logo/loading.gif')}}" alt="Loading" width="100px" height="100px"></div>
+    </div>
+</div>
 <div class="container-scroller">
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo mr-5"><img src="{{asset('Logo/logoanh.png')}}" class="mr-2" alt="logo" with="200px"/></a>
-            <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="{{asset('Logo/logoanh.png')}}" alt="logo"/></a>
+            <a class="navbar-brand brand-logo mr-5"><img src="{{asset('Logo/logo.png')}}" class="mr-2" alt="logo" width="200%"/></a>
+            <a class="navbar-brand brand-logo-mini" href="#"><img src="{{asset('Logo/lg.jpg')}}" alt="logo" style="height: 34px!important;"/></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -309,6 +253,7 @@
         </div>
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
+                @hasRole('admin')
                 <li class="nav-item">
                     <a class="nav-link"  href="{{route("danhmuc.quanly")}}">
                         <i class="mdi mdi-file-multiple menu-icon"></i>
@@ -339,6 +284,7 @@
                         <span class="menu-title">Quản lý bình luận</span>
                     </a>
                 </li>
+                @endhasRole
                 @hasRole('admin')
                 <li class="nav-item">
                     <a class="nav-link" href="{{route("quanlysuachua.quanly")}}" aria-expanded="false"  aria-controls="ui-basic">
@@ -355,21 +301,22 @@
                     </a>
                 </li>
                 @endhasRole
+                @hasRole('admin')
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                         <i class="icon-layout menu-icon"></i>
-                        <span class="menu-title">Báo cáo thống kê</span>
+                        <span class="menu-title">Báo cáo thống kê</span>&nbsp;&nbsp;
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/buttons.html">Thống kê xe mua</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/dropdowns.html">Thống kê xe bán</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Thống kê sửa chữa</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Thống kê doanh thu</a></li>
+                            <li class="nav-item" > <a class="nav-link" style="background: #4b49ac;" href="{{route('baocaothongke.quanly')}}">Báo cáo thống kê </a></li>
+                            <li class="nav-item"> <a class="nav-link" style="background: #4b49ac;" href="{{route('baocaothongke.baocaoxemua')}}">Thống kê xe mua</a></li>
+                            <li class="nav-item"> <a class="nav-link" style="background: #4b49ac;" href="{{route('baocaothongke.baocaoxeban')}}">Thống kê xe bán</a></li>
                         </ul>
                     </div>
                 </li>
+                @endhasRole
             </ul>
         </nav>
         <div class="main-panel">

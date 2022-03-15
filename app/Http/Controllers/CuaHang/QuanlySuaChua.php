@@ -22,11 +22,11 @@ class QuanlySuaChua extends Controller
         $this->hoaDonService = $hoaDonService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-//        $danhsachXe =  $this->hoaDonService->selectXeTheoCuahang();
-        $danhsach = $this->hoaDonService->getHoaDonToCuaHang();
-        return view('cuahang.quanlysuachua',compact('danhsach'));
+        $danhsachXe = $this->hoaDonService->selectXeTheoCuahang();
+        $danhsach = $this->hoaDonService->getHoaDonToCuaHang($request);
+        return view('cuahang.quanlysuachua',compact('danhsach','danhsachXe','request'));
     }
 
     public function view($id)
@@ -52,7 +52,25 @@ class QuanlySuaChua extends Controller
 
     public function lenhoadon(Request $request,$id)
     {
-        $this->hoaDonService->lenhoadon($request,$id);
-        return $this->view($id);
+        if($this->checkDongia($request->dongia))
+        {
+            $this->hoaDonService->lenhoadon($request,$id);
+            return $this->view($id);
+        }else{
+            return "nhap-thieu-don-gia";
+        }
+    }
+
+
+    public function checkDongia($dongia)
+    {
+        foreach ($dongia as $key => $text)
+        {
+            if($text === null)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

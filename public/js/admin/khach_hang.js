@@ -4,7 +4,6 @@ import comfirmAlert from "../comfirm.js";
     $(function () {
 
         $(document).on('click','#them-khach-hang',function(){
-            //console.log(window.location.origin+'/editthongtinxe/18');
             $('.error').html("");
             let dataForm = new FormData($('#form-them-khach-hang')[0]);
             let url = $(this).attr('data-url');
@@ -38,6 +37,67 @@ import comfirmAlert from "../comfirm.js";
                     {
                         $(".error-"+key).html(errors[key]);
                     }
+                })
+        });
+
+        $(document).on('click','.xoa-khach-hang',function() {
+            let dataSearch = $('#form-search').serialize();
+            let deleteUrl = $(this).attr('data-url');
+            comfirmAlert.confirm()
+                .then(result => {
+                    if (result) {
+                        base.callApi(deleteUrl, METHOD_DELETE,dataSearch)
+                            .done(function (response){
+                                if(response == "xoa-thong-tin-lien-qua-khach-hang")
+                                {
+                                    comfirmAlert.showErrorMessageAlert("Vui lòng xóa thông tin xe liên quan đến khách hàng");
+                                    return false;
+                                }
+                                comfirmAlert.showSuccessMessageAlert("Xóa hóa đơn thành công");
+                                $('.table').html(response);
+                            });
+                    }
+                });
+        });
+
+        $(document).on('click', '.paginate-page a', function(e) {
+            e.preventDefault();
+            let url_search = $(this).attr('href');
+            getPosts(url_search);
+        });
+
+        function loading()
+        {
+            let url_load = window.location.origin+'/Logo/loading.gif';
+            let html = "<tr>\
+                            <td colspan='6' class='text-center'>\
+                                <img src='"+url_load+"' >\
+                            </td>\
+                        </tr>";
+            $('#danh-sach-khach-hang').html(html);
+        }
+
+        function getPosts(url_search)
+        {
+            loading();
+            base.callApi( url_search, METHOD_GET)
+                .done(function (response) {
+                    $('.table').html(response);
+                })
+        }
+
+        $(document).on('click', '#tim-kiem', function(){
+            let dataSearch = $('#form-search').serialize();
+            let url = $(this).attr('data-url');
+            loading();
+            base.callApi( url, METHOD_GET, dataSearch)
+                .done(function (response) {
+                    $('.table').html(response);
+                    $('.paginate-page a').unbind('click').on('click', function(e) {
+                        e.preventDefault();
+                        let url_search  = $(this).attr('href');
+                        getPosts(url_search);
+                    });
                 })
         });
     })

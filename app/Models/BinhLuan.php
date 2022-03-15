@@ -26,12 +26,22 @@ class BinhLuan extends Model
 
     public function getAll()
     {
-        return BinhLuan::whereHas('users')->with(['users'])->get();
+        return BinhLuan::whereHas('users')->with(['users']);
     }
 
     public function binhLuanTheoXe($idXe)
     {
         return $this->whereHas('users')->with(['users'])
             ->where('iMa_xe',$idXe)->paginate(5);
+    }
+
+    public function scopeWithTrangThai($query, $trangthai)
+    {
+        return $trangthai ? ( $trangthai == 'tra-loi' ? $query->where('binh_luan_tra_loi', '!=' , null) : $query->where('binh_luan_tra_loi',null) ) : null;
+    }
+
+    public function scopeWithXe($query, $maxe)
+    {
+        return $maxe ? $query->where('iMa_xe', $maxe) : null;
     }
 }

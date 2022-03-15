@@ -1,5 +1,4 @@
 @extends('header.login')
-
 @section('content')
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -7,14 +6,12 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                            <div class="form-group text-center" style="font-weight: bold;">
-                                Đăng ký tài khoản
-                            </div>
+                            <h4 class="text-center">Đăng ký tài khoản</h4>
                             <form method="POST" action="{{ route('register') }}" class="pt-3">
                                 @csrf
                                 <div class="form-group">
                                     <label for="">Họ tên <span class="obligatory">*</span></label>
-                                    <input id="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Username" autofocus>
+                                    <input id="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" maxlength="50" placeholder="Username" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -23,7 +20,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Số điện thoại <span class="obligatory">*</span></label>
-                                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"  placeholder="Số điện thoại">
+                                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" maxlength="10" placeholder="Số điện thoại">
                                     @error('email')
                                         @if($message == 'The email has already been taken.')
                                             <span class="invalid-feedback" role="alert">
@@ -38,7 +35,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Mật khẩu <span class="obligatory">*</span></label>
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"  placeholder="Mật khẩu">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" maxlength="32" placeholder="Mật khẩu">
                                     @error('password')
                                         @if( $message =="The password confirmation does not match.")
                                             <span class="invalid-feedback" role="alert">
@@ -81,4 +78,13 @@
             color: red;
         }
     </style>
+
+    <script src="{{ asset('js/jquery.min.js') }}" ></script>
+    <script>
+        $(document).ready(function() {
+            $('#email').keyup(function () {
+                this.value = this.value.replace(/[^0-9\.]/g,'');
+            });
+        })
+    </script>
 @endsection

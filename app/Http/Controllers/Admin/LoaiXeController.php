@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoaiXeReRequest;
+use App\Models\DongXe;
 use App\Services\LoaiXeService;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,11 @@ class LoaiXeController extends Controller
 
     public function delete($id)
     {
+        $dongxe = DongXe::where('iMa_loai_xe',$id)->get();
+        if(count($dongxe)>0)
+        {
+            return "khong-the-xoa";
+        }
         $this->loaiXeService->delete($id);
         return $this->index();
     }

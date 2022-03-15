@@ -31,6 +31,12 @@ import comfirmAlert from "../comfirm.js";
                     if (result) {
                         base.callApi(delete_Url, METHOD_DELETE)
                             .done(function (response){
+                                console.log(response);
+                                if(response == "ko-the-xoa-anh")
+                                {
+                                    comfirmAlert.showErrorMessageAlert("Không thể xóa ảnh");
+                                    return false;
+                                }
                                 comfirmAlert.showSuccessMessageAlert("Xóa ảnh thành công");
                                 $('.gallery').html(response);
                             });

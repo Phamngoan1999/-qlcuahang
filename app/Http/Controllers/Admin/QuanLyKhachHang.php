@@ -18,10 +18,16 @@ class QuanLyKhachHang extends Controller
         $this->khachHangService = $khachHangService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $listKhachHang = $this->khachHangService->getAllKhachHang();
+        $listKhachHang = $this->khachHangService->getAllKhachHang($request);
         return view("admin.quanlykhachhang",compact('listKhachHang'));
+    }
+
+    public function search(Request $request)
+    {
+        $listKhachHang = $this->khachHangService->getAllKhachHang($request);
+        return view("khachhang.table",compact('listKhachHang'));
     }
 
     public function create()
@@ -37,5 +43,6 @@ class QuanLyKhachHang extends Controller
     {
         return view("khachhang.edit");
     }
+
 
 }

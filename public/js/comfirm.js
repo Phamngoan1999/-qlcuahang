@@ -1,4 +1,3 @@
-
 const comfirmAlert = {
     confirm: function (){
         return swal({

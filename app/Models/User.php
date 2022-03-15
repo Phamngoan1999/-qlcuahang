@@ -67,7 +67,7 @@ class User extends Authenticatable
         $query = User::whereHas('roles', function($query){
                 $query->where('iMa_role', '2');
             }
-        )->get();
+        )->paginate(10);
         return $query;
     }
 

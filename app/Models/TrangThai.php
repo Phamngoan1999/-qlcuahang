@@ -9,14 +9,10 @@ class TrangThai extends Model
 {
     use HasFactory;
 
-    public $table = 'tbl_xe';
+    public $table = 'tbl_trang_thai';
 
     protected $fillable = [
         'ten_trang_thai'
     ];
 
-    public function xe()
-    {
-        return $this->hasMany(Xe::class, 'iMa_trang_thai','id');
-    }
 }

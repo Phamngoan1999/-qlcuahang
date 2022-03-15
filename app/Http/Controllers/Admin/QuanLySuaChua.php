@@ -21,13 +21,15 @@ class QuanLySuaChua extends Controller
 
     public function index(Request $request)
     {
-        $danhsach = $this->hoaDonService->search();
-        return view('admin.quanlysuachua',compact('danhsach'));
+        $danhsach = $this->hoaDonService->search($request);
+        $danhsachCuaHang = $this->cuaHangServive->all();
+        $danhsachXe = $this->xeService->all();
+        return view('admin.quanlysuachua',compact('danhsach','danhsachCuaHang','danhsachXe','request'));
     }
 
     public function view()
     {
-        $danhsach = $this->hoaDonService->search();
+        $danhsach = $this->hoaDonService->all();
         return view('hoadon.table',compact('danhsach'));
     }
 

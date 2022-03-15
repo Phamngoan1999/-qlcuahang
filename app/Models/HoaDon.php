@@ -40,7 +40,7 @@ class HoaDon extends Model
     {
         return $this->whereHas('cuahang')->with(['cuahang'])
             ->whereHas('xe')->with(['xe'])
-            ->get();
+            ->paginate(10);
     }
 
     public function findToHoaDon($id)
@@ -49,18 +49,51 @@ class HoaDon extends Model
         ->where('id',$id)->get();
     }
 
-    public function getHoaDonToCuaHang()
+    public function scopeWithHoaDonToCuaHang($query)
     {
         $inforCuaHang = CuaHang::where('so_dien_thoai',Auth::user()->email)->get();
-        return $this->where('iMa_cua_hang',$inforCuaHang[0]->id)
-            ->whereHas('cuahang')->with(['cuahang'])
-            ->whereHas('xe')->with(['xe'])
-            ->paginate(10);
+        return $query->where('iMa_cua_hang',$inforCuaHang[0]->id)
+            ->whereHas('xe')->with(['xe']);
     }
 
     public function selectXeTheoCuahang()
     {
         $inforCuaHang = CuaHang::where('so_dien_thoai',Auth::user()->email)->first();
-        return DB::table('tbl_hoa_don')->where('iMa_cua_hang',$inforCuaHang->id)->groupBy('iMa_xe')->get();
+        $ds = $this->where('iMa_cua_hang',$inforCuaHang->id)
+            ->whereHas('xe')->with(['xe'])
+            ->groupBy('iMa_xe')->distinct()->get();
+        return $ds;
+    }
+
+    public function scopeWithNameId($query, $name)
+    {
+        return $name ? $query->where('iMa_cua_hang', $name) : null;
+    }
+
+    public function scopeWithCuaHangId($query, $id)
+    {
+        return $id ? $query->where('iMa_xe', $id): null;
+    }
+
+    public function scopeWithTrangThai($query, $sTrangThai)
+    {
+        return $sTrangThai ? $query->where('trang_thai', $sTrangThai): null;
+    }
+
+    public function tinhtongtiensuachua($fromData,$toDate)
+    {
+        $query = DB::table("tbl_hoa_don")
+            ->select(DB::raw("SUM(tong_tien) as tong_tien_sua_chua"))
+            ->where('trang_thai','dahoanthanh');
+        if($fromData != null)
+        {
+            $query = $query->where('updated_at','>=',$fromData);
+        }
+        if($toDate != null)
+        {
+            $query = $query->where('updated_at','<=',$toDate);
+        }
+        $query = $query->get();
+        return $query;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Xe;
 use App\Services\XeService;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,12 @@ class QuanLyXe extends Controller
     {
         $listXe = $this->xeService->all();
         return view("admin.quanlyxe",compact('listXe'));
+    }
+
+    public function search(Request $request)
+    {
+        $listXe = $this->xeService->searchQuanLyXe($request);
+        return view("xe.table",compact('listXe'));
     }
 
     public function edit($id)

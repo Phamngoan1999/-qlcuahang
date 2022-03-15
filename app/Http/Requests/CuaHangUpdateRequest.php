@@ -26,7 +26,7 @@ class CuaHangUpdateRequest extends FormRequest
     {
         return [
             'name'          => 'required',
-            'email'         => ['required','unique:users',new CheckPhontNumber()],
+//            'email'         => ['required',new CheckPhontNumber()],
             'diachi'        => 'required'
         ];
     }
@@ -35,8 +35,7 @@ class CuaHangUpdateRequest extends FormRequest
     {
         return [
             'name.required' => 'Vui lòng nhập tên cửa hàng',
-            'email.unique'  => 'Số điện thoai đã được đăng ký.',
-            'email.required' => 'Vui lòng nhập số điện thoại',
+//            'email.required' => 'Vui lòng nhập số điện thoại',
             'diachi.required' => 'Vui lòng nhập địa chỉ',
             'matkhau.min'       => 'Mật khẩu phải trên 8 ký tự và dưới 32 ký tự'
         ];

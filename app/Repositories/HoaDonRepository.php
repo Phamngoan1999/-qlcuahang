@@ -15,12 +15,15 @@ class HoaDonRepository extends BaseRepository
 
     public function getAllHoaDon()
     {
-        return $this->model->getAllHoaDon();
+        return $this->model->withCuaHangId()
+            ->getAllHoaDon();
     }
 
-    public function search()
+    public function search($dataSearch)
     {
-        return $this->model->paginate(10);
+        return $this->model->withNameId($dataSearch['cuahang'])
+            ->withCuaHangId($dataSearch['xe'])
+            ->paginate(10);
     }
 
     public function findToHoaDon($id)
@@ -28,9 +31,12 @@ class HoaDonRepository extends BaseRepository
         return $this->model->findToHoaDon($id);
     }
 
-    public function getHoaDonToCuaHang()
+    public function getHoaDonToCuaHang($dataSearch)
     {
-        return $this->model->getHoaDonToCuaHang();
+        return $this->model->withTrangThai($dataSearch['idTrangThai'])
+            ->withCuaHangId($dataSearch['idXe'])
+            ->withHoaDonToCuaHang()
+            ->paginate(10);
     }
 
     public function nhandon($id)
@@ -41,16 +47,13 @@ class HoaDonRepository extends BaseRepository
         return $this->update($dataUpdate,$id);
     }
 
-    public function huyhoadon($id)
-    {
-        $dataUpdate = array(
-            'trang_thai' => 'huyhoadon'
-        );
-        return $this->update($dataUpdate,$id);
-    }
-
     public function selectXeTheoCuahang()
     {
         return $this->model->selectXeTheoCuahang();
+    }
+
+    public function tinhtongtiensuachua($request)
+    {
+        return $this->model->tinhtongtiensuachua($request['fromDate'],$request['toDate']);
     }
 }

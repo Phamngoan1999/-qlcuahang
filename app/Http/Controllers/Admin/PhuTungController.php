@@ -36,7 +36,7 @@ class PhuTungController extends Controller
             return "Hay-xoa-hoa-don";
         }
         $this->phuTungService->delete($id);
-        return $this->index($phutung->iMa_hoa_don);
+        return $phutung->iMa_hoa_don;
     }
 
     public function index($id)

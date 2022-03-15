@@ -56,19 +56,19 @@ class CuaHangService
     {
         $dataUpdateCuaHang = array(
             'ten_cua_hang' => $request->name,
-            'so_dien_thoai' => $request->email,
+//            'so_dien_thoai' => $request->email,
             'dia_chi_cua_hang' => $request->diachi
         );
         if (!empty($request->matkhau)) {
             $dataUpdateTaiKhoan = array(
                 'name' => $request->name,
-                'email' => $request->email,
+//                'email' => $request->email,
                 'password' => Hash::make($request->matkhau)
             );
         } else {
             $dataUpdateTaiKhoan = array(
                 'name' => $request->name,
-                'email' => $request->email
+//                'email' => $request->email
             );
         }
         $this->userRepository->update($dataUpdateTaiKhoan, $id);

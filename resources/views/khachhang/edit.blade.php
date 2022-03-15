@@ -18,7 +18,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số điện thoại <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_dien_thoai" id="so_dien_thoai" placeholder="Số điện thoại"  value="{{$inforKhachHang->so_dien_thoai}}">
+                                        <input type="text" class="form-control" name="so_dien_thoai" id="so_dien_thoai" maxlength="10" placeholder="Số điện thoại"  value="{{$inforKhachHang->so_dien_thoai}}">
                                         <div class="error error-so_dien_thoai"></div>
                                     </div>
                                 </div>
@@ -37,7 +37,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số CMND <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND"  placeholder="Số CMND/Thẻ CCCD"  value="{{$inforKhachHang->so_CMND}}">
+                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND" axlength="12" placeholder="Số CMND/Thẻ CCCD"  value="{{$inforKhachHang->so_CMND}}">
                                         <div class="error error-so_CMND"></div>
                                     </div>
                                 </div>

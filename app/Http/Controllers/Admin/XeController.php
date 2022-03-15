@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ThemXeRequest;
 use App\Http\Requests\UpdateXeRequest;
 use App\Http\Requests\UpdateXeWebRequest;
+use App\Http\Requests\XeWebRequest;
 use App\Models\Anh;
 use App\Models\DongXe;
+use App\Models\HangXe;
+use App\Models\KhachHang;
+use App\Models\LoaiXe;
 use App\Models\Xe;
 use App\Services\AnhService;
 use App\Services\KhachHangService;
@@ -59,14 +63,42 @@ class XeController extends Controller
         $date = getdate();
         $namhientai = $date['year'];
         $dongXe = DongXe::all();
+        $hangXe = HangXe::all();
+        $loaiXe = LoaiXe::all();
         $thongTinXe = Xe::getThongTinKhachHangXe($id);
         $thongtinAnh = Anh::getAnhXe($id);
-        return view('xe.dangthongtin',compact('thongTinXe','namhientai','dongXe','thongtinAnh'));
+        return view('xe.dangthongtin',compact('thongTinXe','namhientai','dongXe','thongtinAnh','hangXe','loaiXe'));
     }
 
-    public function dangthongtinxeweb(UpdateXeWebRequest $request,$id)
+    public function view($id)
     {
-        return $this->xeService->updatethongtin($request,$id);
+        $date = getdate();
+        $namhientai = $date['year'];
+        $dongXe = DongXe::all();
+        $hangXe = HangXe::all();
+        $loaiXe = LoaiXe::all();
+        $thongTinXe = Xe::getThongTinKhachHangXe($id);
+        $thongtinAnh = Anh::getAnhXe($id);
+        return view('xe.view_dang_thong_tin',compact('thongTinXe','namhientai','dongXe','thongtinAnh','hangXe','loaiXe'));
+    }
+
+    public function dangthongtinxeweb(XeWebRequest $request,$id)
+    {
+        $this->xeService->dangthongtinxeweb($request,$id);
+        return $this->view($id);
+    }
+
+    //chuyển trạng thái
+    public function deletetthongtinxeweb($id)
+    {
+        $this->xeService->deletethongtin($id);
+        return $this->view($id);
+    }
+
+    public function updatetthongtinxeweb(UpdateXeWebRequest $request,$id)
+    {
+        $this->xeService->updatethongtin($request,$id);
+        return $this->view($id);
     }
 
     public function update(UpdateXeRequest $request,$id)
@@ -74,16 +106,53 @@ class XeController extends Controller
         return $this->xeService->update($request,$id);
     }
 
-    public function xoaThongTinXe($id)
+    public function xoaThongTinXe(Request $request,$id)
     {
-        return $this->xeService->delete($id);
+        $this->xeService->delete($id);
+        $listXe = $this->xeService->searchQuanLyXe($request);
+        return view("xe.table",compact('listXe'));
     }
 
     public function xoaanh($id)
     {
-        $thongAnh = $this->anhService->find($id);
+        $thongtinAnhXe  = $this->anhService->find($id);
+        $thongAnh = Anh::getAnhXeMaAnh($thongtinAnhXe);
+        if(count($thongAnh) == 1)
+        {
+            return "ko-the-xoa-anh";
+        }
         $this->anhService->delete($id);
-        $thongAnh = Anh::getAnhXeMaAnh($thongAnh);
+        $thongAnh = Anh::getAnhXeMaAnh($thongtinAnhXe);
         return view('xe.view_anh_xe',compact('thongAnh'));
+    }
+
+    public function xoaanhweb($id)
+    {
+        $thongAnh = $this->anhService->find($id);
+        $thongtinAnhXe = Anh::getAnhXeMaAnh($thongAnh);
+        if(count($thongtinAnhXe) == 1)
+        {
+            return "ko-the-xoa-anh";
+        }
+        return $this->anhService->delete($id);
+    }
+
+    public function ingiayto($id)
+    {
+        $date = getdate();
+        $namhientai = $date['year'];
+        $dongXe = DongXe::all();
+        $thongTinXe = Xe::find($id);
+        return view('xe.giayban',compact('thongTinXe'));
+    }
+
+    public function inthongtinbanxe($id)
+    {
+        $date = getdate();
+        $namhientai = $date['year'];
+        $dongXe = DongXe::all();
+        $thongTinXe = Xe::find($id);
+        $thongtinKhachHang = KhachHang::find($thongTinXe->iMa_khach_hang_mua_xe);
+        return view('xe.giaymuaxe',compact('thongTinXe','thongtinKhachHang'));
     }
 }

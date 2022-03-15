@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GiaDichMuaXeRequest;
+use App\Http\Requests\GiaoDichMuaXeDaCoThongTinRequest;
 use App\Http\Requests\KhachHangUpdateRequest;
+use App\Http\Requests\SearchCMND;
 use App\Http\Requests\ThemKhachHangRequest;
 use App\Models\DongXe;
+use App\Models\KhachHang;
 use App\Models\Xe;
 use App\Services\KhachHangService;
 use App\Services\XeService;
@@ -33,6 +37,9 @@ class KhachHangController extends Controller
 
     public function store(ThemKhachHangRequest $request)
     {
+        $date = getdate();
+        $namhientai = $date['year'];
+        $dongXe = DongXe::all();
         return $this->khachHangService->store($request);
     }
 
@@ -48,6 +55,55 @@ class KhachHangController extends Controller
         $namhientai = $date['year'];
         $dongXe = DongXe::all();
         $inforXe = Xe::getThongTinXe($id);
-        return view('xe.update',compact('id','namhientai','dongXe','inforXe'));
+        $inforKhachHang = KhachHang::find($inforXe[0]['iMa_khach_hang_mua_xe']);
+        return view('xe.update',compact('id','namhientai','dongXe','inforXe','inforKhachHang'));
+    }
+
+    public function view_giao_dich($id)
+    {
+        $date = getdate();
+        $namhientai = $date['year'];
+        $dongXe = DongXe::all();
+        $inforXe = Xe::getThongTinXe($id);
+        $inforKhachHang = KhachHang::find($inforXe[0]['iMa_khach_hang_mua_xe']);
+        return view('xe.view_update_giao_dich',compact('id','namhientai','dongXe','inforXe','inforKhachHang'));
+    }
+
+    public function view_thong_tin_khach_hang($inforKhachHang,$request)
+    {
+        $date = getdate();
+        $namhientai = $date['year'];
+        $idXe = $request->ma_xe;
+        return view('xe.view_thong_tin_khach_hang',compact('inforKhachHang','namhientai','idXe'));
+    }
+
+    public function delete(Request $request,$id)
+    {
+        $thongtin = $this->xeService->getXeLienQuanKhachHang($id);
+        if(count($thongtin) == 0)
+        {
+            $this->khachHangService->delete($id);
+            $listKhachHang = $this->khachHangService->getAllKhachHang($request);
+            return view("khachhang.table",compact('listKhachHang'));
+        }
+       return "xoa-thong-tin-lien-qua-khach-hang";
+    }
+
+    public function luuGiaDichBan(GiaDichMuaXeRequest $request,$id)
+    {
+        $this->khachHangService->luuGiaDichBan($request,$id);
+        return $this->view_giao_dich($id);
+    }
+
+    public function luuGiaDichBanKhachHang(GiaoDichMuaXeDaCoThongTinRequest $request,$id)
+    {
+        $this->khachHangService->luuGiaDichBan($request,$id);
+        return $this->view_giao_dich($id);
+    }
+
+    public function search(SearchCMND $request)
+    {
+        $khachhang = $this->khachHangService->searchCMND($request);
+        return $this->view_thong_tin_khach_hang($khachhang,$request);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HangXeRequest;
+use App\Models\DongXe;
 use App\Services\HangXeService;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,11 @@ class HangXeController extends Controller
 
     public function delete($id)
     {
+        $dongxe = DongXe::where('iMa_hang_xe',$id)->get();
+        if(count($dongxe)>0)
+        {
+            return "khong-the-xoa";
+        }
         $this->hangXeService->delete($id);
         return $this->index();
     }

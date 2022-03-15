@@ -27,7 +27,7 @@
     left: 0;
     height: 30px;
     width: 30px;
-    transition: all 0.15s ease-out 0s;
+    /*transition: all 0.15s ease-out 0s;*/
     background: #cbd1d8;
     border: none;
     color: #fff;
@@ -39,10 +39,10 @@
     z-index: 1000;
 }
 .option-input:hover {
-    background: #9faab7;
+    background: #428bca;
 }
 .option-input:checked {
-    background: #40e0d0;
+    background: #428bca;
 }
 .option-input:checked::before {
     height: 30px;
@@ -50,7 +50,7 @@
     position: absolute;
     content: '✔';
     display: inline-block;
-    font-size: 26.66667px;
+    font-size: 24px;
     text-align: center;
     line-height: 40px;
 }

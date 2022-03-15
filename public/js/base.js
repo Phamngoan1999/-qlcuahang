@@ -38,6 +38,9 @@ const base = {
             data: data,
             contentType: false,
             processData: false,
+            beforeSend: function() {
+                load()
+            }
         })
     },
     callApi: function callApi(url, method = METHOD_GET, data= null){
@@ -50,4 +53,11 @@ const base = {
     }
 };
 
+function load()
+{
+    $('#show-modal').modal("show");
+    let timeout = setTimeout(function(){
+        $('#show-modal').modal("hide");
+    },2000);
+}
 export default base;

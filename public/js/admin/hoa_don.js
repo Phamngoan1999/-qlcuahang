@@ -2,17 +2,6 @@ import base, {METHOD_GET, METHOD_POST, METHOD_PATCH, METHOD_DELETE} from "../bas
 import comfirmAlert from "../comfirm.js";
 
 
-function validateData()
-{
-    jQuery("input[name='phutung[]']").each(function() {
-        if(this.value == '')
-        {
-            $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
-            return false;
-        }
-    });
-}
-
 function htmlThemPhuTung()
 {
     let html = '<div class="phu-tung">\n' +
@@ -59,8 +48,7 @@ function htmlThemPhuTung()
                                     return false;
                                 }
                                 comfirmAlert.showSuccessMessageAlert("Xóa phụ tùng thành công");
-                                $('.chi-tiet-hoa-don').html(response)
-                                $('.js-example-basic-single').select2();
+                                window.location.href = window.location.origin+'/quanlysuachua/showhoadon/'+response;
                             });
                     }
                 });
@@ -79,8 +67,7 @@ function htmlThemPhuTung()
                         return false;
                     }
                     comfirmAlert.showSuccessMessageAlert('Lưu thông tin thành công');
-                    $('.chi-tiet-hoa-don').html(response)
-                    $('.js-example-basic-single').select2();
+                    window.location.href = window.location.origin+'/quanlysuachua/showhoadon/'+response['id'];
                 })
                 .fail(function (response){
                     let errors = response.responseJSON.errors;
@@ -103,8 +90,7 @@ function htmlThemPhuTung()
                         return false;
                     }
                     comfirmAlert.showSuccessMessageAlert('Lưu thông tin thành công');
-                    $('.chi-tiet-hoa-don').html(response)
-                    $('.js-example-basic-single').select2();
+                    window.location.href = window.location.origin+'/quanlysuachua/showhoadon/'+response['id'];
                 })
                 .fail(function (response){
                     let errors = response.responseJSON.errors;
@@ -126,6 +112,14 @@ function htmlThemPhuTung()
                                 comfirmAlert.showSuccessMessageAlert("Nhận đơn thành công");
                                 $('.chi-tiet-hoa-don').html(response)
                                 $('.js-example-basic-single').select2();
+                                $(".don-gia-validate").on('input', function(e){
+                                    $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g,'')));
+                                }).on('keypress',function(e){
+                                    if(!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+                                }).on('paste', function(e){
+                                    var cb = e.originalEvent.clipboardData || window.clipboardData;
+                                    if(!$.isNumeric(cb.getData('text'))) e.preventDefault();
+                                });
                             });
                     }
                 });
@@ -156,6 +150,11 @@ function htmlThemPhuTung()
                     if (result) {
                         base.callApiWithFormData( updateUrl, METHOD_POST, dataForm)
                             .done(function (response){
+                                if(response === "nhap-thieu-don-gia")
+                                {
+                                    $('.error-don-gia').html('<div class="error">Vui lòng nhập đơn giá phụ tùng</div></p>');
+                                    return false;
+                                }
                                 comfirmAlert.showSuccessMessageAlert("Đã hoàn hóa đơn này");
                                 $('.chi-tiet-hoa-don').html(response)
                                 $('.js-example-basic-single').select2();

@@ -65,23 +65,65 @@ import comfirmAlert from "../comfirm.js";
         });
 
         $(document).on('click', '.xoa-thong-tin-xe', function(){
+            let dataSearch = $('#form-search').serialize();
             let deleteUrl = $(this).attr('data-url');
             comfirmAlert.confirm()
                 .then(result => {
                     if (result) {
-                        base.callApi(deleteUrl, METHOD_DELETE)
+                        loading();
+                        base.callApi(deleteUrl, METHOD_DELETE,dataSearch)
                             .done(function (response){
                                 comfirmAlert.showSuccessMessageAlert("Xóa Thông tin xe thành công");
+                                $('.danh-sach-load').html(response);
+                                $('.paginate-page a').unbind('click').on('click', function(e) {
+                                    e.preventDefault();
+                                    let url_search  = $(this).attr('href');
+                                    getPosts(url_search);
+                                });
                             });
                     }
                 });
         });
 
         $(document).on('click', '#search', function() {
-            let dataForm = new FormData($('#form-search')[0]);
+            let dataSearch = $('#form-search').serialize();
             let url = $(this).attr('data-url');
-            // base.callApiWithFormData( url, METHOD_POST, dataForm)
-            alert("234");
+            loading();
+            base.callApi( url, METHOD_GET, dataSearch)
+                .done(function (response) {
+                    $('.danh-sach-load').html(response);
+                    $('.paginate-page a').unbind('click').on('click', function(e) {
+                        e.preventDefault();
+                        let url_search  = $(this).attr('href');
+                        getPosts(url_search);
+                    });
+                })
         });
+
+        $(document).on('click', '.paginate-page a', function(e) {
+            e.preventDefault();
+            let url_search = $(this).attr('href');
+            getPosts(url_search);
+        });
+
+        function loading()
+        {
+            let url_load = window.location.origin+'/Logo/loading.gif';
+            let html = "<tr>\
+                            <td colspan='6' class='text-center'>\
+                                <img src='"+url_load+"' >\
+                            </td>\
+                        </tr>";
+            $('#danh-sach').html(html);
+        }
+
+        function getPosts(url_search)
+        {
+            loading();
+            base.callApi( url_search, METHOD_GET)
+                .done(function (response) {
+                    $('.danh-sach-load').html(response);
+                })
+        }
     })
 }(window.jQuery, window, document))

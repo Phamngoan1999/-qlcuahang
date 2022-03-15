@@ -41,7 +41,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số điện thoại <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_dien_thoai" id="so_dien_thoai" placeholder="Số điện thoại">
+                                        <input type="text" class="form-control" name="so_dien_thoai" id="so_dien_thoai" maxlength="10" placeholder="Số điện thoại">
                                         <div class="error error-so_dien_thoai"></div>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số CMND <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND"  placeholder="Số CMND/Thẻ CCCD">
+                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND"  maxlength="12" placeholder="Số CMND/Thẻ CCCD">
                                         <div class="error error-so_CMND"></div>
                                     </div>
                                 </div>
@@ -173,14 +173,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Giá đăng lên trang web</label>
-                                        <input type="text" class="form-control" name="gia_dang_web"  placeholder="Giá đăng trên web">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Ảnh giấy tờ <span class="obligatory">*</span></label>
@@ -190,21 +182,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="gallery" width="100%" style="margin-top: 5px;border: 1px solid #f1f1f1;height: 200px;"></div>
+                                    <div class="gallery" width="100%" style="margin-top: 5px;border: 1px solid #f1f1f1;min-height: 200px;"></div>
                                     <div class="error error-files_anh_giay_to"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Ảnh đăng trên web</label>
-                                        <input type="file"  id="gallery-photo-add-web" class="form-control" name="files_anh_dang_web[]" multiple>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="image_preview" width="100%" style="margin-top: 5px;border: 1px solid #f1f1f1;height: 200px;"></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -233,16 +212,27 @@
             $('#so_CMND').keyup(function () {
                 this.value = this.value.replace(/[^0-9\.]/g,'');
             });
-            $('#gia_mua').keyup(function () {
-                this.value = this.value.replace(/[^0-9\.]/g,'');
-            });
             $('#so_dien_thoai').keyup(function () {
                 this.value = this.value.replace(/[^0-9\.]/g,'');
             });
         })
     </script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        function formatCurrency(number){
+            var n = number.split('').reverse().join("");
+            var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");
+            return  n2.split('').reverse().join('') + 'VNĐ';
+        }
+        $("#gia_mua").on('input', function(e){
+            $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g,'')));
+        }).on('keypress',function(e){
+            if(!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+        }).on('paste', function(e){
+            var cb = e.originalEvent.clipboardData || window.clipboardData;
+            if(!$.isNumeric(cb.getData('text'))) e.preventDefault();
+        });
+    </script>
     <script type="module" src="{{asset('js/admin/khach_hang.js')}}"></script>
     <script type="module" src="{{asset('js/admin/create_xe_mua.js')}}"></script>
 @endsection

@@ -30,4 +30,24 @@ class KhachHang extends Model
     {
         return $this->xe()->attach($xe);
     }
+
+    public function scopeGetAll()
+    {
+        return $this->orderBy('created_at', 'DESC');
+    }
+
+    public function scopeWithName($query,$name)
+    {
+        return $name ? $query->where('ho_ten',  'like', '%'.$name.'%') : null;
+    }
+
+    public function scopeWithSodienthoai($query,$sodienthoai)
+    {
+        return $sodienthoai ? $query->where('so_dien_thoai', 'like', '%'.$sodienthoai.'%') : null;
+    }
+
+    public function scopeWithSearchCMND($query, $cmnd)
+    {
+        return $cmnd ? $query->where('so_CMND',$cmnd) : null;
+    }
 }

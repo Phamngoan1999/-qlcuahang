@@ -33,6 +33,16 @@ class BinhLuanService
         return $this->binhLuanRepository->create($dataCreate);
     }
 
+    public function luuPhanHoi($request)
+    {
+        $dataCreate = array(
+            'thoi_gian_binh_luan' => now(),
+            'noi_dung' => $request->noidung,
+            'iMa_khach_hang' => auth()->user()->id
+        );
+        return $this->binhLuanRepository->create($dataCreate);
+    }
+
     public function update($request,$id)
     {
         $dataUpdate = array(
@@ -55,5 +65,16 @@ class BinhLuanService
     {
         return $this->binhLuanRepository->delete($id);
     }
+
+    public function search($request)
+    {
+        $dataSearch = array(
+            'trang_thai_search' => $request->trang_thai_search,
+            'ma_xe' => $request->ma_xe
+        );
+        return $this->binhLuanRepository->search($dataSearch);
+    }
+
+
 }
 

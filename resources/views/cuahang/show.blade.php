@@ -7,7 +7,7 @@
         </div>
         <div class="form-group">
             <label for="">Số điện thoại <span class="obligatory">*</span></label>
-            <input type="text" class="form-control" name="email"  placeholder="Số điện thoại" value="{{$cuahang->so_dien_thoai}}">
+            <input type="text" class="form-control" name="email"  placeholder="Số điện thoại" value="{{$cuahang->so_dien_thoai}}" disabled>
             <div class="error error-email"></div>
         </div>
         <div class="form-group">

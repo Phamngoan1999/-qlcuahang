@@ -12,8 +12,15 @@ class KhachHangRepository extends BaseRepository
         return KhachHang::class;
     }
 
-    public function getAllKhachHang()
+    public function getAllKhachHang($dataSearch)
     {
-        return $this->model->paginate(10);
+        return $this->model->withName($dataSearch['name'])
+            ->withSodienthoai($dataSearch['sodienthoai'])
+            ->paginate(10);
+    }
+
+    public function searchCMND($request)
+    {
+        return $this->model->withSearchCMND($request->searchCMND)->first();
     }
 }

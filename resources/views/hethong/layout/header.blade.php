@@ -1,5 +1,4 @@
-<?php
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,52 +20,65 @@
     <link href="{{asset('Template/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset('Template/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
     <link href="{{asset('Template/assets/css/style.css')}}" rel="stylesheet">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="{{asset('template/vendors/mdi/css/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('template/vendors/feather/feather.css') }}">
+
+
+    <link rel="stylesheet" href="{{ asset('template/vendors/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/hethong.css')}}">
+    <script src="{{ asset('js/jquery.min.js') }}" ></script>
+    <link rel="stylesheet" href="{{ asset('toast/demos/css/jquery.toast.css') }}" >
+    <link rel="stylesheet" href="{{ asset('template/vendors/ti-icons/css/themify-icons.css') }}">
+    <script type="text/javascript" src="{{asset('toast/demos/js/jquery.toast.js')}}"></script>
 </head>
 <body id="body">
 <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto"><a href="index.html">Arsha</a></h1>
+        <h1 class="logo me-auto"><a href="index.html">HỒng Hoan</a></h1>
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto " href="#hero">Trang chủ</a></li>
-                <li><a class="nav-link scrollto" href="#about">Về chúng tôi</a></li>
+                <li><a class="nav-link scrollto " href="{{route('Trangchu')}}">Trang chủ</a></li>
                 <li class="dropdown"><a href="#"><span>Hãng xe</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="#">Drop Down 1</a></li>
-                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">Deep Drop Down 1</a></li>
-                                <li><a href="#">Deep Drop Down 2</a></li>
-                                <li><a href="#">Deep Drop Down 3</a></li>
-                                <li><a href="#">Deep Drop Down 4</a></li>
-                                <li><a href="#">Deep Drop Down 5</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Drop Down 2</a></li>
-                        <li><a href="#">Drop Down 3</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
+                        @foreach($hangxe as $hxe)
+                            <li><a href="{{route('tranghangxe',$hxe->id)}}">{{$hxe->ten_hang_xe}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li><a class="nav-link scrollto" href="#contact">Liên hệ</a></li>
                 @guest
-                    <li><a class="getstarted scrollto" href="/login">Đăng nhâp</a></li>
+                    <li><a class="getstarted scrollto" href="/login">Đăng nhập</a></li>
                 @else
                     <li><a class="getstarted scrollto"
                            href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                        document.getElementById('logout-form').submit();">Đăng xuất</a></li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 @endguest
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
     </div>
 </header>
 
+@if(\Session::has('message'))
+    <script>
+        $.toast({
+            heading: 'Success',
+            text: "{{ \Session::get('message') }}",
+            showHideTransition: 'slide',
+            icon: 'success',
+            position: 'top-right',
+        });
+    </script>
+@endif
+<div class="modal fade" id="show-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div style="text-align: center;margin: 100px;"><img src="{{asset('Logo/loading.gif')}}" alt="Loading" width="100px" height="100px"></div>
+    </div>
+</div>
 @yield('content')
 
 <footer id="footer">
@@ -74,45 +86,31 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>Arsha</h3>
+                    <h3>HỒNG HOAN</h3>
                     <p>
-                        A108 Adam Street <br>
-                        New York, NY 535022<br>
-                        United States <br><br>
-                        <strong>Phone:</strong> 0339845495<br>
+                        Đông La, Đông Hưng<br>
+                        Thái Bình<br><br>
+                        <strong>Điện thoại:</strong> 0339845495<br>
                     </p>
                 </div>
                 <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
+                    <h4>Thông tin </h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Trang chủ</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route("Trangchu")}}">Trang chủ</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route("thongtincuahang")}}">Thông tin cửa hàng</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#contact">Liên hệ</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                    </ul>
+
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Social Networks</h4>
-                    <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                    <h4>Thông tin liên hệ</h4>
                     <div class="social-links mt-3">
-                        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        <a href="https://twitter.com/home" class="twitter"><i class="bx bxl-twitter"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=100028165189199" class="facebook"><i class="bx bxl-facebook"></i></a>
                     </div>
                 </div>
 
@@ -134,6 +132,8 @@
     </div>
 </footer>
 <script src="{{asset('Template/assets/vendor/aos/aos.js')}}"></script>
+<script src="{{ asset('template/vendors/select2/select2.min.js')}}"></script>
+<script src="{{ asset('template/js/select2.js')}}"></script>
 <script src="{{asset('Template/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('Template/assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
 <script src="{{asset('Template/assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>

@@ -2,18 +2,17 @@
 <form id="form-show-binh-luan">
     <div class="modal-body">
         <div class="form-group">
-            <label for="">Bình luận khách hàng</label>
-            <textarea rows="4"  class="form-control">
+            <label for="" class="label">Bình luận khách hàng</label>
+            <textarea rows="4"  class="form-control" disabled>
               {{$binhluan->noi_dung}}
             </textarea>
-            <div class="error error-ten_dong_xe"></div>
         </div>
         <div class="form-group">
-            <label for="">Trả lời</label>
-            <textarea rows="9" class="form-control" name="binh_luan_tra_loi">
+            <label for="" class="label">Trả lời</label>
+            <textarea rows="4" class="form-control" name="binh_luan_tra_loi">
                 {{$binhluan->binh_luan_tra_loi}}
             </textarea>
-            <div class="error error-ten_dong_xe"></div>
+            <div class="error error-binh_luan_tra_loi"></div>
         </div>
     </div>
     <div class="modal-footer">

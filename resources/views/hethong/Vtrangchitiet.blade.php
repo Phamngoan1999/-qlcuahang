@@ -6,13 +6,12 @@
     <script src="{{asset('zoom/jquery.exzoom.js')}}"></script>
     <link href="{{asset('zoom/jquery.exzoom.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/box_message.css')}}" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="{{asset('css/trangchitiet.css')}}">
     <main id="main">
         <section id="breadcrumbs" class="breadcrumbs">
             <div class="container">
                 <ol>
-                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="{{route('Trangchu')}}">Trang chủ</a></li>
                     <li>
                         @foreach($hangXe as $hx)
                             @if($thongTinXe[0]['dongxe']['iMa_hang_xe'] == $hx->id)
@@ -33,9 +32,9 @@
                                 <div class="exzoom_img_box">
                                     <ul class='exzoom_img_ul'>
                                         @foreach($thongtinAnh as $anh)
-                                        <li>
-                                            <img src="{{asset("uploads/images/".$anh['duong_dan'])}}"/>
-                                        </li>
+                                            <li>
+                                                <img src="{{asset("uploads/images/".$anh['duong_dan'])}}"/>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -94,17 +93,17 @@
                             <h2>Quyền lợi khách hàng</h2>
                             <div class="row" style="padding: 10px;">
                                 <div class="col-md-12">
-                                    <strong><span style="background: #ffbd46;color: #fff;padding: 3px 8px;  border-radius: 2px;"><i class="fa fa-check" aria-hidden="true"></i></span></strong> Xe có nguồn gốc rõ ràng
+                                    <strong><span style="background: #ffbd46;color: #fff;padding: 5px 8px;  border-radius: 2px;"><i class="mdi mdi-checkbox-multiple-marked-outline" aria-hidden="true"></i></span></strong> Xe có nguồn gốc rõ ràng
                                 </div>
                             </div>
                             <div class="row" style="padding: 10px;">
                                 <div class="col-md-12">
-                                    <strong><span style="background: #ffbd46;color: #fff;padding: 3px 8px;  border-radius: 2px;"><i class="fa fa-check" aria-hidden="true"></i></span></strong> Cửa hàng có đầy đủ dịch vụ Sang tên, đổi biển, cấp lại đăng ký cho khách trong thời gian ngắn nhất
+                                    <strong><span style="background: #ffbd46;color: #fff;padding: 5px 8px;  border-radius: 2px;"><i class="mdi mdi-checkbox-multiple-marked-outline" aria-hidden="true"></i></span></strong> Cửa hàng có đầy đủ dịch vụ Sang tên, đổi biển, cấp lại đăng ký cho khách trong thời gian ngắn nhất
                                 </div>
                             </div>
                             <div class="row" style="padding: 10px;">
                                 <div class="col-md-12">
-                                    <strong><span style="background: #ffbd46;color: #fff;padding: 3px 8px;  border-radius: 2px;"><i class="fa fa-check" aria-hidden="true"></i></span></strong> Mua lại xe giá cao khi khách không có nhu cầu sử dụng.
+                                    <strong><span style="background: #ffbd46;color: #fff;padding: 5px 8px;  border-radius: 2px;"><i class="mdi mdi-checkbox-multiple-marked-outline" aria-hidden="true"></i></span></strong> Mua lại xe giá cao khi khách không có nhu cầu sử dụng.
                                 </div>
                             </div>
                         </div>
@@ -118,28 +117,26 @@
                 <div class="row">
                     <div class="col-md-8"  style="border: 1px solid #f1f1f1;color: #000; background: #fff;padding: 5px;">
                         <div class="row" style="padding: 20px;">
-                            <form method="post" id="them-binh-luan">
+                            <form method="post" id="them-binh-luan" action="{{route('quanlybinhluan.create')}}">
                                 @csrf
                                 <input type="text" style="display: none;" name="sMaxe" value="{{$id}}">
                                 <div class="col-md-12"style="position: relative;">
                                     <input type="text" name="comment" @guest value="Vui lòng đăng nhập để bình luận"@else value="" @endguest placeholder="Thêm bình luận ..."  style="height: 70px;border: 1px solid #ccc;box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);width:100%;">
-                                    <button type="button" class="msg_send_btn" data-url="{{route('quanlybinhluan.create')}}" ><i class="fab fa-telegram-plane"></i></button>
+                                    <button type="button" class="msg_send_btn" data-url="{{route('quanlybinhluan.create')}}" ><i class="mdi mdi-telegram"></i></button>
                                 </div>
                             </form>
                             <div class="error error-comment"></div>
                         </div>
-                        <div class="row" style="padding: 20px;">
+                        <div class="row" style="padding: 0px 20px;">
                             @foreach($binhluan as $iterm)
                             <div class="incoming_msg">
-                                <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="incoming_msg_img"> <img src="{{asset('Logo/user-profile.png')}}" alt="sunil"> </div>
                                 <div class="received_msg">
                                     <div class="received_withd_msg">
                                         <p class="border-bot border-toprs"><strong>{{$iterm->users->name}}</strong></p>
                                         <p class="border-buttomrs">{{$iterm->noi_dung}}</p>
                                         <span class="time_date">
-                                        <button type="button" class="khongmau" name="like"><i class="far fa-thumbs-up"></i></button>  11 &ensp;
-                                        <button type="button" class="khongmau" name="dislike">{{$iterm->thoi_gian_binh_luan}}</button>
-                                            <button type="button" class="khongmau stylebinhluan xemchitiet" name="xemchitiet" data-chitiet="1"> <i class="fas fa-caret-down"></i> Xem phản hồi của cửa hàng</button>
+                                        <button type="button" class="khongmau" name="dislike">{{ format_thoi_gian($iterm->thoi_gian_binh_luan) }}</button>
                                     </span>
                                     </div>
                                 </div>
@@ -147,15 +144,16 @@
                             @if(!empty($iterm->binh_luan_tra_loi))
                                 <div class="outgoing_msg">
                                     <div class="sent_msg">
+                                        <p class="border-bot border-toprs"><strong>Chủ cửa hàng</strong></p>
                                         <p>{{$iterm->binh_luan_tra_loi}}</p>
-                                        <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+                                    </div>
                                 </div>
                             @endif
                             @endforeach
                         </div>
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="paginate float-right text-right" style="padding: 10px 0px;">
+                            <div class="col-lg-12" >
+                                <div class="paginate float-right text-right" style="padding: 10px 20px;float: right;">
                                     {{$binhluan->appends(request()->all())->links()}}
                                 </div>
                             </div>
@@ -168,23 +166,6 @@
             </div>
         </section>
     </main>
-    <style>
-        .khongmau{
-            border: 0px solid #000;
-            background: #fff;
-        }
-        .border-toprs{
-            border-radius: 5px 5px 0px 0px!important;
-        }
-        .border-buttomrs{
-            border-radius: 0px 0px 5px 5px!important;
-        }
-        .stylebinhluan{
-            color: #065fd4;
-            font-weight: bold!important;
-            font-size: 14px;
-        }
-    </style>
     <script type="text/javascript">
         $('.container').imagesLoaded( function() {
             $("#exzoom").exzoom({
@@ -204,12 +185,6 @@
         })();
 
     </script>
-    <style>
-        .repone-phanhoi{
-            margin-left: 30px;
-        }
-    </style>
-
     <script type="module" src="{{asset('js/nguoidung/them_binh_luan.js')}}"></script>
 @endsection
 

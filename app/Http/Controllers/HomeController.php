@@ -32,6 +32,11 @@ class HomeController extends Controller
         {
             return redirect()->route('quanlytaikhoan.quanly');
         }
+
+        if(auth()->user()->hasRole('cuahanglienket'))
+        {
+            return redirect()->route('quanlysuachua.quanlycuahang');
+        }
         return view('home');
     }
 }
