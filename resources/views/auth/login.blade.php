@@ -40,12 +40,12 @@
                                 </div>
                             </div>
                             <div class="mt-3">
-                                <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
-                                    Đăng nhập
+                                <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" style="border-radius: 0px; font-weight: bold;">
+                                    ĐĂNG NHẬP
                                 </button>
                             </div>
-                            <div class="text-center mt-4 font-weight-light">
-                                <a href="{{route('register')}}" class="text-primary">Tạo tài khoản để bình luận? </a>
+                            <div class="text-center mt-4 font-weight-light" >
+                                <a href="{{route('register')}}" class="text-primary" >Tạo tài khoản để bình luận? </a>
                             </div>
                         </form>
                     </div>

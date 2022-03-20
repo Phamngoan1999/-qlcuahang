@@ -266,11 +266,25 @@
                         <span class="menu-title">Quản lý tài khoản</span>
                     </a>
                 </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link"  href="{{route("quanlykhachhang.khachang")}}">--}}
+{{--                        <i class="mdi mdi-format-align-justify menu-icon"></i>--}}
+{{--                        <span class="menu-title">Quản lý khách hàng</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+
                 <li class="nav-item">
-                    <a class="nav-link"  href="{{route("quanlykhachhang.khachang")}}">
-                        <i class="mdi mdi-format-align-justify menu-icon"></i>
-                        <span class="menu-title">Quản lý khách hàng</span>
+                    <a class="nav-link" data-toggle="collapse" href="#kh-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <i class="icon-layout menu-icon"></i>
+                        <span class="menu-title">Quản lý khách hàng</span>&nbsp;&nbsp;
+                        <i class="menu-arrow"></i>
                     </a>
+                    <div class="collapse" id="kh-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item" > <a class="nav-link" style="background: #4b49ac;" href="{{route("quanlykhachhang.khachang")}}">Quản lý khách hàng</a></li>
+                            <li class="nav-item"> <a class="nav-link" style="background: #4b49ac;" href="{{route('quanlykhachhang.search_lich_su_khach_hang')}}">Tra cứu thông tin</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route("quanlyxe.quanly")}}">

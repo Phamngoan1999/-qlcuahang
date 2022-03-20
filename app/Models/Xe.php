@@ -42,6 +42,11 @@ class Xe extends Model
         return $this->belongsTo(KhachHang::class,'iMa_khach_hang_ban_xe','id');
     }
 
+    public function khachhangmuaxe()
+    {
+        return $this->belongsTo(KhachHang::class,'iMa_khach_hang_mua_xe','id');
+    }
+
     public function dongxe()
     {
         return $this->belongsTo(DongXe::class,'iMa_dong_xe','id');
@@ -209,5 +214,23 @@ class Xe extends Model
         }
         $query = $query->get();
         return $query;
+    }
+
+    public function scopeSearchLichSuBanXe($query, $thongtin)
+    {
+        return $thongtin ? $query->WhereHas('khachhang', function ($query) use ($thongtin) {
+                    $query->where('ho_ten', $thongtin)
+                    ->orWhere('so_dien_thoai',$thongtin)
+                    ->orWhere('so_CMND',$thongtin);
+              }):null;
+    }
+
+    public function scopeSearchLichSuMuaXe($query, $thongtin)
+    {
+        return $query->WhereHas('khachhangmuaxe', function ($query) use ($thongtin) {
+                    $query->where('ho_ten', 'like', '%'.$thongtin.'%')
+                        ->orWhere('so_dien_thoai', 'like', '%'.$thongtin.'%')
+                        ->orWhere('so_CMND', 'like', '%'.$thongtin.'%');
+                });
     }
 }

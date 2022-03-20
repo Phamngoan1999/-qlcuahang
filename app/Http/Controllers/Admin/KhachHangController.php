@@ -106,4 +106,16 @@ class KhachHangController extends Controller
         $khachhang = $this->khachHangService->searchCMND($request);
         return $this->view_thong_tin_khach_hang($khachhang,$request);
     }
+
+    public function search_lich_su_khach_hang(Request $request)
+    {
+        return view('khachhang.search_lich_su_khach_hang');
+    }
+
+    public function search_lich_su(Request $request)
+    {
+        $danhsachBanXe = $this->xeService->search_lich_su($request);
+        $danhsachMuaXe = $this->xeService->search_lich_su_mua_xe($request);
+        return view('khachhang.table_tiem_kiem',compact('danhsachBanXe','danhsachMuaXe'));
+    }
 }

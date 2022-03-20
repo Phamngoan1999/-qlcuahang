@@ -227,8 +227,6 @@ class XeService
             'so_may' => $request->so_may,
             'so_khung' => $request->so_khung,
             'bao_hiem_xe' => !empty($request->bao_hiem_xe)?"checked":null,
-            'ngay_mua' => now(),
-            'gia_mua' => $request->gia_mua,
             'iMa_trang_thai' => 2,
             'iMa_dong_xe' => $request->iMa_dong_xe,
             'gia_dang_web' => $request->gia_dang_web,
@@ -326,4 +324,19 @@ class XeService
         return $this->xeRepository->tinhtongtiensuachua($dataSearch);
     }
 
+    public function search_lich_su($request)
+    {
+        $dataSearch = array(
+            'thongtin' => $request->thongtin,
+        );
+        return $this->xeRepository->search_lich_su_ban_xe($dataSearch);
+    }
+
+    public function search_lich_su_mua_xe($request)
+    {
+        $dataSearch = array(
+            'thongtin' => $request->thongtin,
+        );
+        return $this->xeRepository->search_lich_su_mua_xe($dataSearch);
+    }
 }

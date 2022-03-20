@@ -82,4 +82,14 @@ class XeRepository extends BaseRepository
     {
         return $this->model->tinhtongtiensuachua($request['fromDate'],$request['toDate']);
     }
+
+    public function search_lich_su_ban_xe($dataSearch)
+    {
+        return $this->model->searchLichSuBanXe($dataSearch['thongtin'])->get();
+    }
+
+    public function search_lich_su_mua_xe($dataSearch)
+    {
+        return $this->model->searchLichSuMuaXe($dataSearch['thongtin'])->get();
+    }
 }

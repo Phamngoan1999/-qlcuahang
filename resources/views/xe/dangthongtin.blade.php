@@ -160,7 +160,7 @@
                                         @foreach($thongtinAnh as $anh)
                                             @if($anh['iMa_loai_anh'] == 4)
                                                 <img src="{{ asset('uploads/images/'.$anh['duong_dan']) }}" alt="" width="100%" height="100%" id="thumbnail">
-                                                <p>{{$stt = 1}}</p>
+                                                <p style="display: none;">{{$stt = 1}}</p>
                                             @endif
                                         @endforeach
                                     @endif

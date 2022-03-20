@@ -42,7 +42,7 @@ import comfirmAlert from "../comfirm.js";
             base.callApiWithFormData( url, METHOD_POST, dataForm)
                 .done(function (response) {
                     $("#modal-show-binh-luan").modal("hide");
-                    comfirmAlert.showSuccessMessageAlert("Update Dòng xe thành công!");
+                    comfirmAlert.showSuccessMessageAlert("Update bình luận thành công!");
                 })
                 .fail(function (response){
                     let errors = response.responseJSON.errors;

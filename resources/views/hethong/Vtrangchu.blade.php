@@ -47,7 +47,7 @@
 {{--                                    <button type="button" id="tim-kiem" class="btn-search btn-search-3 hover-border-3" >--}}
 {{--                                        <span>Tìm kiếm</span>--}}
 {{--                                    </button>--}}
-                                    <button type="button" id="tim-kiem" class="btn btn-primary">Tìm kiếm</button>
+                                    <button type="button" id="tim-kiem" class="btn btn-primary btn-get-started scrollto" style="border: none;"><i class="icon-search"></i> Tìm kiếm</button>
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                         <img src="{{asset('Logo/yamaha.png')}}" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{asset('Logo/panago.jpg')}}" class="img-fluid" alt="">
+                        <img src="{{asset('Logo/Kawasaki.jpg')}}" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
                         <img src="{{asset('Logo/sym.png')}}" class="img-fluid" alt="">

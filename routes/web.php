@@ -140,6 +140,12 @@ Route::middleware(['auth'])->group(function() {
 
         Route::post('/timkiem', [KhachHangController::class, 'search'])
             ->name('timkiem')->middleware('role:admin');
+
+        Route::get('/search_lich_su_khach_hang', [KhachHangController::class, 'search_lich_su_khach_hang'])
+            ->name('search_lich_su_khach_hang')->middleware('role:admin');
+
+        Route::get('/search_lich_su_thong_tin_khach_hang', [KhachHangController::class, 'search_lich_su'])
+            ->name('search_lich_su_thong_tin_khach_hang')->middleware('role:admin');
     });
 
 

@@ -38,7 +38,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số CMND <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND"  placeholder="Số CMND/Thẻ CCCD" value="{{$thongTinXe[0]['khachhang']['so_CMND']}}">
+                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND" maxlength="12" placeholder="Số CMND/Thẻ CCCD" value="{{$thongTinXe[0]['khachhang']['so_CMND']}}">
                                         <div class="error error-so_CMND"></div>
                                     </div>
                                 </div>

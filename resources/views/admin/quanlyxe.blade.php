@@ -17,13 +17,13 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="khach_hang_search"
-                                               placeholder="Thông tin khách hang">
+                                               placeholder="Thông tin khách hàng">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <select class="js-example-basic-single w-100" name="trang_thai_search">
-                                            <option value="">Chọn trạng thái bình luận</option>
+                                            <option value="">Chọn trạng thái xe</option>
                                             <option value="1">Xe mới mua</option>
                                             <option value="2">Xe đang đăng web</option>
                                             <option value="3">Xe đã có khách mua</option>

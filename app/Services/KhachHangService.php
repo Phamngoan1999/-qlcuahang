@@ -106,6 +106,7 @@ class KhachHangService{
         $dataXe =  array(
             'updated_at' => now(),
             'gia_ban' => format_money_insert_db($request->gia_ban),
+            'ngay_ban' => now(),
             'iMa_trang_thai' => 3,
             'iMa_khach_hang_mua_xe' => $request->ma_khach_hang
         );

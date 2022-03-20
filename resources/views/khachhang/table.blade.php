@@ -11,7 +11,7 @@
             <th>Tác vụ</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="danh-sach-khach-hang">
         @if(count($listKhachHang) > 0)
             @foreach($listKhachHang as $key => $khachhang)
                 <tr>
@@ -21,14 +21,17 @@
                     <td>{{$khachhang->so_dien_thoai}}</td>
                     <td>{{$khachhang->noi_cu_tru}}</td>
                     <td>
-                        <a href="{{route("quanlykhachhang.showkhachang",$khachhang->id)}}" class="btn btn-warning" ><i class="far fa-edit"></i></a>
-
-                        <a href="{{route("quanlykhachhang.themxeban",$khachhang->id)}}" class="btn btn-primary" >Thêm xe bán</a>
-
-                        <button type="button" class="btn btn-danger xoa-khach-hang"
+                        <a href="{{route("quanlykhachhang.showkhachang",$khachhang->id)}}" class="btn btn-warning btn-width" ><i class="far fa-edit"></i>&nbsp;Sửa thông tin </a>
+                        <br>
+                        <br>
+                        <a href="{{route("quanlykhachhang.themxeban",$khachhang->id)}}" class="btn btn-primary btn-width" >Thêm xe bán</a>
+                        <br>
+                        <br>
+                        <button type="button" class="btn btn-danger btn-width xoa-khach-hang"
                                 data-url="{{route('quanlykhachhang.xoakhachhang',$khachhang->id)}}">
-                            <i class="fas fa-trash-alt"></i>
+                            <i class="fas fa-trash-alt"></i>&nbsp; Xóa thông tin
                         </button>
+
                     </td>
                 </tr>
             @endforeach
