@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckCMND implements Rule
+class CheckSoMay implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,9 +25,7 @@ class CheckCMND implements Rule
      */
     public function passes($attribute, $value)
     {
-        if($value == "000000000" || $value == "000000000000")
-            return false;
-        if(strlen($value) != 9 && strlen($value) != 12)
+        if(strlen($value) != 8)
             return false;
         return true;
     }
@@ -39,6 +37,6 @@ class CheckCMND implements Rule
      */
     public function message()
     {
-        return 'Số CMND không hợp lệ';
+        return 'Số máy không hợp lệ';
     }
 }

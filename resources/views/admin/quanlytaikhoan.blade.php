@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="button" class="btn btn-primary" id="them-tai-khoan" data-toggle="modal" data-target="#cap-tai-khoan-modal">
-                                    Thêm của hàng liên kết
+                                    Thêm cửa hàng liên kết
                                 </button>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Số điện thoại <span class="obligatory">*</span></label>
-                            <input type="text" class="form-control" name="email"  placeholder="Số điện thoại">
+                            <input type="text" class="form-control" name="email" id="sodienthoai"  placeholder="Số điện thoại">
                             <div class="error error-email"></div>
                         </div>
                         <div class="form-group">
@@ -162,4 +162,12 @@
         </div>
     </div>
     <script type="module" src="{{asset('js/admin/taikhoan.js')}}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#sodienthoai').keyup(function () {
+                this.value = this.value.replace(/[^0-9\.]/g,'');
+            });
+        })
+    </script>
 @endsection

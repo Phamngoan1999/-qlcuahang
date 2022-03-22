@@ -1,3 +1,8 @@
+<style>
+    .hide-input{
+        display: none;
+    }
+</style>
     @if(!isset($inforKhachHang))
     <div class="error">Không có dữ liệu</div>
     @endif
@@ -5,16 +10,21 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Khách hàng <span class="obligatory">*</span></label>
-                <input type="text" class="form-control" name="ho_ten"  placeholder="Họ tên khách hàng" @if(isset($inforKhachHang))value="{{$inforKhachHang->ho_ten}}"@endif>
-                <div class="error error-ho_ten"></div>
+                @if(isset($inforKhachHang))
+                    <input type="text" class="form-control"  placeholder="Họ tên khách hàng" @if(isset($inforKhachHang))value="{{$inforKhachHang->ho_ten}}"@endif disabled>
+                    <input type="text" class="form-control hide-input" name="ho_ten"  placeholder="Họ tên khách hàng" @if(isset($inforKhachHang))value="{{$inforKhachHang->ho_ten}}"@endif>
+                @else
+                    <input type="text" class="form-control" name="ho_ten"  placeholder="Họ tên khách hàng">
+                @endif
+                    <div class="error error-ho_ten"></div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="">Số điện thoại <span class="obligatory">*</span></label>
                 @if(isset($inforKhachHang))
-                    <input type="text" class="form-control" name="so_dien_thoai" id="so_dien_thoai" maxlength="10" placeholder="Số điện thoại" value="{{$inforKhachHang->so_dien_thoai}}" disabled>
-                    <input type="text" class="form-control" name="so_dien_thoai" maxlength="10" placeholder="Số CMND/Thẻ CCCD" value="{{$inforKhachHang->so_dien_thoai}}" style="display: none;">
+                    <input type="text" class="form-control" placeholder="Số điện thoại" value="{{$inforKhachHang->so_dien_thoai}}" disabled>
+                    <input type="text" class="form-control hide-input" name="so_dien_thoai" maxlength="10" placeholder="Số CMND/Thẻ CCCD" value="{{$inforKhachHang->so_dien_thoai}}">
                 @else
                     <input type="text" class="form-control" name="so_dien_thoai" id="so_dien_thoai" maxlength="10" placeholder="Số điện thoại" value="">
                 @endif
@@ -24,11 +34,16 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label for="">Năm sinh <span class="obligatory">*</span></label>
-                <select class="form-control  js-example-basic-single" placeholder="Nhân viên" name="nam_sinh" >
-                    <option value="">Chọn năm sinh</option>
-                    @for ($i = $namhientai; $i >1900; $i--)
-                        <option value="{{$i}}" @if(isset($inforKhachHang) && $inforKhachHang->nam_sinh == $i) selected @endif>{{$i}}</option>
-                    @endfor
+                    @if(isset($inforKhachHang))
+                        <input type="text" class="form-control" placeholder="Năm sinh" value="{{$inforKhachHang->nam_sinh}}" disabled>
+                        <input type="text" class="form-control hide-input" placeholder="Năm sinh" value="{{$inforKhachHang->nam_sinh}}" name="nam_sinh">
+                    @else
+                        <select class="form-control js-example-basic-single" placeholder="Nhân viên" name="nam_sinh" >
+                            <option value="">Chọn năm sinh</option>
+                            @for ($i = $namhientai; $i >1900; $i--)
+                                <option value="{{$i}}" >{{$i}}</option>
+                            @endfor
+                    @endif
                 </select>
                 <div class="error error-nam_sinh"></div>
             </div>
@@ -37,8 +52,8 @@
             <div class="form-group">
                 <label for="">Số CMND <span class="obligatory">*</span></label>
                 @if(isset($inforKhachHang))
-                <input type="text" class="form-control" name="so_CMND" id="so_CMND" maxlength="12" placeholder="Số CMND/Thẻ CCCD" value="{{$inforKhachHang->so_CMND}}" disabled>
-                <input type="text" class="form-control" name="so_CMND" id="so_CMND" maxlength="12" placeholder="Số CMND/Thẻ CCCD" value="{{$inforKhachHang->so_CMND}}" style="display: none;">
+                <input type="text" class="form-control" placeholder="Số CMND/Thẻ CCCD" value="{{$inforKhachHang->so_CMND}}" disabled>
+                <input type="text" class="form-control hide-input" name="so_CMND" id="so_CMND" maxlength="12" placeholder="Số CMND/Thẻ CCCD" value="{{$inforKhachHang->so_CMND}}">
                 @else
                     <input type="text" class="form-control" name="so_CMND" id="so_CMND" maxlength="12" placeholder="Số CMND/Thẻ CCCD" value="" >
                 @endif
@@ -50,21 +65,36 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Nơi cấp CMND <span class="obligatory">*</span></label>
-                <input type="text" class="form-control" name="noi_cap_CMND"  placeholder="Nơi cấp CMND"  @if(isset($inforKhachHang))value="{{$inforKhachHang->noi_cap_CMND}}" @endif>
+                @if(isset($inforKhachHang))
+                    <input type="text" class="form-control" @if(isset($inforKhachHang))value="{{$inforKhachHang->noi_cap_CMND}}" @endif disabled>
+                    <input type="text" class="form-control hide-input" name="noi_cap_CMND"  placeholder="Nơi cấp CMND"  @if(isset($inforKhachHang))value="{{$inforKhachHang->noi_cap_CMND}}" @endif style="display: none;">
+                @else
+                    <input type="text" class="form-control" name="noi_cap_CMND"  placeholder="Nơi cấp CMND"  >
+                @endif
                 <div class="error error-noi_cap_CMND"></div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Nơi cư trú <span class="obligatory">*</span></label>
-                <input type="text" class="form-control" name="noi_cu_tru"  placeholder="Nơi cư trú"  @if(isset($inforKhachHang))value="{{$inforKhachHang->noi_cu_tru}}"@endif>
-                <div class="error error-noi_cu_tru"></div>
+                @if(isset($inforKhachHang))
+                    <input type="text" class="form-control" @if(isset($inforKhachHang))value="{{$inforKhachHang->noi_cu_tru}}"@endif disabled>
+                    <input type="text" class="form-control hide-input" name="noi_cu_tru"  placeholder="Nơi cư trú"  @if(isset($inforKhachHang))value="{{$inforKhachHang->noi_cu_tru}}"@endif style="display: none;">
+                @else
+                    <input type="text" class="form-control" name="noi_cu_tru"  placeholder="Nơi cư trú"  @if(isset($inforKhachHang))value="{{$inforKhachHang->noi_cu_tru}}"@endif>
+                @endif
+                    <div class="error error-noi_cu_tru"></div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Ngày cấp <span class="obligatory">*</span></label>
-                <input type="date" class="form-control" name="cap_ngay"  placeholder="Ngày cấp"  @if(isset($inforKhachHang))value="{{$inforKhachHang->cap_ngay}}"@endif>
+                @if(isset($inforKhachHang))
+                    <input type="date" class="form-control" @if(isset($inforKhachHang))value="{{$inforKhachHang->cap_ngay}}"@endif disabled>
+                    <input type="date" class="form-control hide-input" name="cap_ngay"  placeholder="Ngày cấp"  @if(isset($inforKhachHang))value="{{$inforKhachHang->cap_ngay}}"@endif >
+                @else
+                    <input type="date" class="form-control " name="cap_ngay"  placeholder="Ngày cấp" >
+                @endif
                 <div class="error error-cap_ngay"></div>
             </div>
         </div>

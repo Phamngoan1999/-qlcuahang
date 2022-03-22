@@ -47,6 +47,16 @@
                                         </div>
                                     </div>
                                     @hasRole("admin")
+                                        @if($thongtinHoadon[0]->trang_thai == 'dahoanthanh')
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">Tổng tiền</label>
+                                                    <input class="form-control" type="text" value="{{ currency_format($thongtinHoadon[0]->tong_tien)}}" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
                                         @if($thongtinHoadon[0]->trang_thai == 'chonhan')
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -127,7 +137,7 @@
                                         @endif
                                     @endhasRole
                                     @if($thongtinHoadon[0]->trang_thai == 'dahoanthanh')
-                                        <button type="button" class="btn btn-success" data-url="{{route('quanlysuachua.updatehoadon',$id)}}" >Đã hoàn thành</button>
+                                        <a href="" class="btn btn-success">Hóa đơn đã hoàn thành</a>
                                     @endif
                                 </div>
                             </div>

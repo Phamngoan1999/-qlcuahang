@@ -1,0 +1,26 @@
+
+.themanh{
+    width: 150px;
+    height: 150px;
+    border: 1px solid #f1f1f1;
+    margin: 5px;
+    display: inline-block;
+    position: relative;
+}
+.anh{
+    padding: 5px;
+}
+.ikon_xoa{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.error{
+    padding: 5px 4px 5px 0px!important;
+}
+
+label{
+    font-size: 13px;
+    font-family: 'Arial';
+    font-weight: bold;
+}

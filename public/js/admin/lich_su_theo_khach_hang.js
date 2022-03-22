@@ -30,11 +30,17 @@ import comfirmAlert from "../comfirm.js";
         }
 
         $(document).on('click', '#tim-kiem', function(){
+            if($('#thongtin').val() == "")
+            {
+                $('.error').html("Vui lòng nhập thông tin tìm kiếm");
+                return false;
+            }
             let dataSearch = $('#form-search').serialize();
             let url = $(this).attr('data-url');
             loading();
             base.callApi( url, METHOD_GET, dataSearch)
                 .done(function (response) {
+                    $('.error').html("");
                     $('.table').html(response);
                 })
         });

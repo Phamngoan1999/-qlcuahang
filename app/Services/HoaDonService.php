@@ -47,6 +47,11 @@ class HoaDonService
         return $this->hoaDonRepository->findToHoaDon($id);
     }
 
+    public function findHoadon($id)
+    {
+        return $this->hoaDonRepository->find($id);
+    }
+
     public function selectXeTheoCuahang()
     {
         return $this->hoaDonRepository->selectXeTheoCuahang();

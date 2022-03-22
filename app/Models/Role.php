@@ -15,4 +15,19 @@ class Role extends Model
         'ten_roles',
         'vai_tro'
     ];
+
+    public function permissions()
+    {
+        return $this->belongsToMany(
+            Permission::class,
+            'tbl_role_quyen',
+            'iMa_role',
+            'iMa_quyen'
+        );
+    }
+
+    public function hasPermission($permission)
+    {
+        return $this->permissions()->where('ten_quyen', $permission)->exists();
+    }
 }

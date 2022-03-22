@@ -14,7 +14,7 @@ class BinhLuanRepository extends BaseRepository
 
     public function getAll()
     {
-        return $this->model->paginate(10);
+        return $this->model->selectOrder()->paginate(10);
     }
 
     public function binhLuanTheoXe($idXe)

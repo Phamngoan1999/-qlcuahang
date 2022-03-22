@@ -4,6 +4,7 @@ import comfirmAlert from "../comfirm.js";
 
 (function ($, window, document){
     $(function () {
+
         $(document).on('change','#gallery-photo-add',function(event){
             if (this.files) $.each(this.files, readAndPreview);
             function readAndPreview(i, file) {

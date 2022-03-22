@@ -24,6 +24,10 @@ class CheckPhontNumber implements Rule
      */
     public function passes($attribute, $value)
     {
+        if($value == "0000000000")
+            return false;
+        if(substr($value,0,1) != "0")
+            return false;
         if(strlen($value) == 10)
             return true;
         return false;
@@ -36,6 +40,6 @@ class CheckPhontNumber implements Rule
      */
     public function message()
     {
-        return 'Số điện thoại phải 10 ký tự';
+        return 'Số điện thoại phải 10 ký tự và hợp lệ';
     }
 }

@@ -33,7 +33,7 @@ class QuanLyKhachHang extends Controller
     public function create()
     {
         $date = getdate();
-        $namhientai = $date['year'];
+        $namhientai = $date['year']-18;
         $dongXe = DongXe::all();
         return view("khachhang.create",compact('namhientai','dongXe'));
     }

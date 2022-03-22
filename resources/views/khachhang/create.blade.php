@@ -1,27 +1,6 @@
 @extends('header.quanly')
 @section('content')
-    <link rel="stylesheet" href="{{asset('css/checkbox.css')}}">
-    <style>
-        .themanh{
-            width: 150px;
-            height: 150px;
-            border: 1px solid #f1f1f1;
-            margin: 5px;
-            display: inline-block;
-            position: relative;
-        }
-        .anh{
-            padding: 5px;
-        }
-        .ikon_xoa{
-            position: absolute;
-            top: 5px;
-            right: 5px;
-        }
-        .error{
-            padding: 5px 4px 5px 0px!important;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/create_khach_hang.css')}}">
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
@@ -92,7 +71,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Số loại <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_loai"  placeholder="Số loại">
+                                        <input type="text" class="form-control" name="so_loai" id="so_loai"  placeholder="Số loại">
                                         <div class="error error-so_loai"></div>
                                     </div>
                                 </div>
@@ -115,7 +94,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Biển số <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="bien_so"  placeholder="Biển số">
+                                        <input type="text" class="form-control" name="bien_so" id="bien_so"  placeholder="Biển số">
                                         <div class="error error-bien_so"></div>
                                     </div>
                                 </div>
@@ -129,7 +108,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Số máy <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_may"  placeholder="Số máy">
+                                        <input type="text" class="form-control" name="so_may" id="so_may"  placeholder="Số máy" maxlength="8">
                                         <div class="error error-so_may"></div>
                                     </div>
                                 </div>
@@ -138,7 +117,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Số khung <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_khung"  placeholder="Số khung">
+                                        <input type="text" class="form-control" name="so_khung" id="so_khung" placeholder="Số khung"  maxlength="8">
                                         <div class="error error-so_khung"></div>
                                     </div>
                                 </div>
@@ -199,40 +178,7 @@
             </div>
         </div>
     </div>
-    <style>
-
-        label{
-            font-size: 13px;
-            font-family: 'Arial';
-            font-weight: bold;
-        }
-    </style>
-    <script>
-        $(document).ready(function() {
-            $('#so_CMND').keyup(function () {
-                this.value = this.value.replace(/[^0-9\.]/g,'');
-            });
-            $('#so_dien_thoai').keyup(function () {
-                this.value = this.value.replace(/[^0-9\.]/g,'');
-            });
-        })
-    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script>
-        function formatCurrency(number){
-            var n = number.split('').reverse().join("");
-            var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");
-            return  n2.split('').reverse().join('') + 'VNĐ';
-        }
-        $("#gia_mua").on('input', function(e){
-            $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g,'')));
-        }).on('keypress',function(e){
-            if(!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
-        }).on('paste', function(e){
-            var cb = e.originalEvent.clipboardData || window.clipboardData;
-            if(!$.isNumeric(cb.getData('text'))) e.preventDefault();
-        });
-    </script>
     <script type="module" src="{{asset('js/admin/khach_hang.js')}}"></script>
     <script type="module" src="{{asset('js/admin/create_xe_mua.js')}}"></script>
 @endsection

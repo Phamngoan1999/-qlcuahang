@@ -80,7 +80,7 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <div class="paginate float-right text-right" style="padding: 10px 0px;">
+        <div class="paginate float-right text-right paginate-page" style="padding: 10px 0px;">
             {{$listXe->appends(request()->all())->links()}}
         </div>
     </div>

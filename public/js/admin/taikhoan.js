@@ -6,6 +6,7 @@ import comfirmAlert from "../comfirm.js";
     $(function () {
 
         $(document).on('click', '.add-cua-hang', function(){
+            $('.error').html("");
             let dataForm = new FormData($('#form-add-cua-hang')[0]);
             let url = $(this).attr('data-url');
             base.callApiWithFormData( url, METHOD_POST, dataForm)
@@ -16,8 +17,8 @@ import comfirmAlert from "../comfirm.js";
                     $('input').val("");
                 })
                 .fail(function (response){
+                    $('.error').html("");
                     let errors = response.responseJSON.errors;
-                    console.log(errors);
                     for(let key in errors)
                     {
                         $(".error-"+key).html(errors[key]);
@@ -42,7 +43,7 @@ import comfirmAlert from "../comfirm.js";
             base.callApiWithFormData( url, METHOD_POST, dataForm)
                 .done(function (response) {
                     $("#update-tai-khoan-modal").modal("hide");
-                    comfirmAlert.showSuccessMessageAlert("Cấp tài khoản thành công");
+                    comfirmAlert.showSuccessMessageAlert("Update tài khoản thành công");
                     $('#danh-sach-cua-hang').html(response);
                 })
                 .fail(function (response){

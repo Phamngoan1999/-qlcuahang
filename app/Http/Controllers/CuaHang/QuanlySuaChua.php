@@ -73,4 +73,10 @@ class QuanlySuaChua extends Controller
         }
         return true;
     }
+
+    public function inhoadon($id)
+    {
+        $thongtinHoadon = $this->hoaDonService->findHoadon($id);
+        return view('hoadon.inhoadon',compact('thongtinHoadon'));
+    }
 }

@@ -67,6 +67,11 @@ class Xe extends Model
         return $this->hasMany(HoaDon::class, 'iMa_xe','id');
     }
 
+    public function binhluan()
+    {
+        return $this->hasMany(BinhLuan::class, 'iMa_xe','id');
+    }
+
     public function getAllTheoTrangThai()
     {
         return Xe::whereHas('trangthai')->with(['trangthai']);

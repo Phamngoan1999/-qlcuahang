@@ -24,6 +24,15 @@ class BinhLuan extends Model
         return $this->belongsTo(User::class,'iMa_khach_hang');
     }
 
+    public function xe()
+    {
+        return $this->belongsTo(Xe::class,'iMa_xe');
+    }
+
+    public function selectOrder()
+    {
+        return $this->orderBy('created_at', 'DESC');
+    }
     public function getAll()
     {
         return BinhLuan::whereHas('users')->with(['users']);

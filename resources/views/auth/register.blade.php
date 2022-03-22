@@ -13,9 +13,15 @@
                                     <label for="">Họ tên <span class="obligatory">*</span></label>
                                     <input id="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" maxlength="50" placeholder="Username" autofocus>
                                     @error('name')
+                                        @if($message == 'The name field is required.')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong>Vui lòng nhập tên hợp lệ.</strong>
                                         </span>
+                                            @else
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>Vui lòng nhập tên hợp lệ.</strong>
+                                        </span>
+                                        @endif
                                     @enderror
                                 </div>
                                 <div class="form-group">
@@ -28,7 +34,7 @@
                                             </span>
                                         @else
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong>Vui lòng nhập số điện thoại hợp lệ</strong>
                                         </span>
                                         @endif
                                     @enderror
@@ -41,9 +47,13 @@
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>Vui lòng nhập lại mật khẩu</strong>
                                             </span>
+                                        @elseif($message == "The password must be at least 8 characters.")
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>Mật khẩu pải trên 8 ký tự</strong>
+                                            </span>
                                         @else
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong>Vui lòng nhật mật khẩu</strong>
                                             </span>
                                         @endif
                                     @enderror

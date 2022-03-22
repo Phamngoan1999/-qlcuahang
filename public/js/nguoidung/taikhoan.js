@@ -11,7 +11,7 @@ import comfirmAlert from "../comfirm.js";
             dataForm.append('_method', METHOD_PATCH);
             base.callApiWithFormData( url, METHOD_POST, dataForm)
                 .done(function (response) {
-                    comfirmAlert.showSuccessMessageAlert("Update Dòng xe thành công!");
+                    comfirmAlert.showSuccessMessageAlert("Update thông tin thành công!");
                 })
                 .fail(function (response){
                     let errors = response.responseJSON.errors;

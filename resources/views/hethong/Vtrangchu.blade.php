@@ -161,7 +161,7 @@
                         <div class="info">
                             <div class="phone">
                                 <i class="bi bi-phone"></i>
-                                <h4>Call:</h4>
+                                <h4>Liên hệ:</h4>
                                 <p>+(084) 0339845495</p>
                             </div>
                             <iframe

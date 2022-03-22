@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckCMND implements Rule
+class CheckDate implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,11 +25,12 @@ class CheckCMND implements Rule
      */
     public function passes($attribute, $value)
     {
-        if($value == "000000000" || $value == "000000000000")
+        $today = date("Y-m-d");
+        if (strtotime($today) <= strtotime($value)) {
             return false;
-        if(strlen($value) != 9 && strlen($value) != 12)
-            return false;
-        return true;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -39,6 +40,6 @@ class CheckCMND implements Rule
      */
     public function message()
     {
-        return 'Số CMND không hợp lệ';
+        return 'Ngày nhập không hợp lệ';
     }
 }

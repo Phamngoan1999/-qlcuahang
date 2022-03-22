@@ -37,7 +37,7 @@ class XeController extends Controller
     public function create($id)
     {
         $date = getdate();
-        $namhientai = $date['year'];
+        $namhientai = $date['year']-18;
         $dongXe = DongXe::all();
         $inforKhachHang = $this->khachHangService->find($id);
         return view('xe.create',compact('inforKhachHang','namhientai','dongXe','id'));
@@ -46,7 +46,7 @@ class XeController extends Controller
     public function show($id)
     {
         $date = getdate();
-        $namhientai = $date['year'];
+        $namhientai = $date['year']-18;
         $dongXe = DongXe::all();
         $thongTinXe = Xe::getThongTinKhachHangXe($id);
         $thongtinAnh = Anh::getAnhXe($id);

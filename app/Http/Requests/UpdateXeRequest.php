@@ -2,8 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\CheckBienSo;
 use App\Rules\CheckCMND;
+use App\Rules\CheckDate;
+use App\Rules\CheckGia;
 use App\Rules\CheckPhontNumber;
+use App\Rules\CheckSoKhung;
+use App\Rules\CheckSoMay;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateXeRequest extends FormRequest
@@ -26,29 +31,30 @@ class UpdateXeRequest extends FormRequest
     public function rules()
     {
         return [
-            'ho_ten' => 'required',
+            'ho_ten' => 'required|max:50',
             'so_CMND' => ['required',new CheckCMND()],
             'so_dien_thoai' => ['required',new CheckPhontNumber()],
             'nam_sinh'      => 'required',
             'noi_cap_CMND'  => 'required',
             'noi_cu_tru'    => 'required',
-            'cap_ngay'    => 'required',
+            'cap_ngay'    => ['required',new CheckDate()],
             'so_loai'    => 'required',
             'mau_son'    => 'required',
             'dung_tich'    => 'required',
-            'bien_so'    => 'required',
+            'bien_so'    => ['required',new CheckBienSo()],
             'dang_ky_tai'    => 'required',
-            'so_may'    => 'required',
-            'so_khung'    => 'required',
+            'so_may'    => ['required',new CheckSoMay()],
+            'so_khung'    => ['required',new CheckSoKhung()],
             'iMa_dong_xe'    => 'required',
-            'gia_mua'    => 'required',
+            'gia_mua'    => ['required',new CheckGia()],
         ];
     }
 
     public function messages()
     {
         return [
-            'ho_ten.required' => 'Vui lòng nhập tên cửa hàng',
+            'ho_ten.required' => 'Vui lòng nhập họ tên',
+            'ho_ten.max' => 'Họ tên vượt quá độ dài quy định',
             'so_CMND.required' => 'Vui lòng nhập số CMND',
             'so_dien_thoai.required' => 'Vui lòng nhập số điện thoại.',
             'nam_sinh.required' => 'Vui lòng nhập năm sinh',

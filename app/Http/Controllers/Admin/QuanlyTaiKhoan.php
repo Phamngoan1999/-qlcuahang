@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTaikhoan;
 use App\Services\CuaHangService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuanlyTaiKhoan extends Controller
 {

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\CheckCMND;
+use App\Rules\CheckDate;
 use App\Rules\CheckPhontNumber;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -32,7 +33,7 @@ class KhachHangUpdateRequest extends FormRequest
             'so_CMND' => ['required',new CheckCMND()],
             'noi_cap_CMND' => 'required',
             'noi_cu_tru' => 'required',
-            'cap_ngay' => 'required'
+            'cap_ngay' => ['required',new CheckDate()]
         ];
     }
 

@@ -238,30 +238,33 @@ Route::middleware(['auth'])->group(function() {
         Route::post('/lenhoadon/{id}', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'lenhoadon'])
             ->name('lenhoadon')
             ->middleware('role:cuahanglienket');
+
+        Route::get('/inhoadon/{id}', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'inhoadon'])
+            ->name('inhoadon');
     });
 
     Route::name('quanlytaikhoan.')->prefix('quanlytaikhoan')->group(function () {
 
         Route::get('/', [QuanlyTaiKhoan::class, 'index'])
-            ->name('quanly')->middleware('role:admin');;
+            ->name('quanly')->middleware('role:admin');
 
         Route::post('/create', [CuaHangController::class, 'create'])
-            ->name('create')->middleware('role:admin');;
+            ->name('create')->middleware('role:admin');
 
         Route::get('/show/{id}', [CuaHangController::class, 'show'])
-            ->name('show')->middleware('role:admin');;
+            ->name('show')->middleware('role:admin');
 
         Route::patch('/update/{id}', [CuaHangController::class, 'update'])
-            ->name('update')->middleware('role:admin');;
+            ->name('update')->middleware('role:admin');
 
         Route::delete('/delete/{id}', [CuaHangController::class, 'delete'])
-            ->name('delete')->middleware('role:admin');;
+            ->name('delete')->middleware('role:admin');
 
         Route::get('/thongtintaikhoan', [QuanlyTaiKhoan::class, 'show'])
-            ->name('thongtintaikhoan')->middleware('role:admin');;
+            ->name('thongtintaikhoan');
 
         Route::patch('/thongtintaikhoan', [QuanlyTaiKhoan::class, 'update'])
-            ->name('update-thong-tin')->middleware('role:admin');;
+            ->name('update-thong-tin')->middleware('permission:thong-tin-tai-khoan');
     });
 
     Route::name('quanlybinhluan.')->prefix('quanlybinhluan')->group(function () {

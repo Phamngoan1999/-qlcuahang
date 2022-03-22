@@ -1,6 +1,5 @@
 @extends('header.quanly')
 @section('content')
-    <link rel="stylesheet" href="{{asset('css/checkbox.css')}}">
     <style>
         .themanh{
             width: 150px;

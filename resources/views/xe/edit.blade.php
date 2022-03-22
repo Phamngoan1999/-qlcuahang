@@ -19,7 +19,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số điện thoại <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_dien_thoai" id="so_dien_thoai" placeholder="Số điện thoại" value="{{$thongTinXe[0]['khachhang']['so_dien_thoai']}}" >
+                                        <input type="text" class="form-control" placeholder="Số điện thoại" value="{{$thongTinXe[0]['khachhang']['so_dien_thoai']}}" disabled>
+                                        <input type="text" class="form-control" name="so_dien_thoai" id="so_dien_thoai" maxlength="10" placeholder="Số điện thoại" value="{{$thongTinXe[0]['khachhang']['so_dien_thoai']}}" style="display: none;">
                                         <div class="error error-so_dien_thoai"></div>
                                     </div>
                                 </div>
@@ -38,7 +39,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số CMND <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND" maxlength="12" placeholder="Số CMND/Thẻ CCCD" value="{{$thongTinXe[0]['khachhang']['so_CMND']}}">
+                                        <input type="text" class="form-control" value="{{$thongTinXe[0]['khachhang']['so_CMND']}}" disabled>
+                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND" maxlength="12" placeholder="Số CMND/Thẻ CCCD" value="{{$thongTinXe[0]['khachhang']['so_CMND']}}" style="display: none;">
                                         <div class="error error-so_CMND"></div>
                                     </div>
                                 </div>
@@ -93,7 +95,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Biển số <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="bien_so"  placeholder="Biển số"  value="{{$thongTinXe[0]['bien_so']}}">
+                                        <input type="text" class="form-control" name="bien_so" id="bien_so"  placeholder="Biển số"  value="{{$thongTinXe[0]['bien_so']}}">
                                         <div class="error error-bien_so"></div>
                                     </div>
                                 </div>
@@ -107,7 +109,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Số máy <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_may"  placeholder="Số máy"  value="{{$thongTinXe[0]['so_may']}}">
+                                        <input type="text" class="form-control" name="so_may"  placeholder="Số máy" id="so_may" maxlength="8" value="{{$thongTinXe[0]['so_may']}}">
                                         <div class="error error-so_may"></div>
                                     </div>
                                 </div>
@@ -116,7 +118,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Số khung <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_khung"  placeholder="Số khung" value="{{$thongTinXe[0]['so_khung']}}">
+                                        <input type="text" class="form-control" name="so_khung" maxlength="17"  placeholder="Số khung" id="so_khung" value="{{$thongTinXe[0]['so_khung']}}">
                                         <div class="error error-so_khung"></div>
                                     </div>
                                 </div>
@@ -187,7 +189,7 @@
                                         @if($thongTinXe[0]['iMa_trang_thai'] != 3)
                                         <button type="button" id="update-thong-tin" data-url="{{route('quanlyxe.updatethongtinxe',$thongTinXe[0]['id'])}}" class="btn btn-primary" >Update thông tin</button>
                                         @endif
-                                        <a href="{{route('quanlyxe.inthongtin',$thongTinXe[0]['id'])}}" class="btn btn-primary">In thông tin</a>
+                                        <a href="{{route('quanlyxe.inthongtin',$thongTinXe[0]['id'])}}" class="btn btn-primary" target="_blank">In thông tin</a>
                                     </div>
                                 </div>
                             </div>
@@ -198,14 +200,6 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            $('#so_CMND').keyup(function () {
-                this.value = this.value.replace(/[^0-9\.]/g,'');
-            });
-            $('#so_dien_thoai').keyup(function () {
-                this.value = this.value.replace(/[^0-9\.]/g,'');
-            });
-        })
         function formatCurrency(number){
             var n = number.split('').reverse().join("");
             var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");

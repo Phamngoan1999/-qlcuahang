@@ -52,7 +52,7 @@ class KhachHangController extends Controller
     public function muaxXe($id)
     {
         $date = getdate();
-        $namhientai = $date['year'];
+        $namhientai = $date['year']-18;
         $dongXe = DongXe::all();
         $inforXe = Xe::getThongTinXe($id);
         $inforKhachHang = KhachHang::find($inforXe[0]['iMa_khach_hang_mua_xe']);
@@ -72,7 +72,7 @@ class KhachHangController extends Controller
     public function view_thong_tin_khach_hang($inforKhachHang,$request)
     {
         $date = getdate();
-        $namhientai = $date['year'];
+        $namhientai = $date['year']-18;
         $idXe = $request->ma_xe;
         return view('xe.view_thong_tin_khach_hang',compact('inforKhachHang','namhientai','idXe'));
     }

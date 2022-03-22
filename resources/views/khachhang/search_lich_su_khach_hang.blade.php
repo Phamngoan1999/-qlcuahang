@@ -10,7 +10,7 @@
                             <div class="row" style="padding-top: 20px;">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="thongtin"  placeholder="Thông tin khách hàng">
+                                        <input type="text" class="form-control" name="thongtin" id="thongtin" placeholder="Thông tin khách hàng">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -19,6 +19,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="error"></div>
                         </form>
                         <div class="table">
                             <div class="table-responsive pt-3">

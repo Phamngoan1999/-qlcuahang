@@ -129,7 +129,7 @@ function htmlThemPhuTung()
         $(document).on('click','#huy-don-sua-chua',function() {
             let dataForm = new FormData($('#form-hoa-don')[0]);
             let updateUrl = $(this).attr('data-url');
-            comfirmAlert.confirmnhandon()
+            comfirmAlert.confirmnhuydon()
                 .then(result => {
                     if (result) {
                         base.callApiWithFormData( updateUrl, METHOD_POST, dataForm)
@@ -155,7 +155,7 @@ function htmlThemPhuTung()
                                     $('.error-don-gia').html('<div class="error">Vui lòng nhập đơn giá phụ tùng</div></p>');
                                     return false;
                                 }
-                                comfirmAlert.showSuccessMessageAlert("Đã hoàn hóa đơn này");
+                                comfirmAlert.showSuccessMessageAlert("Đã hoàn thành hóa đơn này");
                                 $('.chi-tiet-hoa-don').html(response)
                                 $('.js-example-basic-single').select2();
                             });

@@ -67,7 +67,7 @@ class XeService
             'iMa_loai_xe' => $request->loai_xe,
             'khoang_gia' => $request->khoang_gia
         );
-        return $this->xeRepository->search($request);
+        return $this->xeRepository->search($dataSearch);
     }
 
     public function store($request,$id)

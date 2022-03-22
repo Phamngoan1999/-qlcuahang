@@ -61,7 +61,7 @@ import comfirmAlert from "./comfirm.js";
         });
 
         $(document).on('click', '#add-loai-xe', function(){
-            $('.error').html();
+            $('.error').html("");
             let dataForm = new FormData($('#form-add-loai-xe')[0]);
             let url = $(this).attr('data-url');
             base.callApiWithFormData( url, METHOD_POST, dataForm)

@@ -40,7 +40,8 @@ class CuaHangRequest extends FormRequest
             'email.required' => 'Vui lòng nhập số điện thoại',
             'diachi.required' => 'Vui lòng nhập địa chỉ',
             'matkhau.required' => 'Vui lòng nhập mật khẩu',
-            'matkhau.min'       => 'Mật khẩu phải trên 8 ký tự và dưới 32 ký tự'
+            'matkhau.min'       => 'Mật khẩu phải trên 8 ký tự và dưới 32 ký tự',
+            'matkhau.max'       => 'Mật khẩu phải trên 8 ký tự và dưới 32 ký tự'
         ];
     }
 }

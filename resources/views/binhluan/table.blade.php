@@ -25,7 +25,11 @@
                                 <a href="{{route("quanlyxe.editthongtinxe",$bl->iMa_xe)}}" class="btn btn-primary btn-width" >Thông tin chi tiết xe</a>
                                 <br>
                                 <br>
-                                <a href="{{route("trangchitiet",$bl->iMa_xe)}}" class="btn btn-primary btn-width" >Thông tin xe trên trang web</a>
+                                @if($bl->xe->iMa_trang_thai == 2)
+                                    <a href="{{route("trangchitiet",$bl->iMa_xe)}}" class="btn btn-primary btn-width" >Thông tin xe trên trang web</a>
+                                @else
+                                    <a  class="btn btn-info btn-width" >{{$bl->xe->trangthai->ten_trang_thai}}</a>
+                                @endif
                             @endif
                         </td>
                         <td>

@@ -17,6 +17,15 @@ const comfirmAlert = {
             dangerMode: true
         });
     },
+    confirmnhuydon: function (){
+        return swal({
+            title: "Bạn chắc chắn hủy đơn sửa chữa?",
+            text: "Sau khí xóa sẽ không thể khôi phục",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        });
+    },
     showSuccessMessageAlert: function showSuccessMessageAlert(title)
     {
         toastr.success(title);

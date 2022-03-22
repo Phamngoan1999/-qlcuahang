@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\CuaHang;
+use App\Models\User;
 use App\Repositories\CuaHangRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
@@ -62,17 +64,17 @@ class CuaHangService
         if (!empty($request->matkhau)) {
             $dataUpdateTaiKhoan = array(
                 'name' => $request->name,
-//                'email' => $request->email,
                 'password' => Hash::make($request->matkhau)
             );
         } else {
             $dataUpdateTaiKhoan = array(
-                'name' => $request->name,
-//                'email' => $request->email
+                'name' => $request->name
             );
         }
-        $this->userRepository->update($dataUpdateTaiKhoan, $id);
-        return $this->cuaHangRepository->update($dataUpdateCuaHang, $id);
+        $this->cuaHangRepository->update($dataUpdateCuaHang, $id);
+        $thongtinCuaHang = CuaHang::find($id);
+        $idTaikhoan = User::where('email',$thongtinCuaHang->so_dien_thoai)->get();
+        return $this->userRepository->update($dataUpdateTaiKhoan, $idTaikhoan[0]->id);
     }
 
     public function delete($id)

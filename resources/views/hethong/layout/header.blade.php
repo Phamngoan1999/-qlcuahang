@@ -97,7 +97,6 @@
                     <h4>Thông tin </h4>
                     <ul>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{route("Trangchu")}}">Trang chủ</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{{route("thongtincuahang")}}">Thông tin cửa hàng</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#contact">Liên hệ</a></li>
                     </ul>
                 </div>

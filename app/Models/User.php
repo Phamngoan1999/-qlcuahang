@@ -71,7 +71,6 @@ class User extends Authenticatable
         return $query;
     }
 
-
     public function hasPermission($permission)
     {
         foreach ($this->roles as $role){
