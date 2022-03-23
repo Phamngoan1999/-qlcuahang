@@ -36,6 +36,7 @@ class QuanLySuaChua extends Controller
     public function xoahoadon($id)
     {
         $this->hoaDonService->delete($id);
-        return $this->view();
+        $danhsach = $this->hoaDonService->all();
+        return view('hoadon.table',compact('danhsach'));
     }
 }

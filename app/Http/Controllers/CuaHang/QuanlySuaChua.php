@@ -40,8 +40,7 @@ class QuanlySuaChua extends Controller
     public function nhandon(Request $request,$id)
     {
         $this->hoaDonService->nhandon($request,$id);
-        return $this->view($id);
-
+        return redirect()->route('quanlysuachua.showhoadon',$id)->with('message', 'Cửa hàng đã nhận đơn thành công');
     }
 
     public function huyhoadon(Request $request,$id)
@@ -52,13 +51,8 @@ class QuanlySuaChua extends Controller
 
     public function lenhoadon(Request $request,$id)
     {
-        if($this->checkDongia($request->dongia))
-        {
-            $this->hoaDonService->lenhoadon($request,$id);
-            return $this->view($id);
-        }else{
-            return "nhap-thieu-don-gia";
-        }
+        $this->hoaDonService->lenhoadon($request,$id);
+        return $this->view($id);
     }
 
 

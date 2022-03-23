@@ -8,6 +8,15 @@ const comfirmAlert = {
             dangerMode: true
         });
     },
+    confirmlendon: function (){
+        return swal({
+            title: "Bạn chắc chắn lưu đơn sửa chữa?",
+            text: "Hãy lưu thông tin hóa đơn",
+            icon: "success",
+            buttons: true,
+            dangerMode: true
+        });
+    },
     confirmnhandon: function (){
         return swal({
             title: "Bạn chắc chắn nhận đơn sửa chữa?",

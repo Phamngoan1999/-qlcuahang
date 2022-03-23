@@ -6,8 +6,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Thông tin phụ tùng sửa chữa</h4>
-                        <form action="" id="form-hoa-don" class="chi-tiet-hoa-don">
-                            <div class="row" id="chi-tiet-hoa-don">
+                        <form action="{{route('quanlysuachua.updatenhandon',$id)}}" id="form-hoa-don" class="chi-tiet-hoa-don" method="POST">
+                            @csrf
+                            <div class="row">
                                 <div class="col-md-5">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -15,13 +16,13 @@
                                                 <label for="">Chọn cửa hàng sửa chữa</label>
                                                 @hasRole("admin")
                                                 @if($thongtinHoadon[0]->trang_thai != 'chonhan')
-                                                    <select class="js-example-basic-single w-100" name="iMa_cua_hang" disabled>
+                                                    <select class="js-example-basic-single w-100 ma-cua-hang" name="iMa_cua_hang" disabled>
                                                         @foreach($danhsachCuaHang as $cuahang)
                                                             <option value="{{$cuahang->id}}" @if($cuahang->id==$thongtinHoadon[0]->iMa_cua_hang) selected @endif>{{$cuahang->ten_cua_hang}}</option>
                                                         @endforeach
                                                     </select>
                                                 @else
-                                                    <select class="js-example-basic-single w-100" name="iMa_cua_hang">
+                                                    <select class="js-example-basic-single w-100 ma-cua-hang" name="iMa_cua_hang">
                                                         @foreach($danhsachCuaHang as $cuahang)
                                                             <option value="{{$cuahang->id}}" @if($cuahang->id==$thongtinHoadon[0]->iMa_cua_hang) selected @endif>{{$cuahang->ten_cua_hang}}</option>
                                                         @endforeach
@@ -29,7 +30,7 @@
                                                 @endif
                                                 @endhasRole
                                                 @hasRole("cuahanglienket")
-                                                <select class="js-example-basic-single w-100" name="iMa_cua_hang" disabled>
+                                                <select class="js-example-basic-single w-100  ma-cua-hang" name="iMa_cua_hang" disabled>
                                                     @foreach($danhsachCuaHang as $cuahang)
                                                         <option value="{{$cuahang->id}}" @if($cuahang->id==$thongtinHoadon[0]->iMa_cua_hang) selected @endif>{{$cuahang->ten_cua_hang}}</option>
                                                     @endforeach
@@ -46,8 +47,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @hasRole("admin")
-                                        @if($thongtinHoadon[0]->trang_thai == 'dahoanthanh')
+                                    @if($thongtinHoadon[0]->trang_thai == 'dahoanthanh')
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
@@ -56,11 +56,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @endif
+                                    @endif
+                                    @hasRole("admin")
                                         @if($thongtinHoadon[0]->trang_thai == 'chonhan')
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <button type="button" class="btn btn-primary" id="add-phu-tung" ><i class="fa-solid fa-plus"></i>Thêm phụ tùng</button>
+                                                    <button type="button" class="btn btn-info" id="add-phu-tung" ><i class="fa-solid fa-plus"></i>Thêm phụ tùng</button>
                                                 </div>
                                             </div>
                                         @endif
@@ -101,7 +102,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="">Đơn giá</label>
-                                                            <input type="text" class="form-control don-gia-validate" name="dongia[{{$iterm->id}}]"  placeholder="đơn giá" value="{{$iterm->don_gia}}">
+                                                            <input type="text" class="form-control don-gia-validate dongia" name="dongia[{{$iterm->id}}]"  placeholder="đơn giá" value="{{$iterm->don_gia}}">
                                                         </div>
                                                     </div>
                                                 @endif

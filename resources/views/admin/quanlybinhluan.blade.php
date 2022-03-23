@@ -1,13 +1,5 @@
 @extends('header.quanly')
 @section('content')
-    <style>
-        .btn-width{
-            width: 200px!important;
-        }
-        .label{
-            font-weight: bold;
-        }
-    </style>
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
@@ -61,7 +53,7 @@
                                     @foreach($listBinhLuan as $key => $bl)
                                         <tr>
                                             <td>{{$key + 1}}</td>
-                                            <td>{{$bl->users->name}}</td>
+                                            <td>{{ format_ten_khach_hang($bl->users->name) }}</td>
                                             <td>{{ format_binh_luan($bl->noi_dung) }}</td>
                                             <td>{{ format_thoi_gian($bl->thoi_gian_binh_luan) }}</td>
                                             <td>

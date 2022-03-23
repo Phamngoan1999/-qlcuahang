@@ -25,7 +25,7 @@ class CuaHangUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'required',
+            'name'          => 'required|max:50',
 //            'email'         => ['required',new CheckPhontNumber()],
             'diachi'        => 'required'
         ];
@@ -34,6 +34,7 @@ class CuaHangUpdateRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.max'  => 'Vui lòng nhập tên cửa hàng không quá 50 ký tự',
             'name.required' => 'Vui lòng nhập tên cửa hàng',
 //            'email.required' => 'Vui lòng nhập số điện thoại',
             'diachi.required' => 'Vui lòng nhập địa chỉ',

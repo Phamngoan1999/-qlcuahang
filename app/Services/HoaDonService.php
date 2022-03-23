@@ -128,7 +128,7 @@ class HoaDonService
         {
             $gia = format_money_insert_db($iterm);
             $dataDongiaPhuTung = array(
-                'don_gia' => $iterm
+                'don_gia' => (double)$gia != 0 ? $iterm : "0VND"
             );
             $tongtien = (double)$tongtien + (double)$gia;
             $this->phuTungRepository->update($dataDongiaPhuTung,$key);
@@ -147,7 +147,9 @@ class HoaDonService
 
     public function delete($id)
     {
-        return $this->hoaDonRepository->delete($id);
+        $maXe = $this->hoaDonRepository->find($id)->iMa_xe;
+        $this->hoaDonRepository->delete($id);
+        return $this->xeRepository->update(['iMa_trang_thai' => 1],$maXe);
     }
 
     public function tongtiensuachua($request)

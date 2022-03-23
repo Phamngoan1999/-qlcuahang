@@ -109,7 +109,7 @@ class Xe extends Model
     public function allXeChuaBan()
     {
         return $this->whereHas('dongxe')->with(['dongxe'])
-            ->whereIn('iMa_trang_thai',array(1,4,5))->get();
+            ->whereIn('iMa_trang_thai',array(1,4,5,7))->get();
     }
 
     public function getXeNew()

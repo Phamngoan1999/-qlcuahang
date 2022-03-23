@@ -26,7 +26,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Thêm khách hàng</h4>
+                        <h4 class="card-title">Thêm Xe Bán</h4>
                         <form method="POST" action="" enctype="multipart/form-data" id="form-them-xe">
                             @csrf
                             <div class="row">

@@ -1,4 +1,4 @@
-<div class="row" id="chi-tiet-hoa-don">
+<div class="row" >
     <div class="col-md-5">
         <div class="row">
             <div class="col-md-12">
@@ -42,6 +42,16 @@
                 </div>
             </div>
         </div>
+        @if($thongtinHoadon[0]->trang_thai == 'dahoanthanh')
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">Tổng tiền</label>
+                        <input class="form-control" type="text" value="{{ currency_format($thongtinHoadon[0]->tong_tien)}}" disabled>
+                    </div>
+                </div>
+            </div>
+        @endif
         @hasRole("admin")
             @if($thongtinHoadon[0]->trang_thai == 'chonhan')
                 <div class="row">
@@ -104,7 +114,7 @@
             @endif
         @endhasRole
         @if($thongtinHoadon[0]->trang_thai == 'dahoanthanh')
-            <button type="button" class="btn btn-success" data-url="{{route('quanlysuachua.updatehoadon',$id)}}" >Đã hoàn thành</button>
+            <button type="button" class="btn btn-success" data-url="{{route('quanlysuachua.updatehoadon',$id)}}" >Hóa đơn đã hoàn thành</button>
         @endif
     </div>
 </div>

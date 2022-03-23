@@ -51,18 +51,8 @@ class HoaDonController extends Controller
 
     public function update(UpdateHoaDon $request,$id)
     {
-        if(isset($request->phutung))
-        {
-            if($this->checkPhutung($request->phutung))
-            {
-                return $this->hoaDonService->update($request,$id);
-            }else{
-                return "nhap-thieu";
-            }
-        }else{
-            $this->hoaDonService->update($request,$id);
-            return $this->index($id);
-        }
+
+        return $this->hoaDonService->update($request,$id);
     }
 
     public function checkPhutung($phutung)
@@ -79,11 +69,7 @@ class HoaDonController extends Controller
 
     public function store(CreateHoaDon $request)
     {
-        if($this->checkPhutung($request->phutung))
-        {
-            return $this->hoaDonService->create($request);
-        }else{
-            return "nhap-thieu";
-        }
+        $hoaDon = $this->hoaDonService->create($request);
+        return redirect()->route('quanlysuachua.showhoadon',$hoaDon->id)->with('message', 'Lưu thông tin thành công');
     }
 }

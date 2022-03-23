@@ -29,7 +29,7 @@ class KhachHangController extends Controller
     public function show($id)
     {
         $date = getdate();
-        $namhientai = $date['year'];
+        $namhientai = $date['year']-18;
         $dongXe = DongXe::all();
         $inforKhachHang = $this->khachHangService->find($id);
         return view('khachhang.edit',compact('inforKhachHang','dongXe','namhientai'));

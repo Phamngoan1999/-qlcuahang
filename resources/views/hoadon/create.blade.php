@@ -6,7 +6,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Thêm phụ tùng sửa chữa</h4>
-                        <form action="" id="form-hoa-don" class="chi-tiet-hoa-don">
+                        <form action="{{route('quanlysuachua.luuhoadon')}}" id="form-hoa-don" class="chi-tiet-hoa-don" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="row">
@@ -27,7 +28,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">Chọn xe sửa chữa</label>
-                                                <select class="js-example-basic-single w-100"  name="iMa_xe" >
+                                                <select class="js-example-basic-single w-100 xe-sua-chua"  name="iMa_xe" >
                                                     <option value="">Chọn xe sửa chữa</option>
                                                     @foreach($danhsachXe as$xe)
                                                         <option value="{{$xe->id}}">{{$xe->dongxe->ten_dong_xe}}-{{$xe->bien_so}}</option>
@@ -38,21 +39,24 @@
                                         </div>
                                     </div>
                                     <div class="row" style="padding-bottom: 20px;">
-                                        <div class="col-md-12">
-                                            <button type="button" class="btn btn-primary" id="add-phu-tung" ><i class="fa-solid fa-plus"></i> Thêm phụ tùng</button>
+                                        <div class="col-md-5">
+                                            <button type="button" class="btn btn-info" id="add-phu-tung" ><i class="fa-solid fa-plus"></i> Thêm phụ tùng</button>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="error error-phutung"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
-                                    <div id="list-phu-tung">
-
+                                    <div id="list-phu-tung"></div>
+                                    <div class="col-md-7">
+                                        <div class="error error-phutung-rong"></div>
                                     </div>
-                                    <div class="error error-phutung"></div>
                                 </div>
                             </div>
                             <div class="row group-btn">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-primary" id="add-luu-thong-tin" data-url="{{route('quanlysuachua.luuhoadon')}}" >Lưu thông tin</button>
+                                    <button type="button" class="btn btn-primary" id="add-luu-thong-tin" >Lưu thông tin</button>
                                 </div>
                             </div>
                         </form>

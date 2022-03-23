@@ -8,6 +8,15 @@ if(!function_exists('format_binh_luan')) {
         return $str;
     }
 }
+if(!function_exists('format_ten_khach_hang')) {
+    function format_ten_khach_hang($str)
+    {
+        if (strlen($str) > 20) {
+            return substr($str, 0, 20) . '...';
+        }
+        return $str;
+    }
+}
 if (!function_exists('format_thoi_gian')){
     function format_thoi_gian($date)
     {

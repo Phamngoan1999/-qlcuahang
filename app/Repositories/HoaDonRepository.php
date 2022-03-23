@@ -15,8 +15,7 @@ class HoaDonRepository extends BaseRepository
 
     public function getAllHoaDon()
     {
-        return $this->model->withCuaHangId()
-            ->getAllHoaDon();
+        return $this->model->getAllHoaDon();
     }
 
     public function search($dataSearch)

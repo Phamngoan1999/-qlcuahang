@@ -5,7 +5,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Báo cáo thống kê xe ban</h4>
+                        <h4 class="card-title">Báo cáo thống kê xe bán</h4>
                         <form id="form-search">
                             <div class="row" style="padding-top: 20px;">
                                 <div class="col-md-3">
