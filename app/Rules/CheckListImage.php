@@ -2,10 +2,9 @@
 
 namespace App\Rules;
 
-use App\Models\KhachHang;
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckCMND implements Rule
+class CheckListImage implements Rule
 {
     /**
      * Create a new rule instance.
@@ -26,10 +25,14 @@ class CheckCMND implements Rule
      */
     public function passes($attribute, $value)
     {
-        if($value == "000000000" || $value == "000000000000")
-            return false;
-        if(strlen($value) != 9 && strlen($value) != 12)
-            return false;
+        $allowedfileExtension=['pdf','jpg','png','docx'];
+        foreach($value as $file){
+            $mang = explode(".",$file);
+            if(in_array($mang[count($mang)-1],$allowedfileExtension))
+            {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -40,6 +43,6 @@ class CheckCMND implements Rule
      */
     public function message()
     {
-        return 'Số CMND không hợp lệ';
+        return 'Vui lòng chọn ảnh';
     }
 }

@@ -53,6 +53,13 @@ import comfirmAlert from "../comfirm.js";
                 })
         });
 
+        $(document).on('click', '.dong-modal', function (){
+            if(confirm("Bạn có chắc hủy bình luận không?"))
+            {
+                $('#modal-show-binh-luan').modal('hide');
+            }
+        });
+
         $(document).on('click', '#tim-kiem', function(){
             let dataSearch = $('#form-search').serialize();
             let url = $(this).attr('data-url');

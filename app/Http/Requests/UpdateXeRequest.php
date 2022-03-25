@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\CheckBienSo;
 use App\Rules\CheckCMND;
 use App\Rules\CheckDate;
+use App\Rules\CheckDungTich;
 use App\Rules\CheckGia;
 use App\Rules\CheckPhontNumber;
 use App\Rules\CheckSoKhung;
@@ -40,11 +41,11 @@ class UpdateXeRequest extends FormRequest
             'cap_ngay'    => ['required',new CheckDate()],
             'so_loai'    => 'required',
             'mau_son'    => 'required',
-            'dung_tich'    => 'required',
+            'dung_tich'    => ['required',new CheckDungTich()],
             'bien_so'    => ['required',new CheckBienSo()],
             'dang_ky_tai'    => 'required',
             'so_may'    => ['required',new CheckSoMay()],
-            'so_khung'    => ['required',new CheckSoKhung()],
+            'so_khung'    => 'required|min:9|max:17',
             'iMa_dong_xe'    => 'required',
             'gia_mua'    => ['required',new CheckGia()],
         ];
@@ -53,6 +54,8 @@ class UpdateXeRequest extends FormRequest
     public function messages()
     {
         return [
+            'so_khung.min' => "Số khung có độ dài từ 9 đến 17 ký tự",
+            'so_khung.max' => "Số khung có độ dài từ 9 đến 17 ký tự",
             'ho_ten.required' => 'Vui lòng nhập họ tên',
             'ho_ten.max' => 'Họ tên vượt quá độ dài quy định',
             'so_CMND.required' => 'Vui lòng nhập số CMND',

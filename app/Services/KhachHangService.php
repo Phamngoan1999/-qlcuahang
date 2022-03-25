@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Anh;
+use App\Models\KhachHang;
 use App\Models\Xe;
 use App\Repositories\KhachHangRepository;
 use App\Repositories\XeRepository;
@@ -141,5 +142,10 @@ class KhachHangService{
     public function searchCMND($request)
     {
         return $this->khachHangRepository->searchCMND($request);
+    }
+
+    public function checkSCMND($request)
+    {
+        return KhachHang::where('so_CMND',$request->so_CMND)->get();
     }
 }

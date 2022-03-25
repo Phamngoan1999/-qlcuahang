@@ -6,6 +6,24 @@ import comfirmAlert from "../comfirm.js";
 (function ($, window, document){
     $(function () {
 
+        $( "#dung_tich" ).keyup(function() {
+            let str = $(this).val();
+            let value = base.checkSug(str);
+            $(this).val(value);
+        });
+
+        $( "#gia_dang_web" ).keyup(function() {
+            let str = $(this).val();
+            let value = base.checkSpecail(str);
+            $(this).val(value);
+        });
+
+        $( "#so_km_di" ).keyup(function() {
+            let str = $(this).val();
+            let value = base.checkSug(str);
+            $(this).val(value);
+        });
+
         $(document).on('change','#gallery-photo-avata-web', function(e) {
             let reader = new FileReader();
             reader.onload = function (e){
@@ -15,21 +33,33 @@ import comfirmAlert from "../comfirm.js";
         });
 
         $(document).on('change','#gallery-photo-add-web',function(event){
-            if (this.files) $.each(this.files, readAndPreview);
-            function readAndPreview(i, file) {
-                if (!/\.(jpe?g|png|gif)$/i.test(file.name)){
-                    return alert(file.name +" is not an image");
+            let  kiemtra = "ok";
+            if (this.files) $.each(this.files, ktraanh);
+            function ktraanh(i, file) {
+                if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    kiemtra = "not-ok";
                 }
-                var html = "";
-                var reader = new FileReader();
-                $(reader).on("load", function() {
-                    html += '<div class="themanh">\
+            }
+            if(kiemtra === "not-ok")
+            {
+                alert("Vui lòng chọn file ảnh");
+                return false;
+            }
+            if(kiemtra)
+            {
+                if (this.files) $.each(this.files, readAndPreview);
+                function readAndPreview(i, file) {
+                    var html = "";
+                    var reader = new FileReader();
+                    $(reader).on("load", function() {
+                        html += '<div class="themanh">\
                                 <image src="'+this.result+'" class="anh"  width="150px" height="150px"/>\
                                 <button type="button" class="btn btn-danger ikon_xoa" title = "Xóa ảnh"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>\
                             </div>';
-                    $('div.image_preview').append(html);
-                });
-                reader.readAsDataURL(file);
+                        $('div.image_preview').append(html);
+                    });
+                    reader.readAsDataURL(file);
+                }
             }
         });
 
@@ -39,7 +69,6 @@ import comfirmAlert from "../comfirm.js";
             dataForm.append('_method', METHOD_PATCH);
             base.callApiWithFormData( url, METHOD_POST, dataForm)
                 .done(function (response) {
-                    // console.log(response);
                     comfirmAlert.showSuccessMessageAlert("Đăng thông tin thành công");
                     $('.content-wrapper').html(response);
                     $('.js-example-basic-single').select2();
@@ -62,6 +91,23 @@ import comfirmAlert from "../comfirm.js";
                     comfirmAlert.showSuccessMessageAlert("Gỡ thông tin thành công");
                     $('.content-wrapper').html(response);
                     $('.js-example-basic-single').select2();
+                    $( "#dung_tich" ).keyup(function() {
+                        let str = $(this).val();
+                        let value = base.checkSug(str);
+                        $(this).val(value);
+                    });
+
+                    $( "#gia_dang_web" ).keyup(function() {
+                        let str = $(this).val();
+                        let value = base.checkSpecail(str);
+                        $(this).val(value);
+                    });
+
+                    $( "#so_km_di" ).keyup(function() {
+                        let str = $(this).val();
+                        let value = base.checkSug(str);
+                        $(this).val(value);
+                    });
                 })
                 .fail(function (response){
                     let errors = response.responseJSON.errors;
@@ -81,6 +127,23 @@ import comfirmAlert from "../comfirm.js";
                     comfirmAlert.showSuccessMessageAlert("Update thành công web thành công");
                     $('.content-wrapper').html(response);
                     $('.js-example-basic-single').select2();
+                    $( "#dung_tich" ).keyup(function() {
+                        let str = $(this).val();
+                        let value = base.checkSug(str);
+                        $(this).val(value);
+                    });
+
+                    $( "#gia_dang_web" ).keyup(function() {
+                        let str = $(this).val();
+                        let value = base.checkSpecail(str);
+                        $(this).val(value);
+                    });
+
+                    $( "#so_km_di" ).keyup(function() {
+                        let str = $(this).val();
+                        let value = base.checkSug(str);
+                        $(this).val(value);
+                    });
                 })
                 .fail(function (response){
                     let errors = response.responseJSON.errors;
@@ -93,7 +156,6 @@ import comfirmAlert from "../comfirm.js";
 
         $(document).on('click', '.xoa-anh-web', function() {
             let delete_Url = $(this).attr("data-url");
-            $(this).parent( ".themanh" ).remove();
             comfirmAlert.confirm()
                 .then(result => {
                     if (result) {
@@ -105,6 +167,7 @@ import comfirmAlert from "../comfirm.js";
                                     return false;
                                 }
                                 comfirmAlert.showSuccessMessageAlert("Xóa ảnh thành công");
+                                $('.image_preview').html(response);
                             });
                     }
                 });

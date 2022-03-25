@@ -146,7 +146,6 @@ class XeService
             'bao_hiem_xe' => !empty($request->bao_hiem_xe)?"checked":null,
             'ngay_mua' => now(),
             'gia_mua' => format_money_insert_db($request->gia_mua),
-            'iMa_trang_thai' => 1,
             'iMa_dong_xe' => $request->iMa_dong_xe
         );
         $this->xeRepository->update($dataXe,$id);
@@ -171,14 +170,7 @@ class XeService
     public function dangthongtinxeweb($request,$id)
     {
         $dataXe = array(
-            'so_loai' => $request->so_loai,
-            'mau_son' => $request->mau_son,
             'dung_tich' => $request->dung_tich,
-            'bien_so' => $request->bien_so,
-            'dang_ky_tai' => $request->dang_ky_tai,
-            'so_may' => $request->so_may,
-            'so_khung' => $request->so_khung,
-            'bao_hiem_xe' => !empty($request->bao_hiem_xe)?"checked":null,
             'iMa_trang_thai' => 2,
             'iMa_dong_xe' => $request->iMa_dong_xe,
             'gia_dang_web' => $request->gia_dang_web,
@@ -219,14 +211,7 @@ class XeService
     public function updatethongtin($request,$id)
     {
         $dataXe = array(
-            'so_loai' => $request->so_loai,
-            'mau_son' => $request->mau_son,
             'dung_tich' => $request->dung_tich,
-            'bien_so' => $request->bien_so,
-            'dang_ky_tai' => $request->dang_ky_tai,
-            'so_may' => $request->so_may,
-            'so_khung' => $request->so_khung,
-            'bao_hiem_xe' => !empty($request->bao_hiem_xe)?"checked":null,
             'iMa_trang_thai' => 2,
             'iMa_dong_xe' => $request->iMa_dong_xe,
             'gia_dang_web' => $request->gia_dang_web,
@@ -338,5 +323,10 @@ class XeService
             'thongtin' => $request->thongtin,
         );
         return $this->xeRepository->search_lich_su_mua_xe($dataSearch);
+    }
+
+    public function checkBienSo($request)
+    {
+        return Xe::where('bien_so',$request->bien_so)->get()->toArray();
     }
 }

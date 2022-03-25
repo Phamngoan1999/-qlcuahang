@@ -34,6 +34,7 @@ class TrangChiTietControler extends Controller
             return redirect('404');
         }
         $thongtinAnh = Anh::getAnhWedXe($id);
+
         $hangXe = HangXe::all();
         $loaiXe = LoaiXe::all();
         $binhluan = $this->binhLuanService->binhLuanTheoXe($id);

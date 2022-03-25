@@ -1,5 +1,6 @@
 @extends('header.quanly')
 @section('content')
+
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
@@ -19,8 +20,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số điện thoại <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" placeholder="Số điện thoại" value="{{$thongTinXe[0]['khachhang']['so_dien_thoai']}}" disabled>
-                                        <input type="text" class="form-control" name="so_dien_thoai" id="so_dien_thoai" maxlength="10" placeholder="Số điện thoại" value="{{$thongTinXe[0]['khachhang']['so_dien_thoai']}}" style="display: none;">
+                                        <input type="text" class="form-control" name="so_dien_thoai" id="so_dien_thoai" maxlength="10" placeholder="Số điện thoại" value="{{$thongTinXe[0]['khachhang']['so_dien_thoai']}}" >
                                         <div class="error error-so_dien_thoai"></div>
                                     </div>
                                 </div>
@@ -39,8 +39,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số CMND <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" value="{{$thongTinXe[0]['khachhang']['so_CMND']}}" disabled>
-                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND" maxlength="12" placeholder="Số CMND/Thẻ CCCD" value="{{$thongTinXe[0]['khachhang']['so_CMND']}}" style="display: none;">
+                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND" maxlength="12" placeholder="Số CMND/Thẻ CCCD" value="{{$thongTinXe[0]['khachhang']['so_CMND']}}">
                                         <div class="error error-so_CMND"></div>
                                     </div>
                                 </div>
@@ -79,14 +78,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Màu sơn <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="mau_son"  placeholder="Màu sơn" value="{{$thongTinXe[0]['mau_son']}}">
+                                        <input type="text" class="form-control" name="mau_son" maxlength="100"  placeholder="Màu sơn" value="{{$thongTinXe[0]['mau_son']}}">
                                         <div class="error error-mau_son"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Dung tích <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="dung_tich"  placeholder="Dung tích"  value="{{$thongTinXe[0]['dung_tich']}}">
+                                        <input type="text" class="form-control" name="dung_tich" id="dung_tich"  placeholder="Dung tích" maxlength="10" value="{{$thongTinXe[0]['dung_tich']}}">
                                         <div class="error error-dung_tich"></div>
                                     </div>
                                 </div>
@@ -95,14 +94,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Biển số <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="bien_so" id="bien_so"  placeholder="Biển số"  value="{{$thongTinXe[0]['bien_so']}}">
+                                        <input type="text" class="form-control" name="bien_so" id="bien_so"  placeholder="Biển số"  value="{{$thongTinXe[0]['bien_so']}}" maxlength="11">
                                         <div class="error error-bien_so"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Đăng ký tại <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="dang_ky_tai"  placeholder="Đăng ký tại"  value="{{$thongTinXe[0]['dang_ky_tai']}}">
+                                        <input type="text" class="form-control" name="dang_ky_tai" id="dang_ky_tai" maxlength="255" placeholder="Đăng ký tại"  value="{{$thongTinXe[0]['dang_ky_tai']}}">
                                         <div class="error error-dang_ky_tai"></div>
                                     </div>
                                 </div>
@@ -147,7 +146,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Giá mua <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="gia_mua" id="gia_mua" placeholder="Giá mua"  value="{{ currency_format($thongTinXe[0]['gia_mua'])}}">
+                                        <input type="text" class="form-control" name="gia_mua" id="gia_mua" placeholder="Giá mua" maxlength="14" value="{{ currency_format($thongTinXe[0]['gia_mua'])}}">
                                         <div class="error error-gia_mua"></div>
                                     </div>
                                 </div>
@@ -214,7 +213,7 @@
             if(!$.isNumeric(cb.getData('text'))) e.preventDefault();
         });
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{asset('js/jquery-2.1.1.min.js')}}"></script>
     <script type="module" src="{{asset('js/admin/create_xe_mua.js')}}"></script>
     <script type="module" src="{{asset('js/admin/update_thong_tin_xe.js')}}"></script>
 @endsection

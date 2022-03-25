@@ -6,6 +6,7 @@ use App\Rules\CheckBienSo;
 use App\Rules\CheckCMND;
 use App\Rules\CheckDate;
 use App\Rules\CheckGia;
+use App\Rules\CheckListImage;
 use App\Rules\CheckPhontNumber;
 use App\Rules\CheckSoKhung;
 use App\Rules\CheckSoMay;
@@ -44,10 +45,10 @@ class ThemKhachHangRequest extends FormRequest
             'bien_so'    => ['required',new CheckBienSo()],
             'dang_ky_tai'    => 'required',
             'so_may'    => ['required',new CheckSoMay()],
-            'so_khung'    => ['required',new CheckSoKhung()],
+            'so_khung'    => 'required|min:9|max:17',
             'iMa_dong_xe'    => 'required',
             'gia_mua'    => ['required',new CheckGia()],
-            'files_anh_giay_to'    => 'required',
+            'files_anh_giay_to'    => 'required'
         ];
     }
 

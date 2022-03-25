@@ -45,6 +45,7 @@ class XeController extends Controller
 
     public function show($id)
     {
+
         $date = getdate();
         $namhientai = $date['year']-18;
         $dongXe = DongXe::all();
@@ -103,7 +104,33 @@ class XeController extends Controller
 
     public function update(UpdateXeRequest $request,$id)
     {
-        return $this->xeService->update($request,$id);
+        $kiemtraSCMND = $this->xeService->find($id);
+        if($kiemtraSCMND->khachhang->so_CMND == $request->so_CMND && $kiemtraSCMND->bien_so == $request->bien_so)
+        {
+            return $this->xeService->update($request,$id);
+        }
+        else
+        {
+            if($kiemtraSCMND->khachhang->so_CMND != $request->so_CMND && count($this->khachHangService->checkSCMND($request))> 0)
+            {
+                return "CMND-da-duoc-dang-ky";
+            }
+            if($kiemtraSCMND->bien_so != $request->bien_so)
+            {
+                $ListXeCUngBienSo = $this->xeService->checkBienSo($request);
+                if(!empty($ListXeCUngBienSo))
+                {
+                    foreach($ListXeCUngBienSo as $item)
+                    {
+                        if($item['iMa_trang_thai'] != '3')
+                        {
+                            return "bien-so-khong-hop-le";
+                        }
+                    }
+                }
+            }
+            return $this->xeService->update($request,$id);
+        }
     }
 
     public function xoaThongTinXe(Request $request,$id)
@@ -122,19 +149,21 @@ class XeController extends Controller
             return "ko-the-xoa-anh";
         }
         $this->anhService->delete($id);
-        $thongAnh = Anh::getAnhXeMaAnh($thongtinAnhXe);
-        return view('xe.view_anh_xe',compact('thongAnh'));
+        $listImage = Anh::getAnhXeMaAnh($thongtinAnhXe);
+        return view('xe.view_anh_xe',compact('listImage'));
     }
 
     public function xoaanhweb($id)
     {
-        $thongAnh = $this->anhService->find($id);
-        $thongtinAnhXe = Anh::getAnhXeMaAnh($thongAnh);
-        if(count($thongtinAnhXe) == 1)
+        $thongtinAnhXe  = $this->anhService->find($id);
+        $listImage = Anh::getAnhXeMaAnh($thongtinAnhXe);
+        if(count($listImage) == 1)
         {
             return "ko-the-xoa-anh";
         }
-        return $this->anhService->delete($id);
+        $this->anhService->delete($id);
+        $listImage = Anh::getAnhXeMaAnh($thongtinAnhXe);
+        return view('xe.view_anh_xe',compact('listImage'));
     }
 
     public function ingiayto($id)

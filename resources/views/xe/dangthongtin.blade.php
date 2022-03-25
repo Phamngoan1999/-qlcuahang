@@ -11,57 +11,11 @@
                         <form method="POST" id="form-dang-thong-tin-xe-web">
                             @csrf
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Số loại <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_loai"  placeholder="Số loại" value="{{$thongTinXe[0]['so_loai']}}">
-                                        <div class="error error-so_loai"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Màu sơn <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="mau_son"  placeholder="Màu sơn" value="{{$thongTinXe[0]['mau_son']}}">
-                                        <div class="error error-mau_son"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Dung tích <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="dung_tich"  placeholder="Dung tích"  value="{{$thongTinXe[0]['dung_tich']}}">
-                                        <div class="error error-dung_tich"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Biển số <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="bien_so"  placeholder="Biển số"  value="{{$thongTinXe[0]['bien_so']}}">
-                                        <div class="error error-bien_so"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Đăng ký tại <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="dang_ky_tai"  placeholder="Đăng ký tại"  value="{{$thongTinXe[0]['dang_ky_tai']}}">
-                                        <div class="error error-dang_ky_tai"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Số máy <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_may"  placeholder="Số máy"  value="{{$thongTinXe[0]['so_may']}}">
-                                        <div class="error error-so_may"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="">Số khung <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_khung"  placeholder="Số khung" value="{{$thongTinXe[0]['so_khung']}}">
-                                        <div class="error error-so_khung"></div>
+                                        <label for="">Dung tích <span class="obligatory">*</span></label>
+                                        <input type="text" class="form-control" name="dung_tich" id="dung_tich"  placeholder="Dung tích" value="{{$thongTinXe[0]['dung_tich']}}">
+                                        <div class="error error-dung_tich"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -76,35 +30,24 @@
                                         <div class="error error-iMa_dong_xe"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-2" >
-                                    <div class="form-group">
-                                        <div class="row" style="padding: 10px;">
-                                            <label>
-                                                <input type="checkbox" name="bao_hiem_xe" class="option-input checkbox" @if($thongTinXe[0]['bao_hiem_xe'] == 'checked') checked @endif/>
-                                                Bảo hiểm
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Hãng xe<span class="obligatory">*</span></label>
                                         @foreach($hangXe as $hx)
                                             @if($thongTinXe[0]['dongxe']['iMa_hang_xe'] == $hx->id)
-                                                <input type="text" class="form-control" name="gia_mua" id="gia_mua" placeholder="Dòng xe"  value="{{$hx->ten_hang_xe}}" disabled>
+                                                <input type="text" class="form-control" placeholder="Dòng xe"  value="{{$hx->ten_hang_xe}}" disabled>
                                             @endif
                                         @endforeach<div class="error error-gia_mua"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Loại xe<span class="obligatory">*</span></label>
                                         @foreach($loaiXe as $lx)
                                             @if($thongTinXe[0]['dongxe']['iMa_loai_xe'] == $lx->id)
-                                               <input type="text" class="form-control" name="gia_mua" id="gia_mua" placeholder="Loại xe"  value=" {{$lx->ten_loai_xe}}" disabled>
+                                               <input type="text" class="form-control"  placeholder="Loại xe" maxlength="12" value=" {{$lx->ten_loai_xe}}" disabled>
                                             @endif
                                         @endforeach
-
                                         <div class="error error-gia_mua"></div>
                                     </div>
                                 </div>
@@ -113,7 +56,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Giá đăng lên trang web <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="gia_dang_web"  placeholder="Giá đăng trên web"  value="{{$thongTinXe[0]['gia_dang_web']}}">
+                                        <input type="text" class="form-control" name="gia_dang_web" id="gia_dang_web" placeholder="Giá đăng trên web"  maxlength="12" value="{{$thongTinXe[0]['gia_dang_web']}}">
                                         <div class="error error-gia_dang_web"></div>
                                     </div>
                                 </div>
@@ -132,7 +75,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số km đã đi <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_km_di"  placeholder="Số km đã đi"  value="{{$thongTinXe[0]['gia_dang_web']}}">
+                                        <input type="text" class="form-control" name="so_km_di"  placeholder="Số km đã đi" id="so_km_di" value="{{$thongTinXe[0]['so_km_da_di']}}">
                                         <div class="error error-so_km_di"></div>
                                     </div>
                                 </div>
@@ -167,7 +110,7 @@
                                     @if($stt == 0)
                                     <img src="{{ asset('Logo/avarta.jpg') }}" alt="" width="100%" height="100%" id="thumbnail">
                                     @endif
-                                    <input type="file"  id="gallery-photo-avata-web" name="files_avata_xe">
+                                    <input type="file"  id="gallery-photo-avata-web"  accept="image/*" name="files_avata_xe">
                                     <i class="mdi mdi-cloud-upload ikon-upload"></i>
                                     <p class="tai-anh" >Tải ảnh avatar</p>
                                 </div>
@@ -181,7 +124,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Ảnh đăng trên web</label>
-                                        <input type="file"  id="gallery-photo-add-web" class="form-control" name="files_anh_dang_web[]" multiple>
+                                        <input type="file"  id="gallery-photo-add-web" accept="image/*" class="form-control" name="files_anh_dang_web[]" multiple>
                                     </div>
                                 </div>
                             </div>
@@ -192,9 +135,11 @@
                                             @foreach($thongtinAnh as $anh)
                                                 @if($anh['iMa_loai_anh'] == 1)
                                                     <div class="themanh">
-                                                        <image src="{{ asset('uploads/images/'.$anh['duong_dan']) }}" class="anh"  width="150px" height="150px"/>
+                                                        <a href="{{ asset('uploads/images/'.$anh['duong_dan']) }}">
+                                                            <image src="{{ asset('uploads/images/'.$anh['duong_dan']) }}" class="anh"  width="150px" height="150px"/>
+                                                        </a>
                                                         <button type="button" class="btn btn-danger xoa-anh-web" title = "Xóa ảnh"
-                                                                data-url = "{{route('quanlyxe.xoaanhweb',$anh['id'])}}">
+                                                                    data-url = "{{route('quanlyxe.xoaanhweb',$anh['id'])}}">
                                                             <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                                         </button>
                                                     </div>
@@ -222,7 +167,7 @@
                                         @elseif($thongTinXe[0]['iMa_trang_thai'] == 2)
                                         <button type="button" id="update-thong-tin-web" data-url="{{route('quanlyxe.updatetthongtinxeweb',$thongTinXe[0]['id'])}}" class="btn btn-primary" >Update thông tin xe</button>
                                         <button type="button" id="delete-thong-tin-web" data-url="{{route('quanlyxe.deletetthongtinxeweb',$thongTinXe[0]['id'])}}" class="btn btn-danger" >Gỡ thông tin xe trên web</button>
-                                            <a href="{{route('trangchitiet',$thongTinXe[0]['id'])}}" class="btn btn-primary">Trang chi tiết xe</a>
+                                            <a href="{{route('trangchitiet',$thongTinXe[0]['id'])}}" class="btn btn-primary" target="_blank">Trang chi tiết xe</a>
                                         @elseif($thongTinXe[0]['iMa_trang_thai'] == 4)
                                             <button type="button" id="update-thong-tin-web" data-url="{{route('quanlyxe.updatetthongtinxeweb',$thongTinXe[0]['id'])}}" class="btn btn-primary" >Đăng lại thông tin xe</button>
                                         @endif
@@ -239,6 +184,6 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{asset('js/jquery-2.1.1.min.js')}}"></script>
     <script type="module" src="{{asset('js/admin/dang_thong_tin.js')}}"></script>
 @endsection

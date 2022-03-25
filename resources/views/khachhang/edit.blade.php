@@ -37,7 +37,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Số CMND <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND" axlength="12" placeholder="Số CMND/Thẻ CCCD"  value="{{$inforKhachHang->so_CMND}}">
+                                        <input type="text" class="form-control" name="so_CMND" id="so_CMND" maxlength="12" placeholder="Số CMND/Thẻ CCCD"  value="{{$inforKhachHang->so_CMND}}">
                                         <div class="error error-so_CMND"></div>
                                     </div>
                                 </div>
@@ -46,14 +46,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Nơi cấp CMND  <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="noi_cap_CMND"  placeholder="Nơi cấp CMND"  value="{{$inforKhachHang->noi_cap_CMND}}">
+                                        <input type="text" class="form-control" name="noi_cap_CMND"  placeholder="Nơi cấp CMND" maxlength="255"  value="{{$inforKhachHang->noi_cap_CMND}}">
                                         <div class="error error-noi_cap_CMND"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Nơi cư trú <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="noi_cu_tru"  placeholder="Nơi cư trú"  value="{{$inforKhachHang->noi_cu_tru}}">
+                                        <input type="text" class="form-control" name="noi_cu_tru"  placeholder="Nơi cư trú"  maxlength="255" value="{{$inforKhachHang->noi_cu_tru}}">
                                         <div class="error error-noi_cu_tru"></div>
                                     </div>
                                 </div>

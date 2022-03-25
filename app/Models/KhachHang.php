@@ -50,4 +50,9 @@ class KhachHang extends Model
     {
         return $cmnd ? $query->where('so_CMND',$cmnd) : null;
     }
+
+    public function checkSCMNDUpdate($cmnd)
+    {
+
+    }
 }

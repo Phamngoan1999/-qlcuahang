@@ -5,6 +5,12 @@ import comfirmAlert from "./comfirm.js";
 (function ($, window, document){
     $(function () {
 
+        $( ".ten_dong_xe" ).keyup(function() {
+            let str = $(this).val();
+            let value = base.checkSpecail(str);
+            $(this).val(value);
+        });
+
         $(document).on('click', '#add-hang-xe', function(){
             let dataForm = new FormData($('#form-add-hang-xe')[0]);
             let url = $(this).attr('data-url');
@@ -15,7 +21,11 @@ import comfirmAlert from "./comfirm.js";
                     $('#danh-sach-hang-xe').html(response);
                     $('#hangxe').val("");
                 }).fail(function (response) {
-                    $('.error-hangxe').html("Vui lòng nhập tên hãng xe!");
+                    let errors = response.responseJSON.errors;
+                    for(let key in errors)
+                    {
+                        $(".error-"+key).html(errors[key]);
+                    }
                 })
         });
 
@@ -43,8 +53,8 @@ import comfirmAlert from "./comfirm.js";
             let url = $(this).attr('data-url-show');
             base.callApi(url, METHOD_GET, updateId)
                 .done(function (response) {
-                    $('#form-show-hang-xe').html(response);
-                    $('#show-hang-xe-modal').modal('show');
+                    $('#form-edit-hang-xe').html(response);
+                    $('#show-edit-hang-xe-modal').modal('show');
                 });
         });
 
@@ -57,6 +67,13 @@ import comfirmAlert from "./comfirm.js";
                     $("#show-hang-xe-modal").modal("hide");
                     comfirmAlert.showSuccessMessageAlert("Update Hãng xe thành công!");
                     $("#danh-sach-hang-xe").html(response);
+                })
+                .fail(function (response) {
+                    let errors = response.responseJSON.errors;
+                    for(let key in errors)
+                    {
+                        $(".error-"+key).html(errors[key]);
+                    }
                 })
         });
 
@@ -162,6 +179,11 @@ import comfirmAlert from "./comfirm.js";
                     $('.form-update-dongxe').html(response);
                     $('#modal-edit-dong-xe').modal('show');
                     $('.js-example-basic-single').select2();
+                    $( ".ten_dong_xe" ).keyup(function() {
+                        let str = $(this).val();
+                        let value = base.checkSpecail(str);
+                        $(this).val(value);
+                    });
                 });
         });
 

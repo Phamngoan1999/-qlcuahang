@@ -48,14 +48,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Nơi cấp CMND <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="noi_cap_CMND"  placeholder="Nơi cấp CMND">
+                                        <input type="text" class="form-control" name="noi_cap_CMND"  maxlength="255"  placeholder="Nơi cấp CMND">
                                         <div class="error error-noi_cap_CMND"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Nơi cư trú <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="noi_cu_tru"  placeholder="Nơi cư trú">
+                                        <input type="text" class="form-control" name="noi_cu_tru"  maxlength="255" placeholder="Nơi cư trú">
                                         <div class="error error-noi_cu_tru"></div>
                                     </div>
                                 </div>
@@ -71,21 +71,21 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Số loại <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_loai" id="so_loai"  placeholder="Số loại">
+                                        <input type="text" class="form-control" name="so_loai" id="so_loai" maxlength="8" placeholder="Số loại">
                                         <div class="error error-so_loai"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Màu sơn <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="mau_son"  placeholder="Màu sơn">
+                                        <input type="text" class="form-control" name="mau_son"  maxlength="100"  placeholder="Màu sơn">
                                         <div class="error error-mau_son"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Dung tích <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="dung_tich"  placeholder="Dung tích">
+                                        <input type="text" class="form-control" name="dung_tich" id="dung_tich" maxlength="10" placeholder="Dung tích">
                                         <div class="error error-dung_tich"></div>
                                     </div>
                                 </div>
@@ -94,21 +94,21 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Biển số <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="bien_so" id="bien_so"  placeholder="Biển số">
+                                        <input type="text" class="form-control" name="bien_so" id="bien_so"  maxlength="11" placeholder="Biển số">
                                         <div class="error error-bien_so"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Đăng ký tại <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="dang_ky_tai"  placeholder="Đăng ký tại">
+                                        <input type="text" class="form-control" name="dang_ky_tai" id="dang_ky_tai" maxlength="255" placeholder="Đăng ký tại">
                                         <div class="error error-dang_ky_tai"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Số máy <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_may" id="so_may"  placeholder="Số máy" maxlength="8">
+                                        <input type="text" class="form-control" name="so_may" id="so_may" maxlength="8"  placeholder="Số máy" >
                                         <div class="error error-so_may"></div>
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Số khung <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="so_khung" id="so_khung" placeholder="Số khung"  maxlength="8">
+                                        <input type="text" class="form-control" name="so_khung" id="so_khung" maxlength="17" placeholder="Số khung" >
                                         <div class="error error-so_khung"></div>
                                     </div>
                                 </div>
@@ -146,7 +146,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Giá mua <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="gia_mua" id="gia_mua" placeholder="Giá mua">
+                                        <input type="text" class="form-control" name="gia_mua"  id="gia_mua" placeholder="Giá mua"  maxlength="12">
                                         <div class="error error-gia_mua"></div>
                                     </div>
                                 </div>
@@ -178,7 +178,7 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{asset('js/jquery-2.1.1.min.js')}}"></script>
     <script type="module" src="{{asset('js/admin/khach_hang.js')}}"></script>
     <script type="module" src="{{asset('js/admin/create_xe_mua.js')}}"></script>
 @endsection

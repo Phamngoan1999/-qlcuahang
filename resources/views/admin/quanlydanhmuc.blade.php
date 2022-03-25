@@ -145,7 +145,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">Tên dòng xe</label>
-                            <input type="text" class="form-control" name="ten_dong_xe"  placeholder="Dòng xe">
+                            <input type="text" class="form-control ten_dong_xe" name="ten_dong_xe" placeholder="Dòng xe">
                             <div class="error error-ten_dong_xe"></div>
                         </div>
                         <div class="form-group">

@@ -12,7 +12,18 @@ import comfirmAlert from "../comfirm.js";
             let url = $(this).attr('data-url');
             base.callApiWithFormData( url, METHOD_POST, dataForm)
                 .done(function (response) {
-                    comfirmAlert.showSuccessMessageAlert("Update thông tin khách hàng thành công");
+                    console.log(response);
+                    if(response === "CMND-da-duoc-dang-ky")
+                    {
+                        $('.error-so_CMND').html("Số CMND/Thẻ CCCD đã được đăng ký");
+                        return false;
+                    }
+                    if(response == "bien-so-khong-hop-le")
+                    {
+                        $('.error-bien_so').html("Thông tin xe có biển số này chưa được bán");
+                        return false;
+                    }
+                    comfirmAlert.showSuccessMessageAlert("Update thông tin xe thành công");
                     window.location.href = window.location.origin+'/quanlyxe/editthongtinxe/'+response['id'];
                 })
                 .fail(function (response){
@@ -57,5 +68,6 @@ import comfirmAlert from "../comfirm.js";
                     }
                 });
         })
+
     })
 }(window.jQuery, window, document))

@@ -20,6 +20,11 @@ class QuanLyKhachHang extends Controller
 
     public function index(Request $request)
     {
+//
+//        $mang = explode(".",'217674062_278888420681021_3583001458844245238_n.jpg');
+//        $mang[count($mang)-1];
+//        $allowedfileExtension=['pdf','jpg','png','docx'];
+//        return in_array($mang[count($mang)-1],$allowedfileExtension);
         $listKhachHang = $this->khachHangService->getAllKhachHang($request);
         return view("admin.quanlykhachhang",compact('listKhachHang'));
     }

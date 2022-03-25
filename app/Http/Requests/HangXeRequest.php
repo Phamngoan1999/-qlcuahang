@@ -24,7 +24,14 @@ class HangXeRequest extends FormRequest
     public function rules()
     {
         return [
-            'hangxe' => 'required'
+            'hangxe' => 'required|max:50'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'hangxe.required' => "Vui lòng nhập tên hãng xe",
+            'hangxe.max' => "Tên hãng xe không hợp lệ",
         ];
     }
 }

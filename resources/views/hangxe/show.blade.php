@@ -4,6 +4,7 @@
         <div class="form-group">
             <label for="">Tên hãng xe</label>
             <input type="text" class="form-control" name="hangxe" value="{{$hangXe->ten_hang_xe}}" placeholder="Hãng xe">
+            <div class="error error error-hangxe"></div>
         </div>
     </div>
     @error('hangxe')
