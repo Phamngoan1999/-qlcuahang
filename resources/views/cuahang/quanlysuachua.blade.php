@@ -61,7 +61,7 @@
                                                 @if($iterm->trang_thai== 'chonhan')
                                                     <a href="{{route("quanlysuachua.showhoadon",$iterm->id)}}" class="btn btn-primary btn-width" >Chờ nhận đơn</a>
                                                 @elseif($iterm->trang_thai== 'danhandon')
-                                                    <a href="{{route("quanlysuachua.showhoadon",$iterm->id)}}" class="btn btn-success btn-width" >Cửa hàng đã nhận đơn</a>
+                                                    <a href="{{route("quanlysuachua.showhoadon",$iterm->id)}}" class="btn btn-info btn-width" >Cửa hàng đã nhận đơn</a>
                                                 @elseif($iterm->trang_thai== 'huyhoadon')
                                                     <a href="{{route("quanlysuachua.showhoadon",$iterm->id)}}" class="btn btn-danger btn-width" >Cửa hàng đã hủy đơn</a>
                                                 @elseif($iterm->trang_thai== 'dahoanthanh')

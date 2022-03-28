@@ -183,15 +183,32 @@ class XeService
         $xe = $this->xeRepository->find($id);
         //ảnh avata
         $files_avata = $request->file('files_avata_xe');
-        if(!empty($files_avata))
+        $anhXoa = Anh::where('iMa_xe',$xe->id)->where('iMa_loai_anh',4)->first();
+        if(empty($anhXoa))
         {
-            $duongdan = $this->storeImage($files_avata);
+            //nếu file avata trống thì lấy ảnh mặc định
+            //nếu ko trống thì lưu
+            $duongdan = $this->storeImageAvata($request);
             $dataAnh_avata = new Anh([
                 'duong_dan' => $duongdan,
                 'iMa_loai_anh' => 4
             ]);
             $xe->anh()->save($dataAnh_avata);
         }
+        if(!empty($files_avata) && !empty($anhXoa))
+        {
+            //nếu avata ko trông và cái ảnh 4 đã có trng db thì xóa ảnh trong db lấy ảnh upload
+            $this->deleteImage($anhXoa->duong_dan);
+            $anhXoa->delete();
+            $duongdan = $this->storeImageAvata($files_avata);
+            $dataAnh_avata = new Anh([
+                'duong_dan' => $duongdan,
+                'iMa_loai_anh' => 4
+            ]);
+            $xe->anh()->save($dataAnh_avata);
+        }
+
+
         $files_wed = $request->file('files_anh_dang_web');
         if(!empty($files_wed))
         {
@@ -227,8 +244,11 @@ class XeService
         if(!empty($files_avata))
         {
             $anhXoa = Anh::where('iMa_xe',$xe->id)->where('iMa_loai_anh',4)->first();
-            $this->deleteImage($anhXoa->duong_dan);
-            $anhXoa->delete();
+            if(!empty($anhXoa))
+            {
+                $this->deleteImage($anhXoa->duong_dan);
+                $anhXoa->delete();
+            }
 
             $duongdan = $this->storeImage($files_avata);
             $dataAnh_avata = new Anh([

@@ -146,7 +146,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Giá mua <span class="obligatory">*</span></label>
-                                        <input type="text" class="form-control" name="gia_mua"  id="gia_mua" placeholder="Giá mua"  maxlength="12">
+                                        <input type="text" class="form-control" name="gia_mua"  id="gia_mua" placeholder="Giá mua"  maxlength="15">
                                         <div class="error error-gia_mua"></div>
                                     </div>
                                 </div>

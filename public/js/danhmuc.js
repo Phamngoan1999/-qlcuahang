@@ -59,14 +59,14 @@ import comfirmAlert from "./comfirm.js";
         });
 
         $(document).on('click', '.edit-hang-xe', function(){
-            let dataForm = new FormData($('#form-show-hang-xe')[0]);
+            let dataForm = new FormData($('#form-edit-hang-xe')[0]);
             let url = $(this).attr('data-url');
             dataForm.append('_method', METHOD_PATCH);
             base.callApiWithFormData( url, METHOD_POST, dataForm)
                 .done(function (response) {
-                    $("#show-hang-xe-modal").modal("hide");
                     comfirmAlert.showSuccessMessageAlert("Update Hãng xe thành công!");
                     $("#danh-sach-hang-xe").html(response);
+                    $("#show-edit-hang-xe-modal").modal("hide");
                 })
                 .fail(function (response) {
                     let errors = response.responseJSON.errors;

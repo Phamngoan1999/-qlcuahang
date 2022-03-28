@@ -29,8 +29,6 @@ class XeWebRequest extends FormRequest
             'gia_dang_web'    => 'required',
             'nam_dang_ky'    => 'required',
             'so_km_di'    => 'required',
-            'files_avata_xe'=>'required',
-            'files_anh_dang_web'=>'required'
         ];
     }
 
@@ -42,8 +40,6 @@ class XeWebRequest extends FormRequest
             'gia_dang_web.required'    => 'Vui lòng nhập giá đăng web',
             'nam_dang_ky.required'    => 'Vui lòng nhập năm đăng ký',
             'so_km_di.required'    => 'Vui lòng nhập số km đã đi',
-            'files_avata_xe.required' => 'Vui lòng upload ảnh đăng web',
-            'files_anh_dang_web.required' => 'Vui lòng upload ảnh đăng web'
         ];
     }
 }

@@ -36,7 +36,7 @@ class HangXeController extends Controller
         return view('hangxe.show',compact('hangXe'));
     }
 
-    public function edit(HangXeRequest $request,$id)
+    public function edit(Request $request,$id)
     {
         $this->hangXeService->edit($request,$id);
         return $this->index();

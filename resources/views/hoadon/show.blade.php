@@ -92,7 +92,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">Đơn giá</label>
-                                                                <input type="text" class="form-control"  placeholder="đơn giá" value="{{$iterm->don_gia}}">
+                                                                <input type="text" class="form-control"  placeholder="đơn giá" value="{{currency_format($iterm->don_gia)}}">
                                                             </div>
                                                         </div>
                                                     @endif
@@ -102,7 +102,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="">Đơn giá</label>
-                                                            <input type="text" class="form-control don-gia-validate dongia" name="dongia[{{$iterm->id}}]"  placeholder="đơn giá" value="{{$iterm->don_gia}}">
+                                                            <input type="text" class="form-control don-gia-validate dongia" name="dongia[{{$iterm->id}}]"  placeholder="đơn giá" value="{{ currency_format($iterm->don_gia)}}">
                                                         </div>
                                                     </div>
                                                 @endif

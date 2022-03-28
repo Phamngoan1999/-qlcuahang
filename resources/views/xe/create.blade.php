@@ -228,7 +228,7 @@
             if(!$.isNumeric(cb.getData('text'))) e.preventDefault();
         });
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{asset('jquery-2.1.1.min.js')}}"></script>
     <script type="module" src="{{asset('js/admin/xe.js')}}"></script>
     <script type="module" src="{{asset('js/admin/khach_hang.js')}}"></script>
 @endsection

@@ -103,14 +103,15 @@
                                         @foreach($thongtinAnh as $anh)
                                             @if($anh['iMa_loai_anh'] == 4)
                                                 <img src="{{ asset('uploads/images/'.$anh['duong_dan']) }}" alt="" width="100%" height="100%" id="thumbnail">
+                                                <input type="file"  id="gallery-photo-avata-web"  accept="image/*" value="{{$anh['duong_dan']}}" name="files_avata_xe">
                                                 <p style="display: none;">{{$stt = 1}}</p>
                                             @endif
                                         @endforeach
                                     @endif
                                     @if($stt == 0)
-                                    <img src="{{ asset('Logo/avarta.jpg') }}" alt="" width="100%" height="100%" id="thumbnail">
+                                        <img src="{{ asset('Logo/avarta.jpg') }}" alt="" width="100%" height="100%" id="thumbnail">
+                                        <input type="file"  id="gallery-photo-avata-web"  accept="image/*" value="" name="files_avata_xe">
                                     @endif
-                                    <input type="file"  id="gallery-photo-avata-web"  accept="image/*" name="files_avata_xe">
                                     <i class="mdi mdi-cloud-upload ikon-upload"></i>
                                     <p class="tai-anh" >Tải ảnh avatar</p>
                                 </div>
@@ -162,7 +163,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group button-hide" style="padding-top: 10px;">
-                                        @if($thongTinXe[0]['iMa_trang_thai'] == 1 || $thongTinXe[0]['iMa_trang_thai'] == 7)
+                                        @if($thongTinXe[0]['iMa_trang_thai'] == 1 || $thongTinXe[0]['iMa_trang_thai'] == 7 || $thongTinXe[0]['iMa_trang_thai'] == 5)
                                         <button type="button" id="update-thong-tin" data-url="{{route('quanlyxe.dangthongtinxeweb',$thongTinXe[0]['id'])}}" class="btn btn-primary" >Đăng thông tin xe</button>
                                         @elseif($thongTinXe[0]['iMa_trang_thai'] == 2)
                                         <button type="button" id="update-thong-tin-web" data-url="{{route('quanlyxe.updatetthongtinxeweb',$thongTinXe[0]['id'])}}" class="btn btn-primary" >Update thông tin xe</button>
@@ -174,7 +175,7 @@
                                     </div>
                                     <div class="group-button" style="display: none !important;">
                                         <button type="button" id="update-thong-tin" data-url="{{route('quanlyxe.dangthongtinxeweb',$thongTinXe[0]['id'])}}" class="btn btn-primary" >Update thông tin xe</button>
-                                        <a href="{{route('trangchitiet',$thongTinXe[0]['id'])}}" class="btn btn-primary">Trang chi tiết xe</a>
+                                        <a href="{{route('trangchitiet',$thongTinXe[0]['id'])}}" class="btn btn-primary" target="_blank">Trang chi tiết xe</a>
                                     </div>
                                 </div>
                             </div>

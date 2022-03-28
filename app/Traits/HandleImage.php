@@ -7,7 +7,8 @@ trait HandleImage
 {
     protected $path = 'uploads/images/';
 
-    protected $imageDefault = 'defaul_image.jpg';
+    protected $imageDefault = 'avarta.jpg';
+
 
     public function verifyImage($request)
     {
@@ -21,6 +22,20 @@ trait HandleImage
         $image = Image::make($request);
         $image->resize(250, 250)->save($saveLocation);
         return $fileName;
+    }
+
+    public function storeImageAvata($request)
+    {
+        if(!empty($request->file('files_avata_xe')))
+        {
+            $file = $request->file('files_avata_xe');
+            $fileName = time() . $file->getClientOriginalName();
+            $saveLocation = $this->path . $fileName;
+            $image = Image::make($file);
+            $image->fit(150, 150)->save($saveLocation);
+            return $fileName;
+        }
+        return $this->imageDefault;
     }
 
     public function updateImage($request, $currentImage)

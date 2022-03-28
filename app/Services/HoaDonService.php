@@ -128,7 +128,7 @@ class HoaDonService
         {
             $gia = format_money_insert_db($iterm);
             $dataDongiaPhuTung = array(
-                'don_gia' => (double)$gia != 0 ? $iterm : "0VND"
+                'don_gia' => (double)$gia != 0 ? (double)$gia : "0VND"
             );
             $tongtien = (double)$tongtien + (double)$gia;
             $this->phuTungRepository->update($dataDongiaPhuTung,$key);

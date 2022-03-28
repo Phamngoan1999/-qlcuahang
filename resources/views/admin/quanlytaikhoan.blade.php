@@ -13,7 +13,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Quản lý Tài khoản của hàng liên kết</h4>
+                        <h4 class="card-title">Quản lý Tài khoản cửa hàng liên kết</h4>
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="button" class="btn btn-primary" id="them-tai-khoan" data-toggle="modal" data-target="#cap-tai-khoan-modal">
