@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\CuaHang;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DichVuCreateRequest;
 use App\Models\CuaHang;
 use App\Services\CuaHangService;
+use App\Services\DichVuService;
 use App\Services\HoaDonService;
 use App\Services\XeService;
 use Illuminate\Http\Request;
@@ -15,11 +17,13 @@ use Illuminate\Support\Facades\DB;
 class QuanlySuaChua extends Controller
 {
 
-    public function __construct(CuaHangService $cuaHangServive,XeService $xeService,HoaDonService $hoaDonService)
+    public function __construct(CuaHangService $cuaHangServive,XeService $xeService,
+                                HoaDonService $hoaDonService,DichVuService $dichVuService)
     {
         $this->cuaHangServive = $cuaHangServive;
         $this->xeService = $xeService;
         $this->hoaDonService = $hoaDonService;
+        $this->dichVuService = $dichVuService;
     }
 
     public function index(Request $request)
@@ -28,6 +32,18 @@ class QuanlySuaChua extends Controller
         $danhsach = $this->hoaDonService->getHoaDonToCuaHang($request);
         return view('cuahang.quanlysuachua',compact('danhsach','danhsachXe','request'));
     }
+
+    public function create(DichVuCreateRequest $request)
+    {
+        return $this->dichVuService->create($request);
+    }
+
+    public function danhsachdichvu()
+    {
+        $ListService = $this->dichVuService->all();
+        return view('cuahang.danhsachdichvu', compact('ListService'));
+    }
+
 
     public function view($id)
     {

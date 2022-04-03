@@ -1,7 +1,7 @@
 
-<div class="table">
+<div class="table" >
     <div class="table-responsive pt-3">
-        <table class="table table-bordered">
+        <table class="table table-bordered" >
             <thead>
             <tr>
                 <th>STT</th>

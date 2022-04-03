@@ -2,36 +2,62 @@ import base, {METHOD_GET, METHOD_POST, METHOD_PATCH, METHOD_DELETE} from "../bas
 import comfirmAlert from "../comfirm.js";
 
 
-function htmlThemPhuTung()
-{
-    let html = '<div class="phu-tung">\n' +
-'                                <div class="row them-phu-tung" >\n' +
-'                                    <div class="col-md-4">\n' +
-'                                        <div class="form-group">\n' +
-'                                            <label for="">Phụ tùng</label>\n' +
-'                                            <input type="text" class="form-control phu-tung-check" name="phutung[]"  placeholder="Phụ tùng">\n' +
-'                                        </div>\n' +
-'                                    </div>\n' +
-'                                    <div class="col-md-2">\n' +
-'                                        <div class="form-group">\n' +
-'                                            <label for="" style="visibility: hidden;">Phụ tùng</label>\n' +
-'                                            <button type="button" class="btn btn-danger xoa-phu-tung"><i class="fas fa-trash-alt"></i></button>\n' +
-'                                        </div>\n' +
-'                                    </div>\n' +
-'                                </div>\n' +
-'                            </div>'  ;
-    return html;
-}
 (function ($, window, document){
     $(function () {
 
         $(document).on('click','#add-phu-tung',function() {
             $('.error').html("");
-            let them = htmlThemPhuTung();
-            $('#list-phu-tung').append(them);
+            let maCuaHang = $('.ma-cua-hang').val();
+            if(maCuaHang == "")
+            {
+                $('.error-iMa_cua_hang').html('<p>Vui lòng chọn cửa hàng</p>');
+
+            }
+            let data = {
+                iMa_cua_hang: maCuaHang
+            };
+            let url = $(this).attr('data-url');
+            base.callApi(url, METHOD_GET, data)
+                .done(function (response) {
+                    $('.modal-body').html(response);
+                    $('#modal-list-dich-vu').modal('show');
+                });
         });
 
-        $(document).on('click','.xoa-phu-tung',function() {
+        $(document).on('click', '.data-click', function (){
+            let url = $(this).attr('data-url');
+            let data;
+            //lưu dữ liệu luôn
+            if($(this).is(":checked")){
+                data = {
+                    'idCheck': $(this).val(),
+                    'trangthai': 'add'
+                };
+            }else {
+                data = {
+                    'idCheck': $(this).val(),
+                    'trangthai': 'remove'
+                };
+            }
+            base.callApi( url, METHOD_GET, data)
+                .done(function (response){
+                    console.log(response);
+                });
+        })
+
+        $(document).on('click','#luu-dich-vu',function(e) {
+            let url = $(this).attr('data-url');
+            let data = {
+                'idCuaHangSelect': $('#idCuaHangSelect').val()
+            };
+            base.callApi(url, METHOD_GET, data)
+                .done(function (response){
+                    $("#list-phu-tung").html(response);
+                    $("#modal-list-dich-vu").modal("hide");
+                })
+        })
+
+        $(document).on('click','.xoa-no-confirm',function() {
             $(this).parents( ".them-phu-tung" ).remove();
         });
 
@@ -54,59 +80,59 @@ function htmlThemPhuTung()
                 });
         });
 
-        $(document).on('click','.update-luu-thong-tin',function() {
-            $('.error').html("");
-            let dataForm = new FormData($('#form-hoa-don')[0]);
-            dataForm.append('_method', METHOD_PATCH);
-            let url = $(this).attr('data-url');
-            base.callApiWithFormData( url, METHOD_POST, dataForm)
-                .done(function (response) {
-                    if(response === "nhap-thieu")
-                    {
-                        $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
-                        return false;
-                    }
-                    comfirmAlert.showSuccessMessageAlert('Lưu thông tin thành công');
-                    window.location.href = window.location.origin+'/quanlysuachua/showhoadon/'+response['id'];
-                })
-                .fail(function (response){
-                    let errors = response.responseJSON.errors;
-                    for(let key in errors)
-                    {
-                        $(".error-"+key).html(errors[key]);
-                    }
-                })
-        });
+        // $(document).on('click','.update-luu-thong-tin',function() {
+        //     $('.error').html("");
+        //     let dataForm = new FormData($('#form-hoa-don')[0]);
+        //     dataForm.append('_method', METHOD_PATCH);
+        //     let url = $(this).attr('data-url');
+        //     base.callApiWithFormData( url, METHOD_POST, dataForm)
+        //         .done(function (response) {
+        //             if(response === "nhap-thieu")
+        //             {
+        //                 $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
+        //                 return false;
+        //             }
+        //             comfirmAlert.showSuccessMessageAlert('Lưu thông tin thành công');
+        //             window.location.href = window.location.origin+'/quanlysuachua/showhoadon/'+response['id'];
+        //         })
+        //         .fail(function (response){
+        //             let errors = response.responseJSON.errors;
+        //             for(let key in errors)
+        //             {
+        //                 $(".error-"+key).html(errors[key]);
+        //             }
+        //         })
+        // });
 
         $(document).on('click','#add-luu-thong-tin',function() {
             $('.error').html("");
-            let ktra = true;
-            if($('.ma-cua-hang').val() == "")
-            {
-                $('.error-iMa_cua_hang').html('<p>Vui lòng chọn cửa hàng</p>');
-                ktra = false;
-            }
-            if($('.xe-sua-chua').val() == "")
-            {
-                $('.error-iMa_xe').html('<p>Vui lòng chọn xe sửa chữa</p>');
-                ktra = false;
-            }
-            if($('#list-phu-tung').html() == "")
-            {
-                $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
-                ktra = false;
-            }
-            $('input[name^="phutung"]').each(function()
-            {
-                // tasks.push($(this).val());
-                if($(this).val() == "")
-                {
-                    $('.error-phutung-rong').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
-                    ktra = false;
-                }
-            });
-            if(ktra)
-            {
+            // let ktra = true;
+            // if($('.ma-cua-hang').val() == "")
+            // {
+            //     $('.error-iMa_cua_hang').html('<p>Vui lòng chọn cửa hàng</p>');
+            //     ktra = false;
+            // }
+            // if($('.xe-sua-chua').val() == "")
+            // {
+            //     $('.error-iMa_xe').html('<p>Vui lòng chọn xe sửa chữa</p>');
+            //     ktra = false;
+            // }
+            // if($('#list-phu-tung').html() == "")
+            // {
+            //     $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
+            //     ktra = false;
+            // }
+            // $('input[name^="phutung"]').each(function()
+            // {
+            //     // tasks.push($(this).val());
+            //     if($(this).val() == "")
+            //     {
+            //         $('.error-phutung-rong').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
+            //         ktra = false;
+            //     }
+            // });
+            // if(ktra)
+            // {
                 $( "#form-hoa-don").submit();
                 // let dataForm = new FormData($('#form-hoa-don')[0]);
                 // let url = $(this).attr('data-url');
@@ -127,7 +153,7 @@ function htmlThemPhuTung()
                 //             $(".error-"+key).html(errors[key]);
                 //         }
                 //     })
-            }
+            //}
         });
 
         $(document).on('click','#nhan-don-sua-chua',function() {
@@ -228,6 +254,32 @@ function htmlThemPhuTung()
             base.callApi( url_search, METHOD_GET)
                 .done(function (response) {
                     $('.table').html(response);
+                })
+        }
+
+        $(document).on('click', '.paginate-page-modal a', function(e) {
+            e.preventDefault();
+            let url_search = $(this).attr('href');
+            getPostsModal(url_search);
+        });
+
+        function loadingModal()
+        {
+            let url_load = window.location.origin+'/Logo/loading.gif';
+            let html = "<tr>\
+                            <td colspan='6' class='text-center'>\
+                                <img src='"+url_load+"' >\
+                            </td>\
+                        </tr>";
+            $('#danh-sach-load-modal').html(html);
+        }
+
+        function getPostsModal(url_search)
+        {
+            loadingModal();
+            base.callApi( url_search, METHOD_GET)
+                .done(function (response) {
+                    $('.table-modal').html(response);
                 })
         }
     })

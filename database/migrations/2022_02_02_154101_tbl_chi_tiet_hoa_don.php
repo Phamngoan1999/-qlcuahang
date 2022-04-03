@@ -18,7 +18,9 @@ class TblChiTietHoaDon extends Migration
             $table->string('ten_phu_tung');
             $table->string('don_gia');
             $table->unsignedBigInteger('iMa_hoa_don');
+            $table->unsignedBigInteger('sMa_dich_vu');
             $table->foreign('iMa_hoa_don')->references('id')->on('tbl_hoa_don')->onDelete('cascade');
+            $table->foreign('sMa_dich_vu')->references('id')->on(' tbl_dich_vu');
             $table->timestamps();
         });
     }

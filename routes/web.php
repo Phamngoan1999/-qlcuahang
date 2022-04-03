@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\QuanlyTaiKhoan;
 use App\Http\Controllers\Admin\QuanLyXe;
 use App\Http\Controllers\Admin\XeController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CuaHang\DichVuController;
 use App\Http\Controllers\HeThong\TrangChiTietControler;
 use App\Http\Controllers\HeThong\TrangChuControler;
 use App\Http\Controllers\HeThong\TrangHangXeController;
@@ -216,7 +217,7 @@ Route::middleware(['auth'])->group(function() {
         Route::post('/luuhoadon', [HoaDonController::class, 'store'])
             ->name('luuhoadon')->middleware('role:admin');
 
-        Route::patch('/updatehoadon/{id}', [HoaDonController::class, 'update'])
+        Route::post('/updatehoadon/{id}', [HoaDonController::class, 'update'])
             ->name('updatehoadon')
             ->middleware('role:admin');
 
@@ -241,6 +242,50 @@ Route::middleware(['auth'])->group(function() {
 
         Route::get('/inhoadon/{id}', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'inhoadon'])
             ->name('inhoadon');
+
+        Route::get('/quanlydichvu', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'danhsachdichvu'])
+            ->name('quanlydichvu')
+            ->middleware('role:cuahanglienket');
+
+        Route::post('/quanlydichvu', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'create'])
+            ->name('them-dich-vu')
+            ->middleware('role:cuahanglienket');
+
+        Route::get('/showdichvu/{id}', [DichVuController::class, 'show'])
+            ->name('show-dich-vu')
+            ->middleware('role:cuahanglienket');
+
+        Route::patch('/update-dich-vu/{id}', [DichVuController::class, 'update'])
+            ->name('update-dich-vu')
+            ->middleware('role:cuahanglienket');
+
+        Route::delete('/delete-dich-vu/{id}', [DichVuController::class, 'delete'])
+            ->name('delete-dich-vu')
+            ->middleware('role:cuahanglienket');
+
+        Route::get('/list-dich-vu', [DichVuController::class, 'getListDichVu'])
+            ->name('list-dich-vu')
+            ->middleware('role:admin');
+
+        Route::get('/list-dich-vu-select', [DichVuController::class, 'getListDichVuSelect'])
+            ->name('list-dich-vu-select')
+            ->middleware('role:admin');
+
+        Route::get('/them-dich-vu-select', [DichVuController::class, 'createDichVu'])
+            ->name('them-dich-vu-select')
+            ->middleware('role:admin');
+
+        Route::post('/them-dich-vu-select', [DichVuController::class, 'deleteListSelect'])
+            ->name('change-cua-hang')
+            ->middleware('role:admin');
+
+        Route::get('/list-dich-vu-update/{id}', [DichVuController::class, 'getListDichVuUpdate'])
+            ->name('list-dich-vu-update')
+            ->middleware('role:admin');
+
+        Route::get('/list-dich-vu-select-update', [DichVuController::class, 'getListDichVuSelectUpdate'])
+            ->name('list-dich-vu-select-update')
+            ->middleware('role:admin');
     });
 
     Route::name('quanlytaikhoan.')->prefix('quanlytaikhoan')->group(function () {

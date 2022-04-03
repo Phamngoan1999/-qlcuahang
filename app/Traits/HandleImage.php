@@ -32,7 +32,7 @@ trait HandleImage
             $fileName = time() . $file->getClientOriginalName();
             $saveLocation = $this->path . $fileName;
             $image = Image::make($file);
-            $image->fit(150, 150)->save($saveLocation);
+            $image->resize(250, 250)->save($saveLocation);
             return $fileName;
         }
         return $this->imageDefault;

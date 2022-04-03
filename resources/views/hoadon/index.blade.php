@@ -1,31 +1,16 @@
-<div class="row" >
+<div class="row">
     <div class="col-md-5">
         <div class="row">
             <div class="col-md-12">
+                <div><input type="text" id="maHoaDon" value="{{$id}}" style="display: none;"></div>
                 <div class="form-group">
                     <label for="">Chọn cửa hàng sửa chữa</label>
-                    @hasRole("admin")
-                    @if($thongtinHoadon[0]->trang_thai != 'chonhan')
-                        <select class="js-example-basic-single w-100" name="iMa_cua_hang" disabled>
-                            @foreach($danhsachCuaHang as $cuahang)
-                                <option value="{{$cuahang->id}}" @if($cuahang->id==$thongtinHoadon[0]->iMa_cua_hang) selected @endif>{{$cuahang->ten_cua_hang}}</option>
-                            @endforeach
-                        </select>
-                    @else
-                        <select class="js-example-basic-single w-100" name="iMa_cua_hang">
-                            @foreach($danhsachCuaHang as $cuahang)
-                                <option value="{{$cuahang->id}}" @if($cuahang->id==$thongtinHoadon[0]->iMa_cua_hang) selected @endif>{{$cuahang->ten_cua_hang}}</option>
-                            @endforeach
-                        </select>
-                    @endif
-                    @endhasRole
-                    @hasRole("cuahanglienket")
-                    <select class="js-example-basic-single w-100" name="iMa_cua_hang" disabled>
+                    <select class="js-example-basic-single w-100  ma-cua-hang" name="iMa_cua_hang" disabled>
                         @foreach($danhsachCuaHang as $cuahang)
-                            <option value="{{$cuahang->id}}" @if($cuahang->id==$thongtinHoadon[0]->iMa_cua_hang) selected @endif>{{$cuahang->ten_cua_hang}}</option>
+                            <option value="{{$cuahang->id}}" @if($cuahang->id==$thongtinHoadon->iMa_cua_hang) selected @endif>{{$cuahang->ten_cua_hang}}</option>
                         @endforeach
                     </select>
-                    @endhasRole
+                    <input type="text" id="maCuaHang" value="{{$thongtinHoadon->iMa_cua_hang}}" style="display: none;">
                 </div>
             </div>
         </div>
@@ -33,38 +18,35 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="">Chọn xe sửa chữa</label>
-                    <select class="js-example-basic-single w-100"  name="iMa_xe" disabled>
-                        <option value="">Chọn xe sửa chữa</option>
-                        @foreach($danhsachXe as$xe)
-                            <option value="{{$xe->id}}" @if($xe->id==$thongtinHoadon[0]->iMa_xe) selected @endif>{{$xe->dongxe->ten_dong_xe}}-{{$xe->bien_so}}</option>
-                        @endforeach
-                    </select>
+                    <input class="form-control" type="text" value="{{$thongtinHoadon->xe->dongxe->ten_dong_xe}} - {{$thongtinHoadon->xe->bien_so}}" disabled>
                 </div>
             </div>
         </div>
-        @if($thongtinHoadon[0]->trang_thai == 'dahoanthanh')
+        @if($thongtinHoadon->trang_thai == 'dahoanthanh')
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="">Tổng tiền</label>
-                        <input class="form-control" type="text" value="{{ currency_format($thongtinHoadon[0]->tong_tien)}}" disabled>
+                        <input class="form-control" type="text" value="{{ currency_format($thongtinHoadon->tong_tien)}}" disabled>
                     </div>
                 </div>
             </div>
         @endif
         @hasRole("admin")
-            @if($thongtinHoadon[0]->trang_thai == 'chonhan')
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-primary" id="add-phu-tung" ><i class="fa-solid fa-plus"></i>Thêm phụ tùng</button>
-                    </div>
+        @if($thongtinHoadon->trang_thai == 'chonhan')
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-info" id="add-phu-tung" data-url="{{route("quanlysuachua.list-dich-vu-update",$id)}}" >
+                        <i class="fa-solid fa-plus"></i>Thêm phụ tùng</button>
+                    <div class="error error-phutung"></div>
                 </div>
-            @endif
+            </div>
+        @endif
         @endhasRole
     </div>
     <div class="col-md-7">
         <div id="list-phu-tung">
-            @foreach($thongtinHoadon[0]->phutung as $key => $iterm)
+            @foreach($thongtinHoadon->phutung as $key => $iterm)
                 <div class="row them-phu-tung" >
                     <div class="col-md-4">
                         <div class="form-group">
@@ -72,20 +54,21 @@
                             <input type="text" class="form-control"  placeholder="Phụ tùng" value="{{$iterm->ten_phu_tung}}">
                         </div>
                     </div>
-                    @hasRole("admin")
-                    <div class="col-md-2">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label for="" style="visibility: hidden;">Phụ tùng</label>
-                            <button type="button" class="btn btn-danger xoa-phu-tung-confirm" data-url="{{route("quanlysuachua.delete-phu-tung",$iterm->id)}}"><i class="fas fa-trash-alt"></i></button>
+                            <label for="">Đơn giá</label>
+                            <input type="text" class="form-control"  placeholder="đơn giá" value="{{$iterm->don_gia}}">
                         </div>
                     </div>
-                    @endhasRole
-                    @hasRole("cuahanglienket")
-                    @if($thongtinHoadon[0]->trang_thai == 'danhandon' || $thongtinHoadon[0]->trang_thai == 'dahoanthanh')
-                        <div class="col-md-6">
+                    @hasRole("admin")
+                    @if($thongtinHoadon->trang_thai == 'chonhan')
+                        <div class="col-md-2">
                             <div class="form-group">
-                                <label for="">Đơn giá</label>
-                                <input type="text" class="form-control don-gia-validate" name="dongia[{{$iterm->id}}]"  placeholder="đơn giá" value="{{currency_format($iterm->don_gia)}}">
+                                <label for="" style="visibility: hidden;">Phụ tùng</label>
+                                <input type="text" class="form-control" style="display: none;" name="idPhuTung[]"
+                                       placeholder="Phụ tùng" value="{{$iterm['id']}}">
+                                <button type="button" class="btn btn-danger xoa-phu-tung-confirm"
+                                        data-url="{{route("quanlysuachua.delete-phu-tung",$iterm->id)}}"><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </div>
                     @endif
@@ -93,27 +76,26 @@
                 </div>
             @endforeach
         </div>
-        <div class="error error-phutung"></div>
     </div>
 </div>
 <div class="row" style="padding-top: 10px;">
     <div class="col-md-12">
         @hasRole("cuahanglienket")
-            @if($thongtinHoadon[0]->trang_thai == 'chonhan')
+            @if($thongtinHoadon->trang_thai == 'chonhan')
                 <button type="button" class="btn btn-primary" id="nhan-don-sua-chua" data-url="{{route('quanlysuachua.updatenhandon',$id)}}" >Nhận đơn sửa chữa</button>
                 <button type="button" class="btn btn-primary" id="huy-don-sua-chua" data-url="{{route('quanlysuachua.updatenhandon',$id)}}" >Hủy đơn sửa chữa</button>
             @endif
 
-            @if($thongtinHoadon[0]->trang_thai == 'danhandon')
+            @if($thongtinHoadon->trang_thai == 'danhandon')
                 <button type="button" class="btn btn-primary" id="len-hoa-don-sua-chua" data-url="{{route('quanlysuachua.lenhoadon',$id)}}" >Lên hóa đơn sửa chữa</button>
             @endif
         @endhasRole
         @hasRole("admin")
-            @if($thongtinHoadon[0]->trang_thai == 'chonhan')
+            @if($thongtinHoadon->trang_thai == 'chonhan')
                 <button type="button" class="btn btn-primary update-luu-thong-tin" data-url="{{route('quanlysuachua.updatehoadon',$id)}}" >Update thông tin</button>
             @endif
         @endhasRole
-        @if($thongtinHoadon[0]->trang_thai == 'dahoanthanh')
+        @if($thongtinHoadon->trang_thai == 'dahoanthanh')
             <button type="button" class="btn btn-success" data-url="{{route('quanlysuachua.updatehoadon',$id)}}" >Hóa đơn đã hoàn thành</button>
         @endif
     </div>

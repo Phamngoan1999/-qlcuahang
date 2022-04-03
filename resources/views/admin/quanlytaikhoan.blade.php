@@ -1,13 +1,13 @@
 @extends('header.quanly')
 @section('content')
-    <style>
-        .modal .modal-dialog .modal-content .modal-body {
-            padding: 10px 26px!important;
-        }
-        .modal .modal-dialog {
-            margin-top: 10px!important;
-        }
-    </style>
+{{--    <style>--}}
+{{--        .modal .modal-dialog .modal-content .modal-body {--}}
+{{--            padding: 10px 26px!important;--}}
+{{--        }--}}
+{{--        .modal .modal-dialog {--}}
+{{--            margin-top: 10px!important;--}}
+{{--        }--}}
+{{--    </style>--}}
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">

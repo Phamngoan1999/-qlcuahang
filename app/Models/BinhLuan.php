@@ -33,6 +33,12 @@ class BinhLuan extends Model
     {
         return $this->orderBy('created_at', 'DESC');
     }
+
+    public function scopeSelectOrderSearch($query)
+    {
+        return $query->orderBy('created_at', 'DESC');
+    }
+
     public function getAll()
     {
         return BinhLuan::whereHas('users')->with(['users']);

@@ -7,6 +7,7 @@ use App\Http\Requests\CreateHoaDon;
 use App\Http\Requests\UpdateHoaDon;
 use App\Services\CuaHangService;
 use App\Services\HoaDonService;
+use App\Services\PhuTungService;
 use App\Services\XeService;
 use Illuminate\Http\Request;
 
@@ -19,10 +20,13 @@ class HoaDonController extends Controller
 
     protected $hoaDonService;
 
-    public function __construct(CuaHangService $cuaHangServive,XeService $xeService,HoaDonService $hoaDonService)
+    protected $phutungService;
+
+    public function __construct(CuaHangService $cuaHangServive,XeService $xeService,HoaDonService $hoaDonService,PhuTungService $phutungService)
     {
         $this->cuaHangServive = $cuaHangServive;
         $this->xeService = $xeService;
+        $this->phutungService = $phutungService;
         $this->hoaDonService = $hoaDonService;
     }
 
@@ -49,9 +53,8 @@ class HoaDonController extends Controller
         return view('hoadon.show',compact('danhsachCuaHang','danhsachXe','thongtinHoadon','id'));
     }
 
-    public function update(UpdateHoaDon $request,$id)
+    public function update(Request $request,$id)
     {
-
         return $this->hoaDonService->update($request,$id);
     }
 

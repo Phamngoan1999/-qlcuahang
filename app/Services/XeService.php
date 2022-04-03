@@ -200,7 +200,7 @@ class XeService
             //nếu avata ko trông và cái ảnh 4 đã có trng db thì xóa ảnh trong db lấy ảnh upload
             $this->deleteImage($anhXoa->duong_dan);
             $anhXoa->delete();
-            $duongdan = $this->storeImageAvata($files_avata);
+            $duongdan = $this->storeImageAvata($request);
             $dataAnh_avata = new Anh([
                 'duong_dan' => $duongdan,
                 'iMa_loai_anh' => 4

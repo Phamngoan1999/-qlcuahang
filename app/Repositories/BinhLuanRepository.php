@@ -26,6 +26,7 @@ class BinhLuanRepository extends BaseRepository
     {
         return $this->model->withTrangThai($dataSearch['trang_thai_search'])
             ->withXe($dataSearch['ma_xe'])
+            ->selectOrderSearch()
             ->paginate(10);
     }
 }

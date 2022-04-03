@@ -32,38 +32,65 @@
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Xe</th>
-                                        <th>Giá Mua</th>
-                                        <th>Trạng Thái</th>
-                                        <th>Thông tin chi tiêt</th>
-                                    </tr>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Xe</th>
+                                            <th>Giá Mua(VNĐ)</th>
+                                            <th>Cửa hàng nhận đơn</th>
+                                            <th>Giá trị hóa đơn(VNĐ)</th>
+                                            <th>Ngày lên hóa đơn</th>
+                                            <th>Trạng thái</th>
+                                            <th>Giá dự kiến bán</th>
+                                        </tr>
                                     </thead>
                                     <tbody id="danh-sach-binh-luan">
                                         @if(count($resultXeMua)>0)
                                             @foreach($resultXeMua as $key => $xe)
-                                            <tr>
-                                                <td>{{$key+1}}</td>
-                                                <td>
-                                                    {{$xe->bien_so}}
-                                                    <br><br> {{$xe->dongxe->ten_dong_xe}}
-                                                    <br><br> {{$xe->khachhang->ho_ten}}
-                                                </td>
-                                                <td>
-                                                    {{ currency_format($xe->gia_mua) }}
-                                                </td>
-                                                <td>
-                                                    <label for="" class="badge badge-info">{{$xe->trangthai->ten_trang_thai}}</label>
-                                                </td>
-                                                <td>
-                                                    <a href="{{route('quanlyxe.editthongtinxe',$xe->id)}}" class="btn btn-primary">Thông tin chi tiết</a>
-                                                </td>
+                                                <tr>
+                                                    <td rowspan="{{count($xe->hoadon) >0 ? count($xe->hoadon) : 1}} " class="text-center"><b>{{$key+1}}</b></td>
+                                                    <td rowspan="{{count($xe->hoadon) >0 ? count($xe->hoadon) : 1}}">{{$xe->bien_so}}
+                                                        <br><br> {{$xe->dongxe->ten_dong_xe}}
+                                                        <br><br> {{$xe->khachhang->ho_ten}}
+                                                    </td>
+                                                    <td rowspan="{{count($xe->hoadon) >0 ? count($xe->hoadon) : 1}}">
+                                                        {{ currency_format($xe->gia_mua) }}
+                                                    </td>
+                                                    @if(count($xe->hoadon) >0)
+                                                        <p style="display: none;">{{$tongsuachua = 0}}</p>
+                                                        @foreach($xe->hoadon as $key => $iterm)
+                                                            <td>{{$iterm->cuahang->ten_cua_hang}}</td>
+                                                            @if($iterm->trang_thai == "huyhoadon")
+                                                                <td class="text-center"><label for="" class="badge badge-danger">Hủy hóa đơn</label></td>
+                                                            @else
+                                                                <td class="text-center">{{ currency_format($iterm->tong_tien) }}</td>
+                                                                <p style="display: none;">{{$tongsuachua = $tongsuachua + $iterm->tong_tien}}</p>
+                                                            @endif
+                                                            <td class="text-center">{{ substr(format_thoi_gian($iterm->updated_at),0,10) }}</td>
+                                                            @if($key == 0)
+                                                                <td rowspan="{{count($xe->hoadon) >0 ? count($xe->hoadon) : 1}}">
+                                                                    <label for="" class="btn btn-success btn-sm">{{$xe->trangthai->ten_trang_thai}}</label>
+                                                                </td>
+                                                                <td rowspan="{{count($xe->hoadon) >0 ? count($xe->hoadon) : 1}}">
+                                                                    {{ currency_format($tongsuachua + $xe->gia_mua) }}
+                                                                </td>
+                                                </tr>
+                                                @endif
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td rowspan="{{count($xe->hoadon) >0 ? count($xe->hoadon) : 1}}">
+                                                <label for="" class="btn btn-success btn-sm">{{$xe->trangthai->ten_trang_thai}}</label>
+                                            </td>
+                                            <td>{{ currency_format($xe->gia_mua) }}</td>
                                             </tr>
+                                        @endif
                                         @endforeach
                                         @else
                                             <tr>
-                                                <td colspan="5" class="text-center">Không có dữ liệu</td>
+                                                <td colspan="8" class="text-center">Không có dữ liệu</td>
                                             </tr>
                                         @endif
                                     </tbody>

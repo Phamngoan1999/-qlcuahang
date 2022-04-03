@@ -314,6 +314,12 @@
                         <span class="menu-title">Quản lý sửa chữa</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route("quanlysuachua.quanlydichvu")}}" aria-expanded="false"  aria-controls="ui-basic">
+                        <i class="icon-grid menu-icon" ></i>
+                        <span class="menu-title">Quản lý dịch vụ</span>
+                    </a>
+                </li>
                 @endhasRole
                 @hasRole('admin')
                 <li class="nav-item">

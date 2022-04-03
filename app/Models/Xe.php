@@ -127,9 +127,9 @@ class Xe extends Model
     public function scopeSearchKhachHangQuanLy($query,$khachhang)
     {
         return $khachhang ? $query->WhereHas('khachhang', function ($query) use ($khachhang) {
-            $query->where('ho_ten', $khachhang)
-                ->orWhere('so_dien_thoai',$khachhang)
-                ->orWhere('so_CMND',$khachhang);
+            $query->where('ho_ten','like', '%'.$khachhang.'%')
+                ->orWhere('so_dien_thoai','like', '%'.$khachhang.'%')
+                ->orWhere('so_CMND','like', '%'.$khachhang.'%');
         }): null;
     }
 

@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\DichVu;
+use App\Models\PhuTung;
 use App\Models\Xe;
+use App\Repositories\DichVuRepository;
 use App\Repositories\HoaDonRepository;
 use App\Repositories\PhuTungRepository;
 use App\Repositories\XeRepository;
@@ -16,11 +19,14 @@ class HoaDonService
 
     protected $xeRepository;
 
-    public function __construct(HoaDonRepository $hoaDonRepository,PhuTungRepository $phuTungRepository,XeRepository $xeRepository)
+    protected $dichVuRepository;
+
+    public function __construct(HoaDonRepository $hoaDonRepository,PhuTungRepository $phuTungRepository,XeRepository $xeRepository,DichVuRepository $dichVuRepository)
     {
         $this->hoaDonRepository = $hoaDonRepository;
         $this->phuTungRepository = $phuTungRepository;
         $this->xeRepository = $xeRepository;
+        $this->dichVuRepository = $dichVuRepository;
     }
 
     public function all()
@@ -44,7 +50,7 @@ class HoaDonService
 
     public function find($id)
     {
-        return $this->hoaDonRepository->findToHoaDon($id);
+        return $this->hoaDonRepository->find($id);
     }
 
     public function findHoadon($id)
@@ -59,26 +65,19 @@ class HoaDonService
 
     public function update($request,$id)
     {
-        $dataUpdate = array(
-            'iMa_cua_hang' => $request->iMa_cua_hang,
-            'trang_thai' => 'chonhan'
-        );
-        $this->hoaDonRepository->update($dataUpdate,$id);
-        if(isset($request->phutung))
+        $hoadon = $this->hoaDonRepository->find(183);
+        PhuTung::whereNotIn("id",$request->idPhuTung)->delete();
+        foreach ($request->idPhuTung as $iterm)
         {
-            foreach ($request->phutung as $iterm)
-            {
-                if(!empty($iterm))
-                {
-                    $dataPhuTung = array(
-                        'ten_phu_tung' => $iterm,
-                        'iMa_hoa_don' => $id
-                    );
-                    $this->phuTungRepository->create($dataPhuTung);
-                }
-            }
+            $phutung = $this->phuTungRepository->find($iterm);
+            $dataPhuTung = array(
+                'iMa_hoa_don' => $id,
+                'ten_phu_tung' => $phutung->dichvu->ten_dich_vu,
+                'don_gia' =>  $phutung->dichvu->gia_dich_vu,
+                'sMa_dich_vu' =>  $phutung->sMa_dich_vu
+            );
+            $this->phuTungRepository->update($dataPhuTung,$iterm);
         }
-        $hoadon = $this->hoaDonRepository->find($id);
         return $hoadon;
     }
 
@@ -91,17 +90,17 @@ class HoaDonService
         );
         $hoadon = $this->hoaDonRepository->create($dataCreate);
         Xe::find($request->iMa_xe)->update(['iMa_trang_thai'=>6]);
-        foreach ($request->phutung as $iterm)
+        foreach ($request->idPhuTung as $iterm)
         {
             if(!empty($iterm))
             {
                 $dataPhuTung = array(
-                    'ten_phu_tung' => $iterm,
                     'iMa_hoa_don' => $hoadon->id
                 );
-                $this->phuTungRepository->create($dataPhuTung);
+                $this->phuTungRepository->update($dataPhuTung,$iterm);
             }
         }
+        $this->phuTungRepository->deleteHoaDonNull();
         return $hoadon;
     }
 
@@ -124,14 +123,11 @@ class HoaDonService
     public function lenhoadon($request,$id)
     {
         $tongtien = 0;
-        foreach($request->dongia as $key => $iterm)
+        $hoadon = $this->hoaDonRepository->find($id);
+        foreach ($hoadon->phutung as $index => $val)
         {
-            $gia = format_money_insert_db($iterm);
-            $dataDongiaPhuTung = array(
-                'don_gia' => (double)$gia != 0 ? (double)$gia : "0VND"
-            );
+            $gia = format_money_insert_db($val->don_gia);
             $tongtien = (double)$tongtien + (double)$gia;
-            $this->phuTungRepository->update($dataDongiaPhuTung,$key);
         }
         $dataUpdateHoaDon = array(
             'tong_tien' => $tongtien,

@@ -30,7 +30,7 @@ import comfirmAlert from "../comfirm.js";
         {
             let url_load = window.location.origin+'/Logo/loading.gif';
             let html = "<tr>\
-                            <td colspan='7' class='text-center'>\
+                            <td colspan='8' class='text-center'>\
                                 <img src='"+url_load+"' >\
                             </td>\
                         </tr>";

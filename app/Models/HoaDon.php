@@ -45,8 +45,7 @@ class HoaDon extends Model
 
     public function findToHoaDon($id)
     {
-        return $this->whereHas('phutung')->with(['phutung'])
-        ->where('id',$id)->get();
+        return $this->where('id',$id)->get();
     }
 
     public function scopeWithHoaDonToCuaHang($query)

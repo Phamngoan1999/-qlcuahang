@@ -11,7 +11,10 @@
                         <form method="POST" action="{{ route('login') }}" class="pt-3">
                             @csrf
                             <div class="form-group">
-                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" maxlength="10">
+                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror"
+                                       name="email" value="{{ old('email') }}" autocomplete="email"
+                                       placeholder="Số điện thoại"
+                                       maxlength="10">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     @if($message == "The email field is required.")
@@ -29,7 +32,9 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                                       name="password" autocomplete="current-password"
+                                       placeholder="Mật khẩu">
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
