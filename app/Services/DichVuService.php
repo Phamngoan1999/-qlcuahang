@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\CuaHang;
 use App\Repositories\DichVuRepository;
+use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DichVuService
@@ -19,6 +20,11 @@ class DichVuService
     public function all()
     {
         return $this->dichVuRepository->all();
+    }
+
+    public function listDichVuCuaHang()
+    {
+        return $this->dichVuRepository->listDichVuCuaHang();
     }
 
     public function create($request)

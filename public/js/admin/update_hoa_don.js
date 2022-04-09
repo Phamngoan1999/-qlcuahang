@@ -50,7 +50,8 @@ import comfirmAlert from "../comfirm.js";
         $(document).on('click','#luu-dich-vu',function(e) {
             let url = $(this).attr('data-url');
             let data = {
-                'idCuaHangSelect': $('#idCuaHangSelect').val()
+                'idCuaHangSelect': $('#idCuaHangSelect').val(),
+                'idHoaDonSelect': $('#idHoaDonSelect').val()
             };
             base.callApi(url, METHOD_GET, data)
                 .done(function (response){
@@ -74,6 +75,7 @@ import comfirmAlert from "../comfirm.js";
                 let url = $(this).attr('data-url');
                 base.callApiWithFormData( url, METHOD_POST, dataForm)
                     .done(function (response) {
+                        console.log(response);
                         comfirmAlert.showSuccessMessageAlert('Lưu thông tin thành công');
                     })
                     .fail(function (response){
@@ -84,6 +86,22 @@ import comfirmAlert from "../comfirm.js";
                         }
                     })
             }
+        });
+
+        $(document).on('click','#huy-don-sua-chua',function() {
+            let dataForm = new FormData($('#form-hoa-don')[0]);
+            let updateUrl = $(this).attr('data-url');
+            comfirmAlert.confirmnhuydon()
+                .then(result => {
+                    if (result) {
+                        base.callApiWithFormData( updateUrl, METHOD_POST, dataForm)
+                            .done(function (response){
+                                comfirmAlert.showSuccessMessageAlert("Hủy thành công");
+                                $('.chi-tiet-hoa-don').html(response)
+                                $('.js-example-basic-single').select2();
+                            });
+                    }
+                });
         });
 
         $(document).on('click', '.paginate-page-modal a', function(e) {

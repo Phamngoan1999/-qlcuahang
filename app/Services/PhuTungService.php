@@ -49,6 +49,11 @@ class PhuTungService
         return $this->phuTungRepository->listPhuTungNotFinalAndCuaHang($idCuaHang);
     }
 
+    public function listPhuTungNotFinalAndCuaHangUpdate($idCuaHang,$idHoadon)
+    {
+        return $this->phuTungRepository->listPhuTungNotFinalAndCuaHangUpdate($idCuaHang,$idHoadon);
+    }
+
     public function delete($id,$hoadon)
     {
         $phutung = $this->phuTungRepository->findTheoHoaDonNull($id);

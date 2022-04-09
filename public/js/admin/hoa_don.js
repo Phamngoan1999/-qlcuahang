@@ -106,54 +106,37 @@ import comfirmAlert from "../comfirm.js";
 
         $(document).on('click','#add-luu-thong-tin',function() {
             $('.error').html("");
-            // let ktra = true;
-            // if($('.ma-cua-hang').val() == "")
-            // {
-            //     $('.error-iMa_cua_hang').html('<p>Vui lòng chọn cửa hàng</p>');
-            //     ktra = false;
-            // }
-            // if($('.xe-sua-chua').val() == "")
-            // {
-            //     $('.error-iMa_xe').html('<p>Vui lòng chọn xe sửa chữa</p>');
-            //     ktra = false;
-            // }
-            // if($('#list-phu-tung').html() == "")
-            // {
-            //     $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
-            //     ktra = false;
-            // }
-            // $('input[name^="phutung"]').each(function()
-            // {
-            //     // tasks.push($(this).val());
-            //     if($(this).val() == "")
-            //     {
-            //         $('.error-phutung-rong').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
-            //         ktra = false;
-            //     }
-            // });
-            // if(ktra)
-            // {
+            let ktra = true;
+            if($('.ma-cua-hang').val() == "")
+            {
+                $('.error-iMa_cua_hang').html('<p>Vui lòng chọn cửa hàng</p>');
+                ktra = false;
+            }
+            if($('.xe-sua-chua').val() == "")
+            {
+                $('.error-iMa_xe').html('<p>Vui lòng chọn xe sửa chữa</p>');
+                ktra = false;
+            }
+            var listItems = $("#list-phu-tung").children();
+            var count = listItems.length;
+            if(count == 0)
+            {
+                $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
+                ktra = false;
+            }
+            $('input[name^="phutung"]').each(function()
+            {
+                // tasks.push($(this).val());
+                if($(this).val() == "")
+                {
+                    $('.error-phutung-rong').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
+                    ktra = false;
+                }
+            });
+            if(ktra)
+            {
                 $( "#form-hoa-don").submit();
-                // let dataForm = new FormData($('#form-hoa-don')[0]);
-                // let url = $(this).attr('data-url');
-                // base.callApiWithFormData( url, METHOD_POST, dataForm)
-                //     .done(function (response) {
-                //         if(response === "nhap-thieu")
-                //         {
-                //             $('.error-phutung').html('<div class="error">Vui lòng nhập phụ tùng</div></p>');
-                //             return false;
-                //         }
-                //         comfirmAlert.showSuccessMessageAlert('Lưu thông tin thành công');
-                //         window.location.href = window.location.origin+'/quanlysuachua/showhoadon/'+response['id'];
-                //     })
-                //     .fail(function (response){
-                //         let errors = response.responseJSON.errors;
-                //         for(let key in errors)
-                //         {
-                //             $(".error-"+key).html(errors[key]);
-                //         }
-                //     })
-            //}
+            }
         });
 
         $(document).on('click','#nhan-don-sua-chua',function() {

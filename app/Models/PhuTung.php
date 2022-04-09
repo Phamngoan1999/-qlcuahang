@@ -41,10 +41,18 @@ class PhuTung extends Model
     public function scopeListPhuTungNotFinalAndCuaHang($query, $idCuahang)
     {
         return $this->with('dichvu')
-                    ->where('iMa_hoa_don',NULL)
                     ->whereHas('dichvu', function ($query) use ($idCuahang) {
                         $query->where('sCua_hang', $idCuahang);
-                    })->get();
+                    })->where('iMa_hoa_don',NULL)->get();
+    }
+
+    public function scopelistPhuTungNotFinalAndCuaHangUpdate($query, $idCuahang, $idHoadon)
+    {
+        return $this->with('dichvu')
+            ->whereHas('dichvu', function ($query) use ($idCuahang) {
+                $query->where('sCua_hang', $idCuahang);
+            })->Where('iMa_hoa_don',$idHoadon)
+            ->orWhere('iMa_hoa_don',NULL)->get();
     }
 
     public function deleteHoaDonNull()

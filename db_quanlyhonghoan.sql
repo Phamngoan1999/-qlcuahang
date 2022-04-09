@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2022 at 05:15 AM
+-- Generation Time: Apr 09, 2022 at 10:18 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -73,7 +73,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (27, '2022_02_02_154052_tbl_hoa_don', 6),
 (28, '2022_02_02_154109_tbl_binh_luan', 6),
 (29, '2022_02_02_154118_tbl_anh', 6),
-(30, '2022_02_02_154101_tbl_chi_tiet_hoa_don', 7);
+(32, '2022_02_02_154101_tbl_chi_tiet_hoa_don', 7),
+(35, '2022_03_28_040725_tbl_dichvu', 8);
 
 -- --------------------------------------------------------
 
@@ -125,20 +126,44 @@ CREATE TABLE `tbl_anh` (
 --
 
 INSERT INTO `tbl_anh` (`id`, `duong_dan`, `iMa_xe`, `iMa_loai_anh`, `created_at`, `updated_at`) VALUES
-(922, '1648264967images (1).jpg', 120, 2, '2022-03-25 20:22:47', '2022-03-25 20:22:47'),
-(924, '1648265294honda-wase-4.jpg', 120, 1, '2022-03-25 20:28:14', '2022-03-25 20:28:14'),
-(926, '1648265294images (2).jpg', 120, 1, '2022-03-25 20:28:14', '2022-03-25 20:28:14'),
-(932, '1648266104honda-wase-4.jpg', 120, 1, '2022-03-25 20:41:44', '2022-03-25 20:41:44'),
-(935, '1648266981images (2).jpg', 120, 4, '2022-03-25 20:56:21', '2022-03-25 20:56:21'),
-(936, '1648267226honda-wase-4.jpg', 120, 3, '2022-03-25 21:00:27', '2022-03-25 21:00:27'),
-(937, '1648267698honda-wase-4.jpg', 121, 2, '2022-03-25 21:08:18', '2022-03-25 21:08:18'),
-(939, '1648268576honda-wase-4.jpg', 121, 1, '2022-03-25 21:22:56', '2022-03-25 21:22:56'),
-(942, '1648268708honda-wase-4.jpg', 121, 4, '2022-03-25 21:25:08', '2022-03-25 21:25:08'),
-(943, '1648277150honda-wase-4.jpg', 122, 2, '2022-03-25 23:45:50', '2022-03-25 23:45:50'),
-(944, '1648277361images (1).jpg', 122, 4, '2022-03-25 23:49:21', '2022-03-25 23:49:21'),
-(945, '1648277361honda-wase-4.jpg', 122, 1, '2022-03-25 23:49:21', '2022-03-25 23:49:21'),
-(946, '1648277510images (1).jpg', 121, 3, '2022-03-25 23:51:50', '2022-03-25 23:51:50'),
-(947, '1648287389dang-ky-oto-9934-1573013910.jpg', 123, 2, '2022-03-26 02:36:29', '2022-03-26 02:36:29');
+(971, '1649175423dang-ky-xe-may-bi-mat.jpg', 129, 2, '2022-04-05 09:17:03', '2022-04-05 09:17:03'),
+(972, '1649175653dang-ky-xe-may-bi-mat.jpg', 129, 3, '2022-04-05 09:20:53', '2022-04-05 09:20:53'),
+(973, '16493473334.3.2. Sơ đồ ERD hạn chế.drawio.png', 130, 2, '2022-04-07 09:02:13', '2022-04-07 09:02:13'),
+(974, '1649359664dang-ky-xe-may-bi-mat.jpg', 131, 2, '2022-04-07 12:27:44', '2022-04-07 12:27:44'),
+(975, '1649360619dang-ky-xe-may-bi-mat.jpg', 132, 2, '2022-04-07 12:43:40', '2022-04-07 12:43:40'),
+(976, '16493607131367567636_news.jpg', 130, 4, '2022-04-07 12:45:13', '2022-04-07 12:45:13'),
+(977, '1649360713144532-frontview-1-.jpg', 130, 1, '2022-04-07 12:45:13', '2022-04-07 12:45:13'),
+(978, '16493607134461738_e75b5928f02b795a1117ef0dbcc8b980.jpg', 130, 1, '2022-04-07 12:45:13', '2022-04-07 12:45:13'),
+(979, '1649360799images (1).jpg', 133, 2, '2022-04-07 12:46:39', '2022-04-07 12:46:39'),
+(980, '1649360896honda-wase-4.jpg', 134, 2, '2022-04-07 12:48:16', '2022-04-07 12:48:16'),
+(981, '1649360981images (1).jpg', 135, 2, '2022-04-07 12:49:41', '2022-04-07 12:49:41'),
+(982, '1649361483images (1).jpg', 131, 4, '2022-04-07 12:58:03', '2022-04-07 12:58:03'),
+(983, '1649361483honda-wase-4.jpg', 131, 1, '2022-04-07 12:58:03', '2022-04-07 12:58:03'),
+(984, '1649361483images (1).jpg', 131, 1, '2022-04-07 12:58:03', '2022-04-07 12:58:03'),
+(985, '1649361483images (2).jpg', 131, 1, '2022-04-07 12:58:03', '2022-04-07 12:58:03'),
+(986, '1649361534images (1).jpg', 133, 4, '2022-04-07 12:58:54', '2022-04-07 12:58:54'),
+(987, '1649361534images (2).jpg', 133, 1, '2022-04-07 12:58:54', '2022-04-07 12:58:54'),
+(988, '1649361596images (1).jpg', 135, 4, '2022-04-07 12:59:56', '2022-04-07 12:59:56'),
+(989, '1649361596images (2).jpg', 135, 1, '2022-04-07 12:59:56', '2022-04-07 12:59:56'),
+(990, '1649361676images (1).jpg', 136, 2, '2022-04-07 13:01:16', '2022-04-07 13:01:16'),
+(991, '1649361751images (1).jpg', 137, 2, '2022-04-07 13:02:31', '2022-04-07 13:02:31'),
+(992, '1649361826dang-ky-oto-9934-1573013910.jpg', 138, 2, '2022-04-07 13:03:46', '2022-04-07 13:03:46'),
+(993, '1649361862images (2).jpg', 138, 4, '2022-04-07 13:04:22', '2022-04-07 13:04:22'),
+(994, '1649361862images (1).jpg', 138, 1, '2022-04-07 13:04:22', '2022-04-07 13:04:22'),
+(995, '16493618951367567641_news.jpg', 134, 4, '2022-04-07 13:04:55', '2022-04-07 13:04:55'),
+(996, '1649361895144532-frontview-1-.jpg', 134, 1, '2022-04-07 13:04:55', '2022-04-07 13:04:55'),
+(997, '1649361931images (1).jpg', 137, 4, '2022-04-07 13:05:31', '2022-04-07 13:05:31'),
+(998, '16493619314461738_e75b5928f02b795a1117ef0dbcc8b980.jpg', 137, 1, '2022-04-07 13:05:31', '2022-04-07 13:05:31'),
+(999, '1649361975144532-frontview-1-.jpg', 136, 4, '2022-04-07 13:06:15', '2022-04-07 13:06:15'),
+(1000, '1649361975dang-ky-oto-9934-1573013910.jpg', 136, 1, '2022-04-07 13:06:15', '2022-04-07 13:06:15'),
+(1001, '1649362393images (1).jpg', 130, 3, '2022-04-07 13:13:13', '2022-04-07 13:13:13'),
+(1002, '1649362815dang-ky-oto-9934-1573013910.jpg', 138, 3, '2022-04-07 13:20:15', '2022-04-07 13:20:15'),
+(1003, '1649362923wave-thai-125i-den-do.jpg', 135, 3, '2022-04-07 13:22:03', '2022-04-07 13:22:03'),
+(1004, '1649363691dang-ky-oto-9934-1573013910.jpg', 132, 3, '2022-04-07 13:34:51', '2022-04-07 13:34:51'),
+(1005, '1649363741Xe_so_gia_re_duoi_20_trieu_dong_SYM_Galaxy_115.jpg', 133, 3, '2022-04-07 13:35:41', '2022-04-07 13:35:41'),
+(1006, '1649363775images (3).jpg', 137, 3, '2022-04-07 13:36:15', '2022-04-07 13:36:15'),
+(1007, '1649432713screencapture-127-0-0-1-8000-quanlysuachua-quanlydichvu-2022-04-05-22_43_56.png', 139, 2, '2022-04-08 08:45:14', '2022-04-08 08:45:14'),
+(1008, '1649432888screencapture-127-0-0-1-8000-quanlysuachua-quanlydichvu-2022-04-05-22_43_56.png', 140, 2, '2022-04-08 08:48:08', '2022-04-08 08:48:08');
 
 -- --------------------------------------------------------
 
@@ -162,8 +187,7 @@ CREATE TABLE `tbl_binh_luan` (
 --
 
 INSERT INTO `tbl_binh_luan` (`id`, `thoi_gian_binh_luan`, `noi_dung`, `iMa_khach_hang`, `iMa_xe`, `binh_luan_tra_loi`, `created_at`, `updated_at`) VALUES
-(120, '2022-03-26 03:58:14', 'Nào hãy cùng tìm hiểu làm cách nào để sử dụng service providers để tự động load Helper file nhé. Đầu tiên hãy tạo một Helper service provider nào', 18, 120, 'Bạn nên qua cửa hàng để xem nhé', '2022-03-25 20:58:14', '2022-03-25 20:58:49'),
-(121, '2022-03-26 06:50:12', 'Ở trong một số project lớn hơn, sẽ có trường hợp bạn cần sử dụng nhiều file helper trong thư mục, bạn có thể đổi hàm register như sau:', 18, 122, NULL, '2022-03-25 23:50:12', '2022-03-25 23:50:12');
+(125, '2022-04-07 20:09:30', 'Xe còn không bạn', 18, 131, 'Bạn vui lòng đến cửa hàng để được tư vấn ạ', '2022-04-07 13:09:30', '2022-04-07 13:10:59');
 
 -- --------------------------------------------------------
 
@@ -174,8 +198,9 @@ INSERT INTO `tbl_binh_luan` (`id`, `thoi_gian_binh_luan`, `noi_dung`, `iMa_khach
 CREATE TABLE `tbl_chi_tiet_hoa_don` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `ten_phu_tung` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `don_gia` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `iMa_hoa_don` bigint(20) UNSIGNED NOT NULL,
+  `don_gia` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `iMa_hoa_don` bigint(20) UNSIGNED DEFAULT NULL,
+  `sMa_dich_vu` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -184,15 +209,11 @@ CREATE TABLE `tbl_chi_tiet_hoa_don` (
 -- Dumping data for table `tbl_chi_tiet_hoa_don`
 --
 
-INSERT INTO `tbl_chi_tiet_hoa_don` (`id`, `ten_phu_tung`, `don_gia`, `iMa_hoa_don`, `created_at`, `updated_at`) VALUES
-(273, 'Bình xăng', '1000000', 146, '2022-03-25 20:23:27', '2022-03-25 20:24:36'),
-(274, 'Sơn lại màu', '500000', 146, '2022-03-25 20:23:27', '2022-03-25 20:24:36'),
-(275, 'Thay yếm xe', '100000', 147, '2022-03-25 20:29:24', '2022-03-25 20:29:51'),
-(276, 'Thay lốp', '200000', 148, '2022-03-25 20:32:59', '2022-03-25 20:33:24'),
-(277, 'Thay yếm xe', '222222', 149, '2022-03-25 21:08:42', '2022-03-25 21:10:13'),
-(278, 'Thay yếm xe', '233333', 150, '2022-03-25 23:46:07', '2022-03-25 23:48:12'),
-(279, 'Thay yếm xe', '1000000', 151, '2022-03-26 02:37:02', '2022-03-26 02:38:04'),
-(280, 'Sơn lại màu', NULL, 152, '2022-03-26 02:43:38', '2022-03-26 02:43:38');
+INSERT INTO `tbl_chi_tiet_hoa_don` (`id`, `ten_phu_tung`, `don_gia`, `iMa_hoa_don`, `sMa_dich_vu`, `created_at`, `updated_at`) VALUES
+(280, 'Thay lốp trước Xe Wave Alpha 110', '100,000VNĐ', 197, 7, '2022-04-08 09:06:43', '2022-04-08 09:06:48'),
+(281, 'Thay lốp sau Xe Wave Alpha 110', '150,000VNĐ', 197, 8, '2022-04-08 09:06:44', '2022-04-08 09:06:48'),
+(284, 'Gác chân malay', '100,000VNĐ', 199, 29, '2022-04-08 09:12:54', '2022-04-08 09:12:58'),
+(285, 'BEN TỰ ĐỘNG NÂNG YÊN XE MÁY', '120,000VNĐ', 199, 30, '2022-04-08 09:12:55', '2022-04-08 09:12:58');
 
 -- --------------------------------------------------------
 
@@ -217,6 +238,53 @@ INSERT INTO `tbl_cua_hang_lien_ket` (`id`, `ten_cua_hang`, `so_dien_thoai`, `dia
 (2, 'Cửa hàng Huy Hùng', '0987654321', 'Thái Bình', '2022-03-04 20:15:18', '2022-03-04 20:15:18'),
 (4, 'Cửa hàng Hoàng Hưng', '0339845401', 'Đông La, Thái Bình', '2022-03-10 08:19:14', '2022-03-16 03:05:51'),
 (8, 'Cửa hàng Hoàng Đức', '0398454001', 'Thái Bình', '2022-03-14 03:41:39', '2022-03-14 04:09:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_dich_vu`
+--
+
+CREATE TABLE `tbl_dich_vu` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ten_dich_vu` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gia_dich_vu` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sCua_hang` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_dich_vu`
+--
+
+INSERT INTO `tbl_dich_vu` (`id`, `ten_dich_vu`, `gia_dich_vu`, `sCua_hang`, `created_at`, `updated_at`) VALUES
+(7, 'Thay lốp trước Xe Wave Alpha 110', '100,000VNĐ', 2, '2022-03-29 08:06:45', '2022-03-29 08:06:45'),
+(8, 'Thay lốp sau Xe Wave Alpha 110', '150,000VNĐ', 2, '2022-03-29 08:07:19', '2022-03-29 08:07:19'),
+(9, 'Thay phanh xe', '50,000VNĐ', 2, '2022-03-29 08:07:50', '2022-03-29 08:07:50'),
+(10, 'Thay hộp xích', '300,000VNĐ', 2, '2022-03-29 08:08:11', '2022-03-29 08:08:11'),
+(11, 'Thay xích', '300,000VNĐ', 2, '2022-03-29 08:08:30', '2022-03-29 08:08:30'),
+(12, 'Thay yếm xe', '400,000VNĐ', 2, '2022-03-29 08:09:54', '2022-03-29 08:09:54'),
+(13, 'Bộ cao su để chân sau xe DREAM', '200,000VNĐ', 2, '2022-03-29 08:11:21', '2022-03-29 08:11:21'),
+(14, 'Ống Xả Lắp Wave nhỏ Đời đời đầu Honda', '200,000VNĐ', 2, '2022-03-29 08:12:40', '2022-03-29 08:12:40'),
+(15, 'Nhựa ốp sau tay lái Wave 2017-2020', '100,000VNĐ', 2, '2022-03-29 08:13:26', '2022-03-29 08:13:26'),
+(16, 'Nhựa ốp sau Tay lái / Gáy WAVE RS', '200,000VNĐ', 2, '2022-03-29 08:13:58', '2022-03-29 08:13:58'),
+(17, 'Nắp chắn nhiệt phải Wave S 100 zin honda', '65,000VNĐ', 2, '2022-03-29 08:14:35', '2022-03-29 08:14:35'),
+(18, 'Bộ ốc lốc máy xe Dream WAVE zin', '300,000VNĐ', 2, '2022-03-29 08:15:02', '2022-03-29 08:15:02'),
+(19, 'BEN TỰ ĐỘNG NÂNG YÊN XE MÁY', '300,000VNĐ', 2, '2022-03-29 08:15:02', '2022-03-29 08:15:02'),
+(20, 'Gác chân malay + bát cheo pô cnc lắp đặc ex150 và ex155 có tặng kèm ốc', '100,000VNĐ', 2, '2022-03-29 08:06:45', '2022-03-29 08:06:45'),
+(21, 'Bộ 2 Dây led siêu sáng 12V Xe Máy/Đạp điện /Mô tô', '100,000VNĐ', 2, '2022-03-29 08:06:45', '2022-03-29 08:06:45'),
+(22, 'Siêu Dính Keo Dán Cường Lực 2 Mặt 3M VHB 4229P', '100,000VNĐ', 2, '2022-03-29 08:06:45', '2022-03-29 08:06:45'),
+(23, 'Xi Đánh Bóng Cana xe máy, ô tô.', '100,000VNĐ', 2, '2022-03-29 08:06:45', '2022-03-29 08:06:45'),
+(24, 'Đèn LED báo số xe máy', '100,000VNĐ', 2, '2022-03-29 08:06:45', '2022-03-29 08:06:45'),
+(25, 'Đồng hồ điện tử uma dream KOSO UMA DREAM', '100,000VNĐ', 2, '2022-03-29 08:06:45', '2022-03-29 08:06:45'),
+(26, 'DÈ CHẮN BÙN KIỂU KTM 1 CHÂN Winner', '100,000VNĐ', 2, '2022-03-29 08:06:45', '2022-03-29 08:06:45'),
+(27, 'Siêu Dính Keo Dán Cường Lực 2 Mặt 3M VHB 4229P', '100,000VNĐ', 2, '2022-03-29 08:06:45', '2022-03-29 08:06:45'),
+(28, 'Gác chân malay + bát cheo pô cnc lắp đặc ex150 và ex155 ', '100,000VNĐ', 2, '2022-03-29 08:06:45', '2022-03-29 08:06:45'),
+(29, 'Gác chân malay', '100,000VNĐ', 8, '2022-04-01 00:35:47', '2022-04-01 00:35:47'),
+(30, 'BEN TỰ ĐỘNG NÂNG YÊN XE MÁY', '120,000VNĐ', 8, '2022-04-01 00:36:55', '2022-04-01 00:36:55'),
+(32, 'Siêu Dính Keo Dán Cường Lực 2 Mặt 3M VHB 4229P', '10,000VNĐ', 8, '2022-04-01 01:47:17', '2022-04-01 01:47:17'),
+(33, '1222', '222,222,222VNĐ', 2, '2022-04-05 08:20:49', '2022-04-05 08:20:49');
 
 -- --------------------------------------------------------
 
@@ -287,13 +355,14 @@ CREATE TABLE `tbl_hoa_don` (
 --
 
 INSERT INTO `tbl_hoa_don` (`id`, `tong_tien`, `ngay_lap`, `iMa_xe`, `iMa_cua_hang`, `trang_thai`, `created_at`, `updated_at`) VALUES
-(146, '1500000', '2022-03-26 03:24:36', 120, 2, 'dahoanthanh', '2022-03-25 20:23:27', '2022-03-25 20:24:36'),
-(147, '100000', '2022-03-26 03:29:51', 120, 2, 'dahoanthanh', '2022-03-25 20:29:24', '2022-03-25 20:29:51'),
-(148, '200000', '2022-03-26 03:33:24', 120, 2, 'dahoanthanh', '2022-03-25 20:32:59', '2022-03-25 20:33:24'),
-(149, '222222', '2022-03-26 04:10:13', 121, 2, 'dahoanthanh', '2022-03-25 21:08:42', '2022-03-25 21:10:13'),
-(150, '233333', '2022-03-26 06:48:12', 122, 2, 'dahoanthanh', '2022-03-25 23:46:07', '2022-03-25 23:48:12'),
-(151, '1000000', '2022-03-26 09:38:04', 123, 2, 'dahoanthanh', '2022-03-26 02:37:02', '2022-03-26 02:38:04'),
-(152, NULL, NULL, 123, 2, 'danhandon', '2022-03-26 02:43:38', '2022-03-26 02:44:13');
+(190, '1500000', '2022-04-05 16:17:46', 129, 2, 'dahoanthanh', '2022-04-05 09:17:26', '2022-04-05 09:17:46'),
+(191, '220000', '2022-04-05 16:19:16', 129, 8, 'dahoanthanh', '2022-04-05 09:18:12', '2022-04-05 09:19:16'),
+(193, '400000', '2022-01-07 19:29:11', 130, 2, 'dahoanthanh', '2022-04-07 12:28:35', '2022-04-07 12:29:11'),
+(194, '300000', '2022-04-07 20:22:57', 132, 2, 'dahoanthanh', '2022-04-07 13:22:39', '2022-04-07 13:22:57'),
+(195, '250000', '2022-04-07 20:25:32', 132, 2, 'dahoanthanh', '2022-04-07 13:25:02', '2022-04-07 13:25:32'),
+(196, '250000', '2022-03-07 20:25:32', 132, 2, 'dahoanthanh', '2022-04-07 13:25:02', '2022-04-07 13:25:32'),
+(197, '250000', '2022-04-08 16:09:49', 139, 2, 'dahoanthanh', '2022-04-08 08:50:30', '2022-04-08 09:09:49'),
+(199, NULL, NULL, 139, 8, 'chonhan', '2022-04-08 09:12:58', '2022-04-08 09:12:58');
 
 -- --------------------------------------------------------
 
@@ -324,7 +393,25 @@ INSERT INTO `tbl_khach_hang` (`id`, `ho_ten`, `so_dien_thoai`, `so_CMND`, `nam_s
 (136, 'Phạm Huy Hoàng', '0339845111', '123456789044', '1990', 'Thái Bình', '2022-03-01', 'Thái Bình', '2022-03-25 21:08:18', '2022-03-25 21:08:18'),
 (137, 'Nguyễn Thu Phương', '0339845333', '033984533377', '2002', 'Hà Nội', '2022-03-01', 'Hà Nội', '2022-03-25 23:45:50', '2022-03-25 23:45:50'),
 (138, 'Phạm Huy Hoàng', '0339845114', '033984511477', '2001', 'Thái Bình', '2022-03-03', 'Thái Bình', '2022-03-25 23:51:50', '2022-03-25 23:51:50'),
-(139, 'Phạm Thanh Hương', '0339845499', '033984549999', '1996', 'Hà Nội', '2014-06-23', 'Hà Nội', '2022-03-26 02:36:29', '2022-03-26 02:36:29');
+(139, 'Phạm Thanh Hương', '0339845499', '033984549999', '1996', 'Hà Nội', '2014-06-23', 'Hà Nội', '2022-03-26 02:36:29', '2022-03-26 02:36:29'),
+(140, 'Phạm Thanh Hương', '0339845222', '123456781111', '1993', 'Thái Bình', '2022-04-01', 'Thái Bình', '2022-04-01 20:52:03', '2022-04-01 20:52:03'),
+(141, 'Phạm Ngoãn', '0339845112', '123456789022', '1997', '123456789022', '2022-04-01', 'Thái Bình', '2022-04-03 06:35:22', '2022-04-03 06:35:22'),
+(142, 'Phạm Huy Hoàng3', '0339845144', '033984514455', '2002', '033984514455', '2022-03-31', 'Thái Bình', '2022-04-03 09:30:59', '2022-04-03 09:30:59'),
+(143, 'Phạm Huy Hoàng', '0339845133', '123456789666', '2003', '123456789666', '2022-04-01', '123456789666', '2022-04-03 09:41:12', '2022-04-03 09:41:12'),
+(144, 'Phạm Huy Hoàng', '0339845155', '033984515555', '2002', '033984515555', '2022-04-01', '033984515555', '2022-04-03 10:02:15', '2022-04-03 10:02:15'),
+(145, 'Phạm Huy Hoàng', '0339845113', '033984511355', '1988', 'Hà Nội', '2022-04-01', 'Hà Nội', '2022-04-05 09:17:03', '2022-04-05 09:17:03'),
+(146, 'Phạm Ngoãn', '0339845116', '033984511666', '1989', 'Hà Nội', '2022-04-06', 'Hà Nội', '2022-04-05 09:20:53', '2022-04-05 09:20:53'),
+(147, 'Phạm Huy Hoàng', '0339845112', '123456789033', '2002', 'Thái Bình', '2022-04-01', 'Thái Bình', '2022-04-07 09:02:13', '2022-04-07 09:02:13'),
+(148, 'Phạm Huy Hoàng', '0339845133', '033984513399', '1986', 'Hà Nội', '2022-04-01', 'Thái Bình', '2022-04-07 12:27:44', '2022-04-07 12:27:44'),
+(149, 'Nguyễn Hồng Tươi', '0339845144', '033984514466', '1983', 'Hà Nội', '2022-04-01', 'Hà Nội', '2022-04-07 12:43:39', '2022-04-07 12:43:39'),
+(150, 'Nguyễn Thanh Hằng', '0339845155', '123456789035', '2003', 'Hải Dương', '2022-04-01', 'Hải Dương', '2022-04-07 12:48:16', '2022-04-07 12:48:16'),
+(151, 'Trần Văn Sơn', '0339845166', '033984516677', '1997', 'Thái Bình', '2022-04-01', 'Thái Nguyên', '2022-04-07 12:49:41', '2022-04-07 12:49:41'),
+(152, 'Phạm Huy Hoàng', '0339845155', '033984515599', '1989', 'Hà Nội', '2022-04-01', 'Hà Nội', '2022-04-07 13:01:16', '2022-04-07 13:01:16'),
+(153, 'Phạm Ngoãn', '0339845177', '033984517777', '1990', 'Thái Bình', '2022-04-01', 'Hà Nội', '2022-04-07 13:02:31', '2022-04-07 13:02:31'),
+(154, 'Nguyễn Thị Tuyết', '0339845188', '123456789077', '2000', 'Hà Nội', '2022-04-01', 'Hà Nội', '2022-04-07 13:03:46', '2022-04-07 13:03:46'),
+(155, 'Nguyễn Thu Phương', '0339845166', '033984516600', '1986', 'Thái Bình', '2022-04-01', 'Thái Bình', '2022-04-07 13:13:12', '2022-04-07 13:13:12'),
+(156, 'Trần Văn Sơn', '0339845444', '033984544488', '1999', 'Thái Bình', '2022-04-01', 'Hà Nội', '2022-04-08 08:45:13', '2022-04-08 08:45:13'),
+(157, 'Nguyễn Thanh Tùng', '0339845555', '033984555533', '2003', 'Hà Nội', '2022-04-01', 'Hà Nội', '2022-04-08 08:48:08', '2022-04-08 08:48:08');
 
 -- --------------------------------------------------------
 
@@ -540,10 +627,18 @@ CREATE TABLE `tbl_xe` (
 --
 
 INSERT INTO `tbl_xe` (`id`, `so_loai`, `mau_son`, `dung_tich`, `bien_so`, `dang_ky_tai`, `so_may`, `so_khung`, `bao_hiem_xe`, `ngay_mua`, `ngay_ban`, `gia_mua`, `gia_ban`, `gia_dang_web`, `khoang_gia`, `iMa_trang_thai`, `iMa_khach_hang_mua_xe`, `iMa_khach_hang_ban_xe`, `iMa_dong_xe`, `nam_dang_ky`, `so_km_da_di`, `ghi_chu`, `created_at`, `updated_at`) VALUES
-(120, '12345678', 'Màu xanh', '50cc', '17F-207.32', 'Thái Bình', '17F03939', '42G8E94120', 'checked', '2022-03-26 03:22:47', '2022-03-26 04:00:26', '11111111', '40000000', '20Tr', 'Từ 20Đ - 30Đ', 3, 135, 134, 3, '2022', '10000km', NULL, '2022-03-25 20:22:47', '2022-03-25 21:00:26'),
-(121, '42G8E941', 'Màu xanh', '50cc', '17F-216.35', 'Thái Bình', '17F03939', '42G8E94120', 'checked', '2022-03-26 04:08:18', '2022-03-26 06:51:50', '11111111', '10001110', '21tr', 'Từ 20Đ - 30Đ', 3, 138, 136, 4, '2021', '140000km', NULL, '2022-03-25 21:08:18', '2022-03-25 23:51:50'),
-(122, '42G8E941', 'Màu xanh', '50cc', '17F-216.36', 'Thái Bình', '17F03939', '42G8E94120', 'checked', '2022-03-26 06:45:50', NULL, '2000000', NULL, '20tr', 'Dưới 10Đ', 2, NULL, 137, 3, '2021', '100000km', NULL, '2022-03-25 23:45:50', '2022-03-25 23:49:21'),
-(123, '42G8E941', 'Màu xanh', '50cc', '17F-207.38', 'Hà Nội', '17F03939', '42G8E94120', 'checked', '2022-03-26 09:36:29', NULL, '14000000', NULL, NULL, NULL, 6, NULL, 139, 3, NULL, NULL, NULL, '2022-03-26 02:36:29', '2022-03-26 02:43:38');
+(129, '42G8E941', 'Màu xanh', '50cc', '17F-207.35', 'Hà Nội', 'F1145555', '42G8E94120', 'checked', '2022-03-05 16:17:03', '2022-04-05 16:20:53', '10000000', '30500000', NULL, NULL, 3, 146, 145, 4, NULL, NULL, NULL, '2022-04-05 09:17:03', '2022-04-05 09:20:53'),
+(130, '42G8E941', 'Màu xanh', '50cc', '17F-207.32', 'Thái Bình', '17F03939', '42G8E94120', 'checked', '2022-01-07 16:02:13', '2022-04-07 20:13:12', '12000000', '20000000', '20tr', 'Từ 20Đ - 30Đ', 3, 155, 147, 4, '2018', '230000km', NULL, '2022-04-07 09:02:13', '2022-04-07 13:13:13'),
+(131, '42G8E945', 'Màu xanh', '50cc', '17F-207.37', 'Hà Nội', '17F03939', '42G8E94120', 'checked', '2022-04-07 19:27:44', NULL, '12000000', NULL, '40tr', 'Từ 10Đ - 20Đ', 2, NULL, 148, 4, '2020', '20000km', NULL, '2022-04-07 12:27:44', '2022-04-07 12:58:03'),
+(132, '42G8E941', 'Màu xanh', '50cc', '17F-207.34', 'Hà Nội', '17F03939', '42G8E94120', 'checked', '2022-03-07 19:43:39', '2022-04-07 20:34:51', '14000000', '25000000', NULL, NULL, 3, 139, 149, 2, NULL, NULL, NULL, '2022-04-07 12:43:39', '2022-04-07 13:34:51'),
+(133, '42G8E9411360', 'Màu xanh', '70cc', '17F-207.35', 'Hà Nội', '17F03939', '42G8E94120', 'checked', '2022-04-07 19:46:39', '2022-04-07 20:35:41', '13000000', '20000000', '30tr', 'Từ 20Đ - 30Đ', 3, 135, 134, 4, '2020', '140000km', NULL, '2022-04-07 12:46:39', '2022-04-07 13:35:41'),
+(134, '42G8E941', 'Màu xanh', '80cc', '17F-207.36', 'Thái Bình', '17F03939', '42G8E94120', 'checked', '2022-04-07 19:48:16', NULL, '34000000', NULL, '40tr', 'Từ 10Đ - 20Đ', 2, NULL, 150, 3, '2021', '2000km', NULL, '2022-04-07 12:48:16', '2022-04-07 13:04:55'),
+(135, '42G8E946', 'Màu đỏ', '90cc', '17F-207.32', 'Thái Bình', '17F03939', '42G8E94120', 'checked', '2022-01-07 19:49:41', '2022-04-07 20:22:03', '16000000', '30000000', '30tr', 'Từ 20Đ - 30Đ', 3, 137, 151, 3, '2021', '20000km', NULL, '2022-04-07 12:49:41', '2022-04-07 13:22:03'),
+(136, '42G8E941', 'Màu xanh', '50cc', '17F-207.36', 'Hà Nội', '17F03939', '42G8E94120', 'checked', '2022-02-07 20:01:16', NULL, '15000000', NULL, '30tr', 'Từ 20Đ - 30Đ', 2, NULL, 152, 4, '2020', '4000km', NULL, '2022-04-07 13:01:16', '2022-04-07 13:06:15'),
+(137, '42G8E941', 'Màu xanh', '50cc', '17F-207.36', 'Thái Bình', '17F03939', '42G8E94120', 'checked', '2022-04-07 20:02:31', '2022-04-07 20:36:15', '13000000', '30000000', '20tr', 'Từ 20Đ - 30Đ', 3, 140, 153, 3, '2022', '3000km', NULL, '2022-04-07 13:02:31', '2022-04-07 13:36:15'),
+(138, '42G8E949', 'Màu xanh', '90cc', '17F-207.38', 'Thái Bình', '17F03930', '42G8E9410888', 'checked', '2022-02-07 20:03:46', '2022-04-07 20:20:15', '16000000', '30000000', '30tr', 'Từ 20Đ - 30Đ', 3, 135, 154, 4, '2013', '14000km', NULL, '2022-04-07 13:03:46', '2022-04-07 13:20:15'),
+(139, '42G8E941', 'Màu xanh', '50cc', '17F-207.36', 'Thái Bình', '17F03939', '42G8E94120', NULL, '2022-04-08 15:46:28', NULL, '15500000', NULL, NULL, NULL, 6, NULL, 156, 3, NULL, NULL, NULL, '2022-04-08 08:45:13', '2022-04-08 09:12:58'),
+(140, '42G8E941', 'Màu xanh', '50cc', '17F-207.37', 'Thái Bình', '17F03939', '42G8E94120', 'checked', '2022-04-08 15:48:08', NULL, '16000000', NULL, NULL, NULL, 1, NULL, 157, 2, NULL, NULL, NULL, '2022-04-08 08:48:08', '2022-04-08 09:12:29');
 
 -- --------------------------------------------------------
 
@@ -567,11 +662,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '0339845495', NULL, '$2y$10$jcu48/JF6kLae4HsM.q7i.gwendm8ngTK3aEN3CJflVqDwPiYeI3C', '6Nh9c2XY6gAYJNSu9XGug5oLeZjF7EVXd0Z45V4Cxqq02CFrr5rfza6XrlVr', '2022-02-25 23:21:38', '2022-03-25 10:11:53'),
+(1, 'admin', '0339845495', NULL, '$2y$10$jcu48/JF6kLae4HsM.q7i.gwendm8ngTK3aEN3CJflVqDwPiYeI3C', '0ggBSeZJ1f0P9Iu6ErwmGkq0ELnKHBOFQnkJ9BbZJIkx6nGpl4qCwOMFrkqe', '2022-02-25 23:21:38', '2022-03-25 10:11:53'),
 (2, 'Cửa hàng Đức Thắng', '0123456789', NULL, '$2y$10$yMqU1Grcd96MFfFGmNCsseV0xUlj3x7Ea18ulfxb9kpqgKJU9ieCi', NULL, '2022-02-25 23:26:38', '2022-03-20 03:59:50'),
 (3, 'Pham Thị Ngoãn', '0123456783', NULL, '$2y$10$gvDcufcW7Q76ZB5xKfq/QuUV.pX2hv6XayiSx3bwTP1RHjEWVFi7O', NULL, '2022-03-03 00:58:23', '2022-03-03 00:58:23'),
 (4, 'Cửa hàng Hoàng Hưng', '0339845401', NULL, '$2y$10$yTUEysaxPyKkuzlFoxC5GO.HSwqSHI5YbUGXKB40fpc5Xgj3aqZkG', NULL, '2022-03-03 01:22:24', '2022-03-25 20:07:06'),
-(5, 'Cửa hàng Huy Hùng', '0987654321', NULL, '$2y$10$dZXReC6U3k4DjVjcbIIoEerLJEzlyGfOMkvVuN4jZ6oYuHHgiWRIu', 'J0LnsbuFnxwE9wxz81WNqwKbwJQKiAwglLN0RM5UedVQleK4CpY4gFrDm8N5', '2022-03-04 20:15:18', '2022-03-25 20:07:27'),
+(5, 'Cửa hàng Huy Hùng', '0987654321', NULL, '$2y$10$dZXReC6U3k4DjVjcbIIoEerLJEzlyGfOMkvVuN4jZ6oYuHHgiWRIu', 'eqJt2fTwHd5HRp1ogJGcQegut22XLHdhCwvn3zDZRT7oByE7Nws77Y7YUzDd', '2022-03-04 20:15:18', '2022-03-25 20:07:27'),
 (6, 'Pham Thị Ngoãn', '0339845491', NULL, '$2y$10$mNO55rx767/q69SGRQZqCeU/omuHDi1NoGAn6WCRbZWbYdDcPYpsK', NULL, '2022-03-06 03:51:43', '2022-03-06 03:51:43'),
 (8, 'Cửa hàng Hoàng Đức', '0398454001', NULL, '$2y$10$3xVwaAnHr/VcKFYbys1W9efw.fKDOen8goZPg9ijzLR9Fke7OR.hm', NULL, '2022-03-10 08:20:31', '2022-03-21 00:46:02'),
 (9, 'Cửa hàng Hoàng Nhất', '0339845402', NULL, '$2y$10$ZxPMv.kTECGQ1UGgQVYrqeE8jgl800pqbaEUdVcNmNvpdM1Gb9AP6', NULL, '2022-03-10 08:22:34', '2022-03-10 08:22:34'),
@@ -637,13 +732,21 @@ ALTER TABLE `tbl_binh_luan`
 --
 ALTER TABLE `tbl_chi_tiet_hoa_don`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tbl_chi_tiet_hoa_don_ima_hoa_don_foreign` (`iMa_hoa_don`);
+  ADD KEY `tbl_chi_tiet_hoa_don_ima_hoa_don_foreign` (`iMa_hoa_don`),
+  ADD KEY `tbl_chi_tiet_hoa_don_sma_dich_vu_foreign` (`sMa_dich_vu`);
 
 --
 -- Indexes for table `tbl_cua_hang_lien_ket`
 --
 ALTER TABLE `tbl_cua_hang_lien_ket`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_dich_vu`
+--
+ALTER TABLE `tbl_dich_vu`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tbl_dich_vu_scua_hang_foreign` (`sCua_hang`);
 
 --
 -- Indexes for table `tbl_dong_xe`
@@ -748,7 +851,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -760,25 +863,31 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `tbl_anh`
 --
 ALTER TABLE `tbl_anh`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=948;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1009;
 
 --
 -- AUTO_INCREMENT for table `tbl_binh_luan`
 --
 ALTER TABLE `tbl_binh_luan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `tbl_chi_tiet_hoa_don`
 --
 ALTER TABLE `tbl_chi_tiet_hoa_don`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
 
 --
 -- AUTO_INCREMENT for table `tbl_cua_hang_lien_ket`
 --
 ALTER TABLE `tbl_cua_hang_lien_ket`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tbl_dich_vu`
+--
+ALTER TABLE `tbl_dich_vu`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_dong_xe`
@@ -796,13 +905,13 @@ ALTER TABLE `tbl_hang_xe`
 -- AUTO_INCREMENT for table `tbl_hoa_don`
 --
 ALTER TABLE `tbl_hoa_don`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
 -- AUTO_INCREMENT for table `tbl_khach_hang`
 --
 ALTER TABLE `tbl_khach_hang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT for table `tbl_loai_anh`
@@ -838,7 +947,7 @@ ALTER TABLE `tbl_trang_thai`
 -- AUTO_INCREMENT for table `tbl_xe`
 --
 ALTER TABLE `tbl_xe`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -868,7 +977,14 @@ ALTER TABLE `tbl_binh_luan`
 -- Constraints for table `tbl_chi_tiet_hoa_don`
 --
 ALTER TABLE `tbl_chi_tiet_hoa_don`
-  ADD CONSTRAINT `tbl_chi_tiet_hoa_don_ima_hoa_don_foreign` FOREIGN KEY (`iMa_hoa_don`) REFERENCES `tbl_hoa_don` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `tbl_chi_tiet_hoa_don_ima_hoa_don_foreign` FOREIGN KEY (`iMa_hoa_don`) REFERENCES `tbl_hoa_don` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tbl_chi_tiet_hoa_don_sma_dich_vu_foreign` FOREIGN KEY (`sMa_dich_vu`) REFERENCES `tbl_dich_vu` (`id`);
+
+--
+-- Constraints for table `tbl_dich_vu`
+--
+ALTER TABLE `tbl_dich_vu`
+  ADD CONSTRAINT `tbl_dich_vu_scua_hang_foreign` FOREIGN KEY (`sCua_hang`) REFERENCES `tbl_cua_hang_lien_ket` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tbl_dong_xe`

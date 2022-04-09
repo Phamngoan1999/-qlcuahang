@@ -74,7 +74,7 @@ class DichVuController extends Controller
 
     public function getListDichVuSelectUpdate(Request $request)
     {
-        $dich_vu = $this->phuTungService->listPhuTungNotFinalAndCuaHang($request->idCuaHangSelect);
+        $dich_vu = $this->phuTungService->listPhuTungNotFinalAndCuaHangUpdate($request->idCuaHangSelect,$request->idHoaDonSelect);
         return view('dichvu.list_phu_tung',compact('dich_vu'));
     }
 }

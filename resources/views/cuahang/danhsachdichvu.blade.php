@@ -10,7 +10,12 @@
                         <div class="row" style="padding-top: 20px;">
                             <div class="col-md-3">
                                 <div class="form-group">
-{{--                                    <button type="submit" class="btn btn-primary" id="add-hang-xe" >Tìm kiếm</button>--}}
+                                    <input type="text" class="form-control ten_dich_vu-search" name="ten_dich_vu_search" placeholder="Dịch vụ">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" id="add-hang-xe" >Tìm kiếm</button>
                                 </div>
                             </div>
                         </div>
@@ -47,6 +52,13 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="paginate float-right text-right" style="padding: 10px 0px;">
+                                    {{$ListService->appends(request()->all())->links()}}
+                                </div>
                             </div>
                         </div>
                     </div>

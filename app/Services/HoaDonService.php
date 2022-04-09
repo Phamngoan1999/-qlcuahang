@@ -65,8 +65,8 @@ class HoaDonService
 
     public function update($request,$id)
     {
-        $hoadon = $this->hoaDonRepository->find(183);
-        PhuTung::whereNotIn("id",$request->idPhuTung)->delete();
+        $hoadon = $this->hoaDonRepository->find($id);
+        PhuTung::whereNotIn("id",$request->idPhuTung)->where('iMa_hoa_don',$id)->delete();
         foreach ($request->idPhuTung as $iterm)
         {
             $phutung = $this->phuTungRepository->find($iterm);

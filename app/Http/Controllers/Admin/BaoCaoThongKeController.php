@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\HoaDon;
 use App\Models\Xe;
 use App\Services\HoaDonService;
 use App\Services\XeService;
@@ -22,9 +23,42 @@ class BaoCaoThongKeController extends Controller
 
     public function index(Request $request)
     {
+        $baocao = Xe::selectRaw('year(ngay_mua) as year, monthname(ngay_mua) month, sum(gia_mua) tonggiamua, sum(gia_ban) tonggiaban')
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'desc')
+            ->get();
+        $baocaoSuaChua = HoaDon::selectRaw('year(ngay_lap) as year, monthname(ngay_lap) month, sum(tong_tien) tongsuachua')
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'desc')
+            ->get();
+        $listMonth = array('January','February','March','April','May','June','July','August','September','October','November','December');
+        foreach ($listMonth as $iterm)
+        {
+            $list[$iterm] = array(
+                'tonggiamua'=>0,
+                'tonggiaban'=>0,
+                'tongsuachua'=>0
+            );
+        }
+        foreach ($baocao as $iterm)
+        {
+            if($iterm->year == "2022")
+            {
+                $list[$iterm->month]['tonggiamua'] = $iterm->tonggiamua;
+                $list[$iterm->month]['tonggiaban'] = $iterm->tonggiaban;
+            }
+        }
+
+        foreach ($baocaoSuaChua as $iterm)
+        {
+            if($iterm->year == "2022")
+            {
+                $list[$iterm->month]['tongsuachua'] = $iterm->tongsuachua;
+            }
+        }
         $tongtienmua = $this->xeService->tinhtongtiensuachua($request);
         $tongtienSuaChua = $this->hoaDonService->tongtienSuaChua($request);
-        return view('admin.bacocaothongke',compact('tongtienmua','tongtienSuaChua'));
+        return view('admin.bacocaothongke',compact('tongtienmua','tongtienSuaChua','list'));
     }
 
     public function baocaoxemua(Request $request)

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class DichVu extends Model
 {
@@ -25,5 +26,11 @@ class DichVu extends Model
     public function scopeWithCuaHang($query, $id)
     {
         return $query->where('sCua_hang', $id);
+    }
+
+    public function scopeWithDichVuCuaHang($query)
+    {
+        $inforCuaHang = CuaHang::where('so_dien_thoai',Auth::user()->email)->first();
+        return $query->where('sCua_hang',$inforCuaHang->id);
     }
 }

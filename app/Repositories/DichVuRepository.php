@@ -17,4 +17,8 @@ class DichVuRepository extends BaseRepository
         return $this->model->withCuaHang($id)->paginate(10);
     }
 
+    public function listDichVuCuaHang()
+    {
+        return $this->model->withDichVuCuaHang()->paginate(10);
+    }
 }

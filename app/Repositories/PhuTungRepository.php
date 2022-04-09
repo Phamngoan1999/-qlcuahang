@@ -26,6 +26,11 @@ class PhuTungRepository extends BaseRepository
         return $this->model->listPhuTungNotFinalAndCuaHang($idCuaHang);
     }
 
+    public function listPhuTungNotFinalAndCuaHangUpdate($idCuaHang,$idHoadon)
+    {
+        return $this->model->listPhuTungNotFinalAndCuaHangUpdate($idCuaHang,$idHoadon);
+    }
+
     public function deleteHoaDonNull()
     {
         return $this->model->deleteHoaDonNull();

@@ -40,7 +40,7 @@ class QuanlySuaChua extends Controller
 
     public function danhsachdichvu()
     {
-        $ListService = $this->dichVuService->all();
+        $ListService = $this->dichVuService->listDichVuCuaHang();
         return view('cuahang.danhsachdichvu', compact('ListService'));
     }
 
