@@ -53,6 +53,11 @@ import comfirmAlert from "../comfirm.js";
             let url = $(this).attr('data-url');
             base.callApiWithFormData( url, METHOD_POST, dataForm)
                 .done(function (response) {
+                    if(response == "gia-ban-khong-hop-le")
+                    {
+                        $(".error-gia_ban").html("Giá bán không hợp lệ");
+                        return false;
+                    }
                     comfirmAlert.showSuccessMessageAlert('Lưu thông tin thành công');
                     $('.content-wrapper').html(response);
                 })

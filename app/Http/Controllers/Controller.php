@@ -15,4 +15,13 @@ class Controller extends BaseController
     {
         return view("hethong.404");
     }
+
+    public function responseSuccsess($resource, $message, $status)
+    {
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+            'resource' => $resource
+        ], $status);
+    }
 }

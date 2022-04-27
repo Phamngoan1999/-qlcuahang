@@ -27,6 +27,14 @@ class DichVuService
         return $this->dichVuRepository->listDichVuCuaHang();
     }
 
+    public function search($request)
+    {
+        $dataSearch = array(
+            'ten_dich_vu_search' => $request->ten_dich_vu_search
+        );
+        return $this->dichVuRepository->search($dataSearch);
+    }
+
     public function create($request)
     {
 
@@ -62,5 +70,10 @@ class DichVuService
     {
         $id = $request->iMa_cua_hang;
         return $this->dichVuRepository->getListDichVu($id);
+    }
+
+    public function finddichVuChitietHoaDon($id)
+    {
+        return $this->dichVuRepository->finddichVuChitietHoaDon($id);
     }
 }

@@ -21,6 +21,18 @@ class DichVuController extends Controller
         $this->phuTungService = $phuTungService;
     }
 
+    public function create(DichVuCreateRequest $request)
+    {
+        $this->dichVuService->create($request);
+        return redirect()->route('quanlysuachua.quanlydichvu')->with('message', 'Lưu thông tin thành công');
+    }
+
+    public function searchDichVu(Request $request)
+    {
+        $listService = $this->dichVuService->search($request);
+        return view('cuahang.list_dich_vu_theo_cua_hang',compact('listService'));
+    }
+
     public function show($id)
     {
         $dichvu = $this->dichVuService->show($id);
@@ -29,7 +41,8 @@ class DichVuController extends Controller
 
     public function update(DichVuCreateRequest $request,$id)
     {
-        return $this->dichVuService->update($request,$id);
+        $this->dichVuService->update($request,$id);
+        return redirect()->route('quanlysuachua.quanlydichvu')->with('message', 'Update thông tin thành công');
     }
 
     public function getListDichVu(Request $request)
@@ -51,7 +64,12 @@ class DichVuController extends Controller
 
     public function delete($id)
     {
-        return $this->dichVuService->delete($id);
+        if(count($this->dichVuService->finddichVuChitietHoaDon($id)) > 0)
+        {
+            return redirect()->route('quanlysuachua.quanlydichvu')->with('message-error', 'Không thể xóa thông tin');
+        }
+        $this->dichVuService->delete($id);
+        return redirect()->route('quanlysuachua.quanlydichvu')->with('message', 'Xóa thông tin thành công');
     }
 
     public function getListDichVuSelect(Request $request)

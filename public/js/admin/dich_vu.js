@@ -4,20 +4,21 @@ import comfirmAlert from "../comfirm.js";
 
 (function ($, window, document) {
     $(function () {
-        $(document).on('click', '#add-dich-vu', function (event) {
-            let dataForm = new FormData($('#form-add-dich-vu-post')[0]);
-            let url = $(this).attr('data-url');
-            base.callApiWithFormData(url, METHOD_POST, dataForm)
-                .done(function (response) {
-                    comfirmAlert.showSuccessMessageAlert("Thêm dịch vụ thành công");
-                    $('#add-dich-vu-modal').modal("hide");
-                })
-                .fail(function (response) {
-                    let errors = response.responseJSON.errors;
-                    for (let key in errors) {
-                        $(".error-" + key).html(errors[key]);
-                    }
-                });
+        $(document).on('click', '#add-dich-vu', function () {
+            if($('.ten_dich_vu_create').val() == ''){
+                $('.error-ten_dich_vu').html("Vui lòng nhập tên dịch vụ")
+                return false;
+            }
+            let gia = $('.gia_dich_vu_create').val();
+            if(gia == ''){
+                $('.error-gia_dich_vu').html("Vui lòng đơn giá dịch vụ")
+                return false;
+            }
+            if(gia.substr(0, 1) == 0){
+                $('.error-gia_dich_vu').html("Vui lòng chính xác đơn giá dịch vụ")
+                return false;
+            }
+            $('#form-add-dich-vu-post').submit();
         });
 
         $(document).on('click', '.model-update-dich-vu', function () {
@@ -30,13 +31,46 @@ import comfirmAlert from "../comfirm.js";
         });
 
         $(document).on('click', '#update-dich-vu', function () {
-            let dataForm = new FormData($('#form-update-dich-vu-post')[0]);
+
+            if($('.ten_dich_vu_update').val() == ''){
+                $('.error-ten_dich_vu').html("Vui lòng nhập tên dịch vụ")
+                return false;
+            }
+            let gia = $('.gia_dich_vu_update').val();
+            if(gia == ''){
+                $('.error-gia_dich_vu').html("Vui lòng đơn giá dịch vụ")
+                return false;
+            }
+            if(gia.substr(0, 1) == 0){
+                $('.error-gia_dich_vu').html("Vui lòng chính xác đơn giá dịch vụ")
+                return false;
+            }
+            $('#form-update-dich-vu-post').submit();
+
+
+            // let dataForm = new FormData($('#form-update-dich-vu-post')[0]);
+            // let url = $(this).attr('data-url');
+            // dataForm.append('_method', METHOD_PATCH);
+            // base.callApiWithFormData(url, METHOD_POST, dataForm)
+            //     .done(function (response) {
+            //         comfirmAlert.showSuccessMessageAlert("Update dịch vụ thành công");
+            //         $('#dich-vu-update-modal').modal("hide");
+            //     })
+            //     .fail(function (response) {
+            //         let errors = response.responseJSON.errors;
+            //         for (let key in errors) {
+            //             $(".error-" + key).html(errors[key]);
+            //         }
+            //     });
+        });
+
+        $(document).on('click','#tim-kiem-dich-vu', function (){
+            let dataForm = $('#form_dich_vu_search').serialize();
             let url = $(this).attr('data-url');
-            dataForm.append('_method', METHOD_PATCH);
-            base.callApiWithFormData(url, METHOD_POST, dataForm)
+            loading();
+            base.callApi(url, METHOD_GET, dataForm)
                 .done(function (response) {
-                    comfirmAlert.showSuccessMessageAlert("Update dịch vụ thành công");
-                    $('#dich-vu-update-modal').modal("hide");
+                    $('#table-row').html(response);
                 })
                 .fail(function (response) {
                     let errors = response.responseJSON.errors;
@@ -47,22 +81,40 @@ import comfirmAlert from "../comfirm.js";
         });
 
         $(document).on('click', '.xoa-dich-vu', function () {
-            let deleteUrl = $(this).attr('data-url');
+            let idDichVu = $(this).attr('data-id');
             comfirmAlert.confirm()
                 .then(result => {
                     if (result) {
-                        base.callApi(deleteUrl, METHOD_DELETE)
-                            .done(function (response) {
-                                if (response == "khong-the-xoa") {
-                                    comfirmAlert.showErrorMessageAlert("Không thể xóa loại xe");
-                                    return false;
-                                }
-                                comfirmAlert.showSuccessMessageAlert("Xóa Loại xe thành công");
-                                $('#danh-sach-loai-xe').html(response);
-                            });
+                        $('#delete-dich-vu-form-'+idDichVu).submit();
                     }
                 });
         });
+
+        $(document).on('click', '.paginate-page a', function(e) {
+            e.preventDefault();
+            let url_search = $(this).attr('href');
+            getPosts(url_search);
+        });
+
+        function loading()
+        {
+            let url_load = window.location.origin+'/Logo/loading.gif';
+            let html = "<tr>\
+                            <td colspan='5' class='text-center'>\
+                                <img src='"+url_load+"' >\
+                            </td>\
+                        </tr>";
+            $('.danh-sach-load').html(html);
+        }
+
+        function getPosts(url_search)
+        {
+            loading();
+            base.callApi( url_search, METHOD_GET)
+                .done(function (response) {
+                    $('#table-row').html(response);
+                })
+        }
 
         $(document).on('click','#add-phu-tung',function() {
             $('.error').html("");

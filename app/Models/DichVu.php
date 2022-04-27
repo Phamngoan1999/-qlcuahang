@@ -33,4 +33,16 @@ class DichVu extends Model
         $inforCuaHang = CuaHang::where('so_dien_thoai',Auth::user()->email)->first();
         return $query->where('sCua_hang',$inforCuaHang->id);
     }
+
+    public function scopeWithSearch($query,$data)
+    {
+        $inforCuaHang = CuaHang::where('so_dien_thoai',Auth::user()->email)->first();
+        return $query->where('ten_dich_vu','like', '%'.$data['ten_dich_vu_search'].'%')
+            ->orWhere('gia_dich_vu','like', '%'.$data['ten_dich_vu_search'].'%');
+    }
+
+    public function finddichVuChitietHoaDon($id)
+    {
+        return PhuTung::where('sMa_dich_vu',$id)->get();
+    }
 }

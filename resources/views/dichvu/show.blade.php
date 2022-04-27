@@ -1,13 +1,15 @@
-<form id="form-update-dich-vu-post">
+<form id="form-update-dich-vu-post" action="{{route('quanlysuachua.update-dich-vu',$dichvu->id)}}" method="POST">
+    @csrf
+    @method('patch')
     <div class="modal-body">
         <div class="form-group">
             <label for="">Tên dịch vụ</label>
-            <input type="text" class="form-control ten_dich_vu" name="ten_dich_vu" placeholder="Dịch vụ" value="{{$dichvu->ten_dich_vu}}">
+            <input type="text" class="form-control ten_dich_vu_update" name="ten_dich_vu" placeholder="Dịch vụ" value="{{$dichvu->ten_dich_vu}}">
             <div class="error error-ten_dich_vu"></div>
         </div>
         <div class="form-group">
             <label for="">Giá dịch vụ</label>
-            <input type="text" class="form-control gia_dich_vu" name="gia_dich_vu" placeholder="Giá dịch vụ" maxlength="14" value="{{$dichvu->gia_dich_vu}}">
+            <input type="text" class="form-control gia_dich_vu_update" name="gia_dich_vu" placeholder="Giá dịch vụ" maxlength="14" value="{{$dichvu->gia_dich_vu}}">
             <div class="error error-gia_dich_vu"></div>
         </div>
     </div>

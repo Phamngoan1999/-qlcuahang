@@ -104,6 +104,17 @@ class KhachHangService{
 
     public function luuGiaDichBan($request,$idXe)
     {
+        $tien = 0;
+        $xe = $this->xeRepository->find($idXe);
+        $tien = $tien + $xe->gia_mua;
+        if (!empty($xe->hoadon))
+        {
+            foreach ($xe->hoadon as $iterm)
+            {
+                $tien += $iterm->tong_tien;
+            }
+        }
+        if ((double)format_money_insert_db($request->gia_ban) < (double)$tien) return "gia-ban-khong-hop-le";
         $dataXe =  array(
             'updated_at' => now(),
             'gia_ban' => format_money_insert_db($request->gia_ban),
@@ -124,7 +135,7 @@ class KhachHangService{
             $khachhang = $this->khachHangRepository->create($dataKhachHang);
             $dataXe['iMa_khach_hang_mua_xe'] = $khachhang->id;
         }
-        $xeUpdate = $this->xeRepository->update($dataXe,$idXe);
+        $this->xeRepository->update($dataXe,$idXe);
         $xe = $this->xeRepository->find($idXe);
         $files = $request->file('files_anh_giay_to');
         foreach ($files as $key => $file)

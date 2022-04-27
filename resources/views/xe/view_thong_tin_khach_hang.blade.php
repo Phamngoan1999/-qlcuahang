@@ -124,7 +124,6 @@
                 @if(empty($inforXe[0]['iMa_khach_hang_mua_xe']))
                     <button type="button" id="them-khach-hang-mua-xe" data-url="{{route("quanlykhachhang.luuGiaDichBan_dacothongtinkhachhang",$idXe)}}" class="btn btn-primary" >Lưu thông tin</button>
                 @endif
-                <a href="{{route('quanlyxe.inthongtinbanxe',$idXe)}}"  class="btn btn-primary">In thông tin</a>
             </div>
         </div>
     </div>

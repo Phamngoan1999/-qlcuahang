@@ -60,7 +60,7 @@
             <br />
             Đăng ký tại: <b>{{$thongTinXe->dang_ky_tai}}</b>
             <br />
-            Nay bán, cho, tặng chiếc xe máy cho:<b>Phạm Văn Hoan</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Năm sinh:&nbsp;<b>1989</b>
+            Nay bán, cho, tặng chiếc xe máy cho:&nbsp;<b>Phạm Văn Hoan</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Năm sinh:&nbsp;<b>1989</b>
             <br />
             Nơi cư trú:<b>&nbsp;Xóm 1, thôn Thuần Túy, xã Đông La, Đông Hưng, Thái Bình</b>
             <br />
@@ -70,7 +70,7 @@
             <p>Đã giao giấy tờ gồm: Giấy đăng ký</p>
         </div>
         <br />
-        Đề nghị cơ quan Công an cho ông bà:<b></b>&nbsp;được làm thủ tục sang tên chiếc xe nói trên.
+        Đề nghị cơ quan Công an cho ông bà:<b></b>&nbsp;Được làm thủ tục sang tên chiếc xe nói trên.
         <table>
             <div style="float:right;padding-right: 45px; font-size: 20px;">
                 <strong>.............., Ngày .....Tháng......năm 20......</strong>

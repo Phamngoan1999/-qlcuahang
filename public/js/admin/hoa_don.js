@@ -5,6 +5,10 @@ import comfirmAlert from "../comfirm.js";
 (function ($, window, document){
     $(function () {
 
+        $(document).on('change','.ma-cua-hang',function (){
+            $('#list-phu-tung').html("");
+        })
+
         $(document).on('click','#add-phu-tung',function() {
             $('.error').html("");
             let maCuaHang = $('.ma-cua-hang').val();

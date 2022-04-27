@@ -9,13 +9,14 @@
                         <form action="{{route('baocaothongke.quanly')}}" id="form-search" method="GET">
                             <div class="row" style="padding-top: 20px;">
                                 <div class="col-md-3">
-                                    <select class="form-group js-example-basic-single w-100" name="ma_xe">
-                                        <option value="2022">Năm 2022</option>
+                                    <select class="form-group js-example-basic-single w-100" name="year_select">
+                                        <option value="2022" @if($request->year_select == "2022") selected @endif>Năm 2022</option>
+                                        <option value="2021" @if($request->year_select == "2021") selected @endif>Năm 2021</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-primary" id="tim-kiem" data-url="{{route('baocaothongke.timkiem_theobaocao')}}">Tìm kiếm</button>
+                                        <button type="submit" class="btn btn-primary" id="tim-kiem" >Tìm kiếm</button>
                                     </div>
                                 </div>
                             </div>
@@ -44,32 +45,38 @@
                                 "Tháng 7", "Tháng 8","Tháng 9","Tháng 10", "Tháng 11", "Tháng 12",],
                             datasets: [{
                                 label: 'Số tiền mua xe',
-                                data: [{{$list['January']['tonggiamua']}}, {{$list['February']['tonggiamua']}},
-                                        {{$list['March']['tonggiamua']}}, {{$list['April']['tonggiamua']}},
-                                        {{$list['May']['tonggiamua']}}, {{$list['June']['tonggiamua']}},
-                                        {{$list['July']['tonggiamua']}},{{$list['August']['tonggiamua']}},
-                                        {{$list['September']['tonggiamua']}}, {{$list['October']['tonggiamua']}},
-                                        {{$list['November']['tonggiamua']}},{{$list['December']['tonggiamua']}}],
+                                data: [
+                                    {{$list['January']['tonggiamua']}}, {{$list['February']['tonggiamua']}},
+                                    {{$list['March']['tonggiamua']}}, {{$list['April']['tonggiamua']}},
+                                    {{$list['May']['tonggiamua']}}, {{$list['June']['tonggiamua']}},
+                                    {{$list['July']['tonggiamua']}},{{$list['August']['tonggiamua']}},
+                                    {{$list['September']['tonggiamua']}}, {{$list['October']['tonggiamua']}},
+                                    {{$list['November']['tonggiamua']}},{{$list['December']['tonggiamua']}}
+                                ],
                                 backgroundColor: '#98BDFF'
                                 },
                                 {
                                     label: 'Số tiền bán xe',
-                                    data: [{{$list['January']['tonggiaban']}}, {{$list['February']['tonggiaban']}},
+                                    data: [
+                                        {{$list['January']['tonggiaban']}}, {{$list['February']['tonggiaban']}},
                                         {{$list['March']['tonggiaban']}}, {{$list['April']['tonggiaban']}},
                                         {{$list['May']['tonggiaban']}}, {{$list['June']['tonggiaban']}},
                                         {{$list['July']['tonggiaban']}},{{$list['August']['tonggiaban']}},
                                         {{$list['September']['tonggiaban']}}, {{$list['October']['tonggiaban']}},
-                                        {{$list['November']['tonggiaban']}},{{$list['December']['tonggiaban']}}],
+                                        {{$list['November']['tonggiaban']}},{{$list['December']['tonggiaban']}}
+                                    ],
                                     backgroundColor: 'green'
                                 },
                                 {
                                     label: 'Số tiền sửa chữa',
-                                    data: [{{$list['January']['tongsuachua']}}, {{$list['February']['tongsuachua']}},
+                                    data: [
+                                        {{$list['January']['tongsuachua']}}, {{$list['February']['tongsuachua']}},
                                         {{$list['March']['tongsuachua']}}, {{$list['April']['tongsuachua']}},
                                         {{$list['May']['tongsuachua']}}, {{$list['June']['tongsuachua']}},
                                         {{$list['July']['tongsuachua']}},{{$list['August']['tongsuachua']}},
                                         {{$list['September']['tongsuachua']}}, {{$list['October']['tongsuachua']}},
-                                        {{$list['November']['tongsuachua']}},{{$list['December']['tongsuachua']}}],
+                                        {{$list['November']['tongsuachua']}},{{$list['December']['tongsuachua']}}
+                                    ],
                                     backgroundColor: '#4B49AC'
                                 }
                             ]
@@ -97,7 +104,7 @@
                                     ticks: {
                                         display: true,
                                         min: 0,
-                                        max: 100000000,
+                                        max: {{$max}},
                                         callback: function(value, index, values) {
                                             return  value + 'VND' ;
                                         },

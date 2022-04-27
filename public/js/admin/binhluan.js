@@ -54,7 +54,7 @@ import comfirmAlert from "../comfirm.js";
         });
 
         $(document).on('click', '.dong-modal', function (){
-            if(confirm("Bạn có chắc hủy bình luận không?"))
+            if(confirm("Bình luận chưa được lưu, bạn chắc chắn muốn đóng?"))
             {
                 $('#modal-show-binh-luan').modal('hide');
             }

@@ -21,4 +21,15 @@ class DichVuRepository extends BaseRepository
     {
         return $this->model->withDichVuCuaHang()->paginate(10);
     }
+
+    public function search($dataSearch)
+    {
+        return $this->model->withSearch($dataSearch)
+            ->withDichVuCuaHang()->paginate(10);
+    }
+
+    public function finddichVuChitietHoaDon($id)
+    {
+        return $this->model->finddichVuChitietHoaDon($id);
+    }
 }

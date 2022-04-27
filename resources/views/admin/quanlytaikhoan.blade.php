@@ -1,13 +1,5 @@
 @extends('header.quanly')
 @section('content')
-{{--    <style>--}}
-{{--        .modal .modal-dialog .modal-content .modal-body {--}}
-{{--            padding: 10px 26px!important;--}}
-{{--        }--}}
-{{--        .modal .modal-dialog {--}}
-{{--            margin-top: 10px!important;--}}
-{{--        }--}}
-{{--    </style>--}}
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
@@ -16,7 +8,7 @@
                         <h4 class="card-title">Quản lý Tài khoản cửa hàng liên kết</h4>
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-primary" id="them-tai-khoan" data-toggle="modal" data-target="#cap-tai-khoan-modal">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cap-tai-khoan-modal">
                                     Thêm cửa hàng liên kết
                                 </button>
                             </div>
@@ -79,8 +71,7 @@
     </div>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="cap-tai-khoan-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal fade" id="cap-tai-khoan-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -93,27 +84,27 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">Tên cửa hàng <span class="obligatory">*</span></label>
-                            <input type="text" class="form-control" name="name"  placeholder="Tên cửa hàng">
+                            <input type="text" class="form-control name-cua-hang" name="name"  placeholder="Tên cửa hàng">
                             <div class="error error-name"></div>
                         </div>
                         <div class="form-group">
                             <label for="">Số điện thoại <span class="obligatory">*</span></label>
-                            <input type="text" class="form-control" name="email" id="sodienthoai"  placeholder="Số điện thoại">
+                            <input type="text" class="form-control email-cua-hang" name="email" id="sodienthoai"  placeholder="Số điện thoại">
                             <div class="error error-email"></div>
                         </div>
                         <div class="form-group">
                             <label for="">Địa chỉ cửa hàng <span class="obligatory">*</span></label>
-                            <input type="text" class="form-control" name="diachi"  placeholder="Địa chỉ">
+                            <input type="text" class="form-control diachi-cua-hang" name="diachi"  placeholder="Địa chỉ">
                             <div class="error error-diachi"></div>
                         </div>
                         <div class="form-group">
                             <label for="">Mật khẩu <span class="obligatory">*</span></label>
-                            <input type="password" class="form-control" name="matkhau"  placeholder="Mật khẩu">
+                            <input type="password" class="form-control matkhau-cua-hang" name="matkhau"  placeholder="Mật khẩu">
                             <div class="error error-matkhau"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                         <button type="button" class="btn btn-primary add-cua-hang" data-url="{{route("quanlytaikhoan.create")}}" >Lưu</button>
                     </div>
                 </form>

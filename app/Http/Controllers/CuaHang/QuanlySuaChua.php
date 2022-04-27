@@ -35,7 +35,9 @@ class QuanlySuaChua extends Controller
 
     public function create(DichVuCreateRequest $request)
     {
-        return $this->dichVuService->create($request);
+        $this->dichVuService->create($request);
+        $ListService = $this->dichVuService->listDichVuCuaHang();
+        return view("cuahang.list_theo_cua_hang",compact('ListService'));
     }
 
     public function danhsachdichvu()

@@ -29,10 +29,24 @@
 @if(\Session::has('message'))
     <script>
         $(document).ready(function (){
-            toastr.success("{{ \Session::get('message') }}");
+            toastr.success("{{ Session::get('message') }}");
         });
     </script>
 @endif
+
+@if(Session::has('message-error'))
+    <script>
+        $(document).ready(function (){
+            toastr.error("{{ Session::get('message-error') }}");
+        });
+    </script>
+@endif
+
+<style>
+    .toast{
+        margin-top: 40px!important;
+    }
+</style>
 <div class="modal fade" id="show-modal"tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div style="text-align: center;margin: 100px;"><img src="{{asset('Logo/loading.gif')}}" alt="Loading" width="100px" height="100px"></div>

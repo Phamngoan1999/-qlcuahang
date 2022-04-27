@@ -91,14 +91,28 @@ class KhachHangController extends Controller
 
     public function luuGiaDichBan(GiaDichMuaXeRequest $request,$id)
     {
-        $this->khachHangService->luuGiaDichBan($request,$id);
-        return $this->view_giao_dich($id);
+        $result = $this->khachHangService->luuGiaDichBan($request,$id);
+        if($result == "gia-ban-khong-hop-le")
+        {
+            return "gia-ban-khong-hop-le";
+        }else
+        {
+            return $this->view_giao_dich($id);
+        }
+//        $this->khachHangService->luuGiaDichBan($request,$id);
+//        return $this->view_giao_dich($id);
     }
 
     public function luuGiaDichBanKhachHang(GiaoDichMuaXeDaCoThongTinRequest $request,$id)
     {
-        $this->khachHangService->luuGiaDichBan($request,$id);
-        return $this->view_giao_dich($id);
+        $result = $this->khachHangService->luuGiaDichBan($request,$id);
+        if($result == "gia-ban-khong-hop-le")
+        {
+            return "gia-ban-khong-hop-le";
+        }else
+        {
+            return $this->view_giao_dich($id);
+        }
     }
 
     public function search(SearchCMND $request)

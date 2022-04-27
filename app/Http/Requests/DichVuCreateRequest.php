@@ -24,7 +24,7 @@ class DichVuCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'ten_dich_vu' => 'required|max:50',
+            'ten_dich_vu' => 'required',
             'gia_dich_vu' => 'required',
         ];
     }
@@ -34,7 +34,6 @@ class DichVuCreateRequest extends FormRequest
         return [
             'ten_dich_vu.required' => 'Vui lòng nhập tên dịch vụ',
             'gia_dich_vu.required' => 'Vui lòng nhập giá dịch vụ',
-            'ten_dong_xe.max'   => 'Tên dòng xe không quá 50 ký tự'
         ];
     }
 }

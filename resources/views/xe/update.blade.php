@@ -312,8 +312,9 @@
                                             <div class="form-group" style="padding-top: 10px;">
                                                 @if(empty($inforXe[0]['iMa_khach_hang_mua_xe']))
                                                     <button type="button" id="them-khach-hang-mua-xe" data-url="{{route("quanlykhachhang.luuGiaDichBan",$id)}}" class="btn btn-primary" >Lưu thông tin</button>
+                                                @else
+                                                    <a href="{{route('quanlyxe.inthongtinbanxe',$id)}}"  class="btn btn-primary"  target="_blank">In thông tin</a>
                                                 @endif
-                                                <a href="{{route('quanlyxe.inthongtinbanxe',$id)}}"  class="btn btn-primary"  target="_blank">In thông tin</a>
                                             </div>
                                         </div>
                                     </div>

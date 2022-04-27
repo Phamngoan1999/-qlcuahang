@@ -14,7 +14,10 @@ import comfirmAlert from "../comfirm.js";
                     $("#cap-tai-khoan-modal").modal("hide");
                     comfirmAlert.showSuccessMessageAlert("Cấp tài khoản thành công");
                     $('#danh-sach-cua-hang').html(response);
-                    $('input').val("");
+                    $(".name-cua-hang").val("");
+                    $(".email-cua-hang").val("");
+                    $(".diachi-cua-hang").val("");
+                    $(".matkhau-cua-hang").val("");
                 })
                 .fail(function (response){
                     $('.error').html("");

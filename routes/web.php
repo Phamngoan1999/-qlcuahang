@@ -247,7 +247,7 @@ Route::middleware(['auth'])->group(function() {
             ->name('quanlydichvu')
             ->middleware('role:cuahanglienket');
 
-        Route::post('/quanlydichvu', [\App\Http\Controllers\CuaHang\QuanlySuaChua::class, 'create'])
+        Route::post('/them-dich-vu', [DichVuController::class, 'create'])
             ->name('them-dich-vu')
             ->middleware('role:cuahanglienket');
 
@@ -286,6 +286,10 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/list-dich-vu-select-update', [DichVuController::class, 'getListDichVuSelectUpdate'])
             ->name('list-dich-vu-select-update')
             ->middleware('role:admin');
+
+        Route::get('/cuahanglienket', [DichVuController::class, 'searchDichVu'])
+            ->name('search_dich_vu')
+            ->middleware('role:cuahanglienket');
     });
 
     Route::name('quanlytaikhoan.')->prefix('quanlytaikhoan')->group(function () {

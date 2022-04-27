@@ -60,7 +60,7 @@
             <br />
             Đăng ký tại: <b>{{$thongTinXe->dang_ky_tai}}</b>
             <br />
-            Nay bán, cho, tặng chiếc xe máy cho:<b>{{$thongtinKhachHang->ho_ten}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Năm sinh:&nbsp;<b>{{$thongtinKhachHang->nam_sinh}}</b>
+            Nay bán, cho, tặng chiếc xe máy cho:<b>&nbsp;{{$thongtinKhachHang->ho_ten}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Năm sinh:&nbsp;<b>{{$thongtinKhachHang->nam_sinh}}</b>
             <br />
             Nơi cư trú:<b>{{$thongtinKhachHang->noi_cu_tru}}</b>
             <br />

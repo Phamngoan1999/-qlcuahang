@@ -53,7 +53,7 @@ import comfirmAlert from "../comfirm.js";
             let url = $(this).attr('data-url');
             base.callApiWithFormData( url, METHOD_POST, dataForm)
                 .done(function (response) {
-                    comfirmAlert.showSuccessMessageAlert("Cấp tài khoản thành công");
+                    comfirmAlert.showSuccessMessageAlert("Thêm gia dịch thành công");
                     window.location.href = window.location.origin+'/quanlyxe/editthongtinxe/'+response['id'];
                 })
                 .fail(function (response){
